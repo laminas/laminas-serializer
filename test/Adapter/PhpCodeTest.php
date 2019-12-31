@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Serializer\Adapter;
+namespace LaminasTest\Serializer\Adapter;
 
-use Zend\Serializer;
-use Zend\Serializer\Exception;
+use Laminas\Serializer;
+use Laminas\Serializer\Exception;
 
 /**
- * @group      Zend_Serializer
+ * @group      Laminas_Serializer
  */
 class PhpCodeTest extends \PHPUnit_Framework_TestCase
 {
@@ -131,7 +130,7 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
         }
         $value = 'not a serialized string';
 
-        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'syntax error');
+        $this->setExpectedException('Laminas\Serializer\Exception\RuntimeException', 'syntax error');
         $this->adapter->unserialize($value);
     }
 }
