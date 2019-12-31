@@ -1,24 +1,22 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Serializer
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Serializer;
+namespace LaminasTest\Serializer;
 
-use Zend\Serializer\Adapter;
-use Zend\Serializer\AdapterPluginManager;
-use Zend\Serializer\Serializer;
+use Laminas\Serializer\Adapter;
+use Laminas\Serializer\AdapterPluginManager;
+use Laminas\Serializer\Serializer;
 
 /**
- * @category   Zend
- * @package    Zend_Serializer
+ * @category   Laminas
+ * @package    Laminas_Serializer
  * @subpackage UnitTests
- * @group      Zend_Serializer
+ * @group      Laminas_Serializer
  */
 class SerializerTest extends \PHPUnit_Framework_TestCase
 {
@@ -57,16 +55,16 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryUnknownAdapter()
     {
-        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
+        $this->setExpectedException('Laminas\ServiceManager\Exception\ServiceNotFoundException');
         Serializer::factory('unknown');
     }
 
     public function testFactoryOnADummyClassAdapter()
     {
         $adapters = new AdapterPluginManager();
-        $adapters->setInvokableClass('dummy', 'ZendTest\Serializer\TestAsset\Dummy');
+        $adapters->setInvokableClass('dummy', 'LaminasTest\Serializer\TestAsset\Dummy');
         Serializer::setAdapterPluginManager($adapters);
-        $this->setExpectedException('Zend\\Serializer\\Exception\\RuntimeException', 'AdapterInterface');
+        $this->setExpectedException('Laminas\\Serializer\\Exception\\RuntimeException', 'AdapterInterface');
         Serializer::factory('dummy');
     }
 
