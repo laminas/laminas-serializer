@@ -1,16 +1,17 @@
 <?php
+
 /**
- * @link      http://github.com/zendframework/zend-serializer for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Serializer;
+namespace Laminas\Serializer;
 
 class Module
 {
     /**
-     * Return default zend-serializer configuration for zend-mvc applications.
+     * Return default laminas-serializer configuration for laminas-mvc applications.
      */
     public function getConfig()
     {
@@ -24,7 +25,7 @@ class Module
     /**
      * Register a specification for the SerializerAdapterManager with the ServiceListener.
      *
-     * @param \Zend\ModuleManager\ModuleEvent
+     * @param \Laminas\ModuleManager\ModuleEvent
      * @return void
      */
     public function init($event)
@@ -35,7 +36,7 @@ class Module
         $serviceListener->addServiceManager(
             'SerializerAdapterManager',
             'serializers',
-            'Zend\ModuleManager\Feature\SerializerProviderInterface',
+            'Laminas\ModuleManager\Feature\SerializerProviderInterface',
             'getSerializerConfig'
         );
     }

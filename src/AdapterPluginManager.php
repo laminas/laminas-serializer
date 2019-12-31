@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Serializer;
+namespace Laminas\Serializer;
 
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\Factory\InvokableFactory;
-use Zend\ServiceManager\Exception\InvalidServiceException;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\Exception\InvalidServiceException;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 /**
  * Plugin manager implementation for serializer adapters.
@@ -42,6 +41,24 @@ class AdapterPluginManager extends AbstractPluginManager
         'PythonPickle' => Adapter\PythonPickle::class,
         'wddx'         => Adapter\Wddx::class,
         'Wddx'         => Adapter\Wddx::class,
+
+        // Legacy Zend Framework aliases
+        \Zend\Serializer\Adapter\IgBinary::class => Adapter\IgBinary::class,
+        \Zend\Serializer\Adapter\Json::class => Adapter\Json::class,
+        \Zend\Serializer\Adapter\MsgPack::class => Adapter\MsgPack::class,
+        \Zend\Serializer\Adapter\PhpCode::class => Adapter\PhpCode::class,
+        \Zend\Serializer\Adapter\PhpSerialize::class => Adapter\PhpSerialize::class,
+        \Zend\Serializer\Adapter\PythonPickle::class => Adapter\PythonPickle::class,
+        \Zend\Serializer\Adapter\Wddx::class => Adapter\Wddx::class,
+
+        // v2 normalized FQCNs
+        'zendserializeradapterigbinary' => Adapter\IgBinary::class,
+        'zendserializeradapterjson' => Adapter\Json::class,
+        'zendserializeradaptermsgpack' => Adapter\MsgPack::class,
+        'zendserializeradapterphpcode' => Adapter\PhpCode::class,
+        'zendserializeradapterphpserialize' => Adapter\PhpSerialize::class,
+        'zendserializeradapterpythonpickle' => Adapter\PythonPickle::class,
+        'zendserializeradapterwddx' => Adapter\Wddx::class,
     ];
 
     protected $factories = [
@@ -55,13 +72,13 @@ class AdapterPluginManager extends AbstractPluginManager
         // Legacy (v2) due to alias resolution; canonical form of resolved
         // alias is used to look up the factory, while the non-normalized
         // resolved alias is used as the requested name passed to the factory.
-        'zendserializeradapterigbinary' => InvokableFactory::class,
-        'zendserializeradapterjson' => InvokableFactory::class,
-        'zendserializeradaptermsgpack' => InvokableFactory::class,
-        'zendserializeradapterphpcode' => InvokableFactory::class,
-        'zendserializeradapterphpserialize' => InvokableFactory::class,
-        'zendserializeradapterpythonpickle' => InvokableFactory::class,
-        'zendserializeradapterwddx' => InvokableFactory::class,
+        'laminasserializeradapterigbinary' => InvokableFactory::class,
+        'laminasserializeradapterjson' => InvokableFactory::class,
+        'laminasserializeradaptermsgpack' => InvokableFactory::class,
+        'laminasserializeradapterphpcode' => InvokableFactory::class,
+        'laminasserializeradapterphpserialize' => InvokableFactory::class,
+        'laminasserializeradapterpythonpickle' => InvokableFactory::class,
+        'laminasserializeradapterwddx' => InvokableFactory::class,
     ];
 
     protected $instanceOf = Adapter\AdapterInterface::class;
