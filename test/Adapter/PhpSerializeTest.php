@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Serializer\Adapter;
+namespace LaminasTest\Serializer\Adapter;
 
-use Zend\Serializer;
+use Laminas\Serializer;
 
 /**
- * @group      Zend_Serializer
- * @covers Zend\Serializer\Adapter\PhpSerialize
+ * @group      Laminas_Serializer
+ * @covers Laminas\Serializer\Adapter\PhpSerialize
  */
 class PhpSerializeTest extends \PHPUnit_Framework_TestCase
 {
@@ -131,7 +130,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
     public function testUnserializingInvalidStringRaisesException()
     {
         $value = 'a:foobar';
-        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException');
+        $this->setExpectedException('Laminas\Serializer\Exception\RuntimeException');
         $this->adapter->unserialize($value);
     }
 }
