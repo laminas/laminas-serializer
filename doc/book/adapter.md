@@ -1,6 +1,6 @@
 # Adapters
 
-zend-serializer adapters handle serialization to and deserialization from
+laminas-serializer adapters handle serialization to and deserialization from
 specific representations.
 
 Each adapter has its own strengths. In some cases, not every PHP datatype (e.g.,
@@ -8,11 +8,11 @@ objects) can be converted to a string representation. In most such cases, the
 type will be converted to a similar type that is serializable.
 
 As an example, PHP objects will often be cast to arrays. If this fails, a
-`Zend\Serializer\Exception\ExceptionInterface` will be thrown.
+`Laminas\Serializer\Exception\ExceptionInterface` will be thrown.
 
 ## The PhpSerialize Adapter
 
-The `Zend\Serializer\Adapter\PhpSerialize` adapter uses the built-in
+The `Laminas\Serializer\Adapter\PhpSerialize` adapter uses the built-in
 [serialize()](http://php.net/serialize)/[unserialize()](http://php.net/unserialize)
 functions, and is a good default adapter choice.
 
@@ -55,14 +55,14 @@ comment | `string`  |               | An optional comment that appears in the pa
 ## The Json Adapter
 
 The [JSON](http://wikipedia.org/wiki/JavaScript_Object_Notation) adapter provides a bridge to the
-[zend-json](https://zendframework.github.io/zend-json) component.
+[laminas-json](https://docs.laminas.dev/laminas-json) component.
 
 Available options include:
 
 Option                    | Data Type                | Default Value
 ------------------------- | ------------------------ | -------------
 `cycle_check`             | `boolean`                | `false`
-`object_decode_type`      | `Zend\Json\Json::TYPE_*` | `Zend\Json\Json::TYPE_ARRAY`
+`object_decode_type`      | `Laminas\Json\Json::TYPE_*` | `Laminas\Json\Json::TYPE_ARRAY`
 `enable_json_expr_finder` | `boolean`                | `false`
 
 ## The PythonPickle Adapter
@@ -71,10 +71,10 @@ This adapter converts PHP types to a [Python Pickle](http://docs.python.org/libr
 string representation. With it, you can read the serialized data with Python and
 read Pickled data from Python with PHP.
 
-This adapter requires the [zend-math](https://zendframework.github.io/zend-math/) component:
+This adapter requires the [laminas-math](https://docs.laminas.dev/laminas-math/) component:
 
 ```bash
-$ composer require zendframework/zend-math
+$ composer require laminas/laminas-math
 ```
 
 Available options include:
@@ -103,7 +103,7 @@ Python Pickle Type | PHP Type
 `None`             | `NULL`
 `boolean`          | `boolean`
 `integer`          | `integer`
-`long`             | `integer`, `float`, `string`, or `Zend\Serializer\Exception\ExceptionInterface`
+`long`             | `integer`, `float`, `string`, or `Laminas\Serializer\Exception\ExceptionInterface`
 `float`            | `float`
 `string`           | `string`
 `bytes`            | `string`
@@ -111,11 +111,11 @@ Python Pickle Type | PHP Type
 `list`             | `array` list
 `tuple`            | `array` list
 `dictionary`       | `array` map
-All other types    | `Zend\Serializer\Exception\ExceptionInterface`
+All other types    | `Laminas\Serializer\Exception\ExceptionInterface`
 
 ## The PhpCode Adapter
 
-The `Zend\Serializer\Adapter\PhpCode` adapter generates a parsable PHP code
+The `Laminas\Serializer\Adapter\PhpCode` adapter generates a parsable PHP code
 representation using [var_export()](http://php.net/var_export). To restore,
 the data will be executed using [eval](http://php.net/eval).
 
