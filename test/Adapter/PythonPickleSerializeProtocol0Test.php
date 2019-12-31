@@ -1,22 +1,20 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Serializer
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Serializer\Adapter;
+namespace LaminasTest\Serializer\Adapter;
 
-use Zend\Serializer;
+use Laminas\Serializer;
 
 /**
- * @category   Zend
- * @package    Zend_Serializer
+ * @category   Laminas
+ * @package    Laminas_Serializer
  * @subpackage UnitTests
- * @group      Zend_Serializer
+ * @group      Laminas_Serializer
  */
 class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
 {

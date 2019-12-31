@@ -1,23 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Serializer
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Serializer\Adapter;
+namespace LaminasTest\Serializer\Adapter;
 
-use Zend\Serializer;
-use Zend\Serializer\Exception\ExtensionNotLoadedException;
+use Laminas\Serializer;
+use Laminas\Serializer\Exception\ExtensionNotLoadedException;
 
 /**
- * @category   Zend
- * @package    Zend_Serializer
+ * @category   Laminas
+ * @package    Laminas_Serializer
  * @subpackage UnitTests
- * @group      Zend_Serializer
+ * @group      Laminas_Serializer
  */
 class MsgPackTest extends \PHPUnit_Framework_TestCase
 {
@@ -31,9 +29,9 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('msgpack')) {
             try {
                 new Serializer\Adapter\MsgPack();
-                $this->fail("Zend\\Serializer\\Adapter\\MsgPack needs missing ext/msgpack but did't throw exception");
+                $this->fail("Laminas\\Serializer\\Adapter\\MsgPack needs missing ext/msgpack but did't throw exception");
             } catch (ExtensionNotLoadedException $e) {}
-            $this->markTestSkipped('Zend\\Serializer\\Adapter\\MsgPack needs ext/msgpack');
+            $this->markTestSkipped('Laminas\\Serializer\\Adapter\\MsgPack needs ext/msgpack');
         }
         $this->adapter = new Serializer\Adapter\MsgPack();
     }
@@ -146,7 +144,7 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
     {
         $value = "\0\1\r\n";
         $this->setExpectedException(
-            'Zend\Serializer\Exception\RuntimeException',
+            'Laminas\Serializer\Exception\RuntimeException',
             'Unserialization failed'
         );
         $this->adapter->unserialize($value);
