@@ -1,6 +1,6 @@
 # Introduction
 
-zend-serialzier provides an adapter-based interface for serializing and
+laminas-serialzier provides an adapter-based interface for serializing and
 deserializing PHP types to and from different representations.
 
 For more information what a serializer is read the wikipedia page of
@@ -9,13 +9,13 @@ For more information what a serializer is read the wikipedia page of
 ## Quick Start
 
 Serializing adapters can either be created from the provided
-`Zend\Serializer\Serializer::factory` method, or by instantiating one of the
-`Zend\Serializer\Adapter\*` classes.
+`Laminas\Serializer\Serializer::factory` method, or by instantiating one of the
+`Laminas\Serializer\Adapter\*` classes.
 
 ```php
-use Zend\Serializer\Adapter;
-use Zend\Serializer\Exception;
-use Zend\Serializer\Serializer;
+use Laminas\Serializer\Adapter;
+use Laminas\Serializer\Exception;
+use Laminas\Serializer\Serializer;
 
 // Via factory:
 $serializer = Serializer::factory(Adapter\PhpSerialize::class);
@@ -23,8 +23,8 @@ $serializer = Serializer::factory(Adapter\PhpSerialize::class);
 // Alternately:
 $serializer = new Adapter\PhpSerialize();
 
-// Now $serializer is an instance of Zend\Serializer\Adapter\AdapterInterface,
-// specifically Zend\Serializer\Adapter\PhpSerialize
+// Now $serializer is an instance of Laminas\Serializer\Adapter\AdapterInterface,
+// specifically Laminas\Serializer\Adapter\PhpSerialize
 
 try {
     $serialized = $serializer->serialize($data);
@@ -41,19 +41,19 @@ The method `serialize()` generates a storable string. To regenerate this
 serialized data, call the method `unserialize()`.
 
 Any time an error is encountered serializing or unserializing, the adapter will
-throw a `Zend\Serializer\Exception\ExceptionInterface`.
+throw a `Laminas\Serializer\Exception\ExceptionInterface`.
 
 Because an application often uses only one serializer internally, it is possible
 to define and use a default serializer. That serializer will be used by default
-by other components like `Zend\Cache\Storage\Plugin\Serializer`.
+by other components like `Laminas\Cache\Storage\Plugin\Serializer`.
 
 To define and use the default serializer, use the static serialization methods
-of the basic `Zend\Serializer\Serializer`:
+of the basic `Laminas\Serializer\Serializer`:
 
 ```php
-use Zend\Serializer\Adapter;
-use Zend\Serializer\Exception;
-use Zend\Serializer\Serializer;
+use Laminas\Serializer\Adapter;
+use Laminas\Serializer\Exception;
+use Laminas\Serializer\Serializer;
 
 Serializer::setDefaultAdapter(Adapter\PhpSerialize::class);
 
@@ -71,19 +71,19 @@ try {
 ## Basic configuration Options
 
 To configure a serializer adapter, you can optionally use an instance of
-`Zend\Serializer\Adapter\AdapterOptions`, an instance of one of the adapter
+`Laminas\Serializer\Adapter\AdapterOptions`, an instance of one of the adapter
 specific options class, an `array`, or a `Traversable` object. The adapter
 will convert it into the adapter specific options class instance (if present) or
-into the basic `Zend\Serializer\Adapter\AdapterOptions` class instance.
+into the basic `Laminas\Serializer\Adapter\AdapterOptions` class instance.
 
 Options can be passed as the second argument to the provided
-`Zend\Serializer\Serializer::factory` and `::setDefaultAdapter` methods, via the
+`Laminas\Serializer\Serializer::factory` and `::setDefaultAdapter` methods, via the
 adapter's `setOptions` method, or as constructor arguments when directly
 instantiating an adapter.
 
 ## Available Methods
 
-Each serializer implements the interface `Zend\Serializer\Adapter\AdapterInterface`.
+Each serializer implements the interface `Laminas\Serializer\Adapter\AdapterInterface`.
 
 This interface defines the following methods:
 
@@ -92,15 +92,15 @@ Method signature | Description
 `serialize(mixed $value) : string` | Generates a storable representation of a value.
 `unserialize(string $value) : mixed` | Creates a PHP value from a stored representation.
 
-The base class `Zend\Serializer\Serializer` is used to instantiate the
+The base class `Laminas\Serializer\Serializer` is used to instantiate the
 adapters, to configure the factory, and as a proxy for serialization operations.
 
 It defines the following static methods, where the following references map to
 classes/interfaces as follows:
 
-- `AdapterPluginManager`: `Zend\Serializer\AdapterPluginManager`
-- `AdapterInterface`: `Zend\Serializer\Adapter\AdapterInterface`
-- `AdapterOptions`: `Zend\Serializer\Adapter\AdapterOptions`
+- `AdapterPluginManager`: `Laminas\Serializer\AdapterPluginManager`
+- `AdapterInterface`: `Laminas\Serializer\Adapter\AdapterInterface`
+- `AdapterOptions`: `Laminas\Serializer\Adapter\AdapterOptions`
 
 Method signature | Description
 ---------------- | -----------
