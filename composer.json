@@ -1,31 +1,22 @@
 {
-    "name": "zendframework/zend-serializer",
+    "name": "laminas/laminas-serializer",
     "description": "provides an adapter based interface to simply generate storable representation of PHP types by different facilities, and recover",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf2",
+        "laminas",
         "serializer"
     ],
-    "homepage": "https://github.com/zendframework/zend-serializer",
-    "autoload": {
-        "psr-4": {
-            "Zend\\Serializer\\": "src/"
-        }
+    "homepage": "https://laminas.dev",
+    "support": {
+        "docs": "https://docs.laminas.dev/laminas-serializer/",
+        "issues": "https://github.com/laminas/laminas-serializer/issues",
+        "source": "https://github.com/laminas/laminas-serializer",
+        "rss": "https://github.com/laminas/laminas-serializer/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
-    "require": {
-        "php": ">=5.3.3",
-        "zendframework/zend-stdlib": "self.version",
-        "zendframework/zend-json": "self.version",
-        "zendframework/zend-math": "self.version"
-    },
-    "require-dev": {
-        "zendframework/zend-servicemanager": "self.version",
-        "fabpot/php-cs-fixer": "1.7.*",
-        "satooshi/php-coveralls": "dev-master",
-        "phpunit/PHPUnit": "~4.0"
-    },
-    "suggest": {
-        "zendframework/zend-servicemanager": "To support plugin manager support"
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
@@ -33,9 +24,33 @@
             "dev-develop": "2.3-dev"
         }
     },
+    "require": {
+        "php": ">=5.3.3",
+        "laminas/laminas-json": "self.version",
+        "laminas/laminas-math": "self.version",
+        "laminas/laminas-stdlib": "self.version",
+        "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "require-dev": {
+        "fabpot/php-cs-fixer": "1.7.*",
+        "laminas/laminas-servicemanager": "self.version",
+        "phpunit/phpunit": "~4.0",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "suggest": {
+        "laminas/laminas-servicemanager": "To support plugin manager support"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\Serializer\\": "src/"
+        }
+    },
     "autoload-dev": {
         "psr-4": {
-            "ZendTest\\Serializer\\": "test/"
+            "LaminasTest\\Serializer\\": "test/"
         }
+    },
+    "replace": {
+        "zendframework/zend-serializer": "self.version"
     }
 }
