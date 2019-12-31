@@ -1,18 +1,19 @@
 <?php
+
 /**
- * @link      http://github.com/zendframework/zend-serializer for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Serializer;
+namespace LaminasTest\Serializer;
 
 use Interop\Container\ContainerInterface;
+use Laminas\Serializer\Adapter\AdapterInterface;
+use Laminas\Serializer\AdapterPluginManager;
+use Laminas\Serializer\AdapterPluginManagerFactory;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Serializer\Adapter\AdapterInterface;
-use Zend\Serializer\AdapterPluginManager;
-use Zend\Serializer\AdapterPluginManagerFactory;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
 class AdapterPluginManagerFactoryTest extends TestCase
 {
@@ -25,10 +26,10 @@ class AdapterPluginManagerFactoryTest extends TestCase
         $this->assertInstanceOf(AdapterPluginManager::class, $serializers);
 
         if (method_exists($serializers, 'configure')) {
-            // zend-servicemanager v3
+            // laminas-servicemanager v3
             $this->assertAttributeSame($container, 'creationContext', $serializers);
         } else {
-            // zend-servicemanager v2
+            // laminas-servicemanager v2
             $this->assertSame($container, $serializers->getServiceLocator());
         }
     }
