@@ -1,44 +1,19 @@
 {
-    "name": "zendframework/zend-serializer",
+    "name": "laminas/laminas-serializer",
     "description": "Serialize and deserialize PHP structures to a variety of representations",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf",
-        "zendframework",
+        "laminas",
         "serializer"
     ],
+    "homepage": "https://laminas.dev",
     "support": {
-        "docs": "https://docs.zendframework.com/zend-serializer/",
-        "issues": "https://github.com/zendframework/zend-serializer/issues",
-        "source": "https://github.com/zendframework/zend-serializer",
-        "rss": "https://github.com/zendframework/zend-serializer/releases.atom",
-        "chat": "https://zendframework-slack.herokuapp.com",
-        "forum": "https://discourse.zendframework.com/c/questions/components"
-    },
-    "require": {
-        "php": "^5.6 || ^7.0",
-        "zendframework/zend-json": "^2.5 || ^3.0",
-        "zendframework/zend-stdlib": "^2.7 || ^3.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.16",
-        "zendframework/zend-coding-standard": "~1.0.0",
-        "zendframework/zend-math": "^2.6 || ^3.0",
-        "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
-    },
-    "suggest": {
-        "zendframework/zend-math": "(^2.6 || ^3.0) To support Python Pickle serialization",
-        "zendframework/zend-servicemanager": "(^2.7.5 || ^3.0.3) To support plugin manager support"
-    },
-    "autoload": {
-        "psr-4": {
-            "Zend\\Serializer\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "ZendTest\\Serializer\\": "test/"
-        }
+        "docs": "https://docs.laminas.dev/laminas-serializer/",
+        "issues": "https://github.com/laminas/laminas-serializer/issues",
+        "source": "https://github.com/laminas/laminas-serializer",
+        "rss": "https://github.com/laminas/laminas-serializer/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
     "config": {
         "sort-packages": true
@@ -48,9 +23,35 @@
             "dev-master": "2.9.x-dev",
             "dev-develop": "2.10.x-dev"
         },
-        "zf": {
-            "component": "Zend\\Serializer",
-            "config-provider": "Zend\\Serializer\\ConfigProvider"
+        "laminas": {
+            "component": "Laminas\\Serializer",
+            "config-provider": "Laminas\\Serializer\\ConfigProvider"
+        }
+    },
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "laminas/laminas-json": "^2.5 || ^3.0",
+        "laminas/laminas-stdlib": "^2.7 || ^3.0",
+        "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "laminas/laminas-math": "^2.6 || ^3.0",
+        "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+        "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.16"
+    },
+    "suggest": {
+        "laminas/laminas-math": "(^2.6 || ^3.0) To support Python Pickle serialization",
+        "laminas/laminas-servicemanager": "(^2.7.5 || ^3.0.3) To support plugin manager support"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\Serializer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaminasTest\\Serializer\\": "test/"
         }
     },
     "scripts": {
@@ -62,5 +63,8 @@
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+    },
+    "replace": {
+        "zendframework/zend-serializer": "self.version"
     }
 }
