@@ -1,20 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Serializer\Adapter;
+namespace LaminasTest\Serializer\Adapter;
 
+use Laminas\Serializer;
 use PHPUnit\Framework\TestCase;
-use Zend\Serializer;
 
 /**
- * @group      Zend_Serializer
- * @covers Zend\Serializer\Adapter\PythonPickle
+ * @group      Laminas_Serializer
+ * @covers Laminas\Serializer\Adapter\PythonPickle
  */
 class PythonPickleUnserializeTest extends TestCase
 {
@@ -357,7 +356,7 @@ class PythonPickleUnserializeTest extends TestCase
     public function testUnserialzeInvalid()
     {
         $value = 'not a serialized string';
-        $this->expectException('Zend\Serializer\Exception\RuntimeException');
+        $this->expectException('Laminas\Serializer\Exception\RuntimeException');
         $this->expectExceptionMessage("Invalid or unknown opcode 'n'");
         $this->adapter->unserialize($value);
     }

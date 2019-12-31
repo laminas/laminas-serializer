@@ -1,25 +1,24 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Serializer;
+namespace LaminasTest\Serializer;
 
+use Laminas\Serializer\Adapter;
+use Laminas\Serializer\AdapterPluginManager;
+use Laminas\Serializer\Exception\RuntimeException;
+use Laminas\Serializer\Serializer;
+use Laminas\ServiceManager\Exception\InvalidServiceException;
+use Laminas\ServiceManager\ServiceManager;
 use PHPUnit\Framework\TestCase;
-use Zend\Serializer\Adapter;
-use Zend\Serializer\AdapterPluginManager;
-use Zend\Serializer\Exception\RuntimeException;
-use Zend\Serializer\Serializer;
-use Zend\ServiceManager\Exception\InvalidServiceException;
-use Zend\ServiceManager\ServiceManager;
 
 /**
- * @group      Zend_Serializer
- * @covers Zend\Serializer\Serializer
+ * @group      Laminas_Serializer
+ * @covers Laminas\Serializer\Serializer
  */
 class SerializerTest extends TestCase
 {
@@ -30,7 +29,7 @@ class SerializerTest extends TestCase
 
     public function testGetDefaultAdapterPluginManager()
     {
-        $this->assertInstanceOf('Zend\Serializer\AdapterPluginManager', Serializer::getAdapterPluginManager());
+        $this->assertInstanceOf('Laminas\Serializer\AdapterPluginManager', Serializer::getAdapterPluginManager());
     }
 
     public function testChangeAdapterPluginManager()
@@ -45,18 +44,18 @@ class SerializerTest extends TestCase
     public function testDefaultAdapter()
     {
         $adapter = Serializer::getDefaultAdapter();
-        $this->assertInstanceOf('Zend\Serializer\Adapter\AdapterInterface', $adapter);
+        $this->assertInstanceOf('Laminas\Serializer\Adapter\AdapterInterface', $adapter);
     }
 
     public function testFactoryValidCall()
     {
         $serializer = Serializer::factory('PhpSerialize');
-        $this->assertInstanceOf('Zend\Serializer\Adapter\PHPSerialize', $serializer);
+        $this->assertInstanceOf('Laminas\Serializer\Adapter\PHPSerialize', $serializer);
     }
 
     public function testFactoryUnknownAdapter()
     {
-        $this->expectException('Zend\ServiceManager\Exception\ServiceNotFoundException');
+        $this->expectException('Laminas\ServiceManager\Exception\ServiceNotFoundException');
         Serializer::factory('unknown');
     }
 
@@ -84,7 +83,7 @@ class SerializerTest extends TestCase
     public function testChangeDefaultAdapterWithString()
     {
         Serializer::setDefaultAdapter('Json');
-        $this->assertInstanceOf('Zend\Serializer\Adapter\Json', Serializer::getDefaultAdapter());
+        $this->assertInstanceOf('Laminas\Serializer\Adapter\Json', Serializer::getDefaultAdapter());
     }
 
     public function testChangeDefaultAdapterWithInstance()
@@ -100,7 +99,7 @@ class SerializerTest extends TestCase
         $options = new Adapter\PythonPickleOptions(['protocol' => 2]);
         /** @var Adapter\PythonPickle $adapter  */
         $adapter = Serializer::factory('pythonpickle', $options->toArray());
-        $this->assertInstanceOf('Zend\Serializer\Adapter\PythonPickle', $adapter);
+        $this->assertInstanceOf('Laminas\Serializer\Adapter\PythonPickle', $adapter);
         $this->assertEquals(2, $adapter->getOptions()->getProtocol());
     }
 

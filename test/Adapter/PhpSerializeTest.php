@@ -1,20 +1,21 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-serializer for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-serializer/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Serializer\Adapter;
+namespace LaminasTest\Serializer\Adapter;
 
+use Laminas\Serializer;
+use Laminas\Serializer\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use stdClass;
-use Zend\Serializer;
-use Zend\Serializer\Exception\InvalidArgumentException;
 
 /**
- * @group  Zend_Serializer
- * @covers \Zend\Serializer\Adapter\PhpSerialize
+ * @group  Laminas_Serializer
+ * @covers \Laminas\Serializer\Adapter\PhpSerialize
  */
 class PhpSerializeTest extends TestCase
 {
@@ -143,7 +144,7 @@ class PhpSerializeTest extends TestCase
      */
     public function testUnserializingNoStringRaisesException($value, $expected)
     {
-        $this->expectException('Zend\Serializer\Exception\RuntimeException');
+        $this->expectException('Laminas\Serializer\Exception\RuntimeException');
         $this->expectExceptionMessage($expected);
         $this->adapter->unserialize($value);
     }
