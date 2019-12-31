@@ -1,21 +1,20 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Serializer\Adapter;
+namespace LaminasTest\Serializer\Adapter;
 
+use Laminas\Serializer;
+use Laminas\Serializer\Exception\ExtensionNotLoadedException;
 use PHPUnit\Framework\TestCase;
-use Zend\Serializer;
-use Zend\Serializer\Exception\ExtensionNotLoadedException;
 
 /**
- * @group      Zend_Serializer
- * @covers \Zend\Serializer\Adapter\IgBinary
+ * @group      Laminas_Serializer
+ * @covers \Laminas\Serializer\Adapter\IgBinary
  */
 class IgBinaryTest extends TestCase
 {
@@ -29,10 +28,10 @@ class IgBinaryTest extends TestCase
         if (! extension_loaded('igbinary')) {
             try {
                 new Serializer\Adapter\IgBinary();
-                $this->fail("Zend\\Serializer\\Adapter\\IgBinary needs missing ext/igbinary but did't throw exception");
+                $this->fail("Laminas\\Serializer\\Adapter\\IgBinary needs missing ext/igbinary but did't throw exception");
             } catch (ExtensionNotLoadedException $e) {
             }
-            $this->markTestSkipped('Zend\\Serializer\\Adapter\\IgBinary needs ext/igbinary');
+            $this->markTestSkipped('Laminas\\Serializer\\Adapter\\IgBinary needs ext/igbinary');
         }
         $this->adapter = new Serializer\Adapter\IgBinary();
     }
@@ -135,7 +134,7 @@ class IgBinaryTest extends TestCase
     public function testUnserialzeInvalid()
     {
         $value = "\0\1\r\n";
-        $this->expectException('Zend\Serializer\Exception\RuntimeException');
+        $this->expectException('Laminas\Serializer\Exception\RuntimeException');
         $this->expectExceptionMessage('Unserialization failed');
         $this->adapter->unserialize($value);
     }
