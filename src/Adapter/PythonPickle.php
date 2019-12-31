@@ -1,28 +1,26 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Serializer
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Serializer\Adapter;
+namespace Laminas\Serializer\Adapter;
 
+use Laminas\Math\BigInteger;
+use Laminas\Serializer\Exception;
+use Laminas\Stdlib\ArrayUtils;
 use stdClass;
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Serializer\Exception;
-use Zend\Math\BigInteger;
 
 /**
  * @link       http://www.python.org
  * @see        Phython3.1/Lib/pickle.py
  * @see        Phython3.1/Modules/_pickle.c
  * @link       http://pickle-js.googlecode.com
- * @category   Zend
- * @package    Zend_Serializer
+ * @category   Laminas
+ * @package    Laminas_Serializer
  * @subpackage Adapter
  */
 class PythonPickle extends AbstractAdapter
