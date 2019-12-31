@@ -1,16 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Serializer\Adapter;
+namespace Laminas\Serializer\Adapter;
 
-use Zend\Json\Json as ZendJson;
-use Zend\Serializer\Exception;
+use Laminas\Json\Json as LaminasJson;
+use Laminas\Serializer\Exception;
 
 class JsonOptions extends AdapterOptions
 {
@@ -21,7 +20,7 @@ class JsonOptions extends AdapterOptions
 
     protected $enableJsonExprFinder = false;
 
-    protected $objectDecodeType = ZendJson::TYPE_ARRAY;
+    protected $objectDecodeType = LaminasJson::TYPE_ARRAY;
 
     /**
      * @param  bool $flag
@@ -66,7 +65,7 @@ class JsonOptions extends AdapterOptions
      */
     public function setObjectDecodeType($type)
     {
-        if ($type != ZendJson::TYPE_ARRAY && $type != ZendJson::TYPE_OBJECT) {
+        if ($type != LaminasJson::TYPE_ARRAY && $type != LaminasJson::TYPE_OBJECT) {
             throw new Exception\InvalidArgumentException(
                 'Unknown decode type: ' . $type
             );

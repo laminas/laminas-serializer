@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Serializer\Adapter;
+namespace LaminasTest\Serializer\Adapter;
 
-use Zend\Serializer;
-use Zend\Serializer\Exception\ExtensionNotLoadedException;
+use Laminas\Serializer;
+use Laminas\Serializer\Exception\ExtensionNotLoadedException;
 
 /**
- * @group      Zend_Serializer
+ * @group      Laminas_Serializer
  */
 class WddxTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,9 +26,9 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('wddx')) {
             try {
                 new Serializer\Adapter\Wddx();
-                $this->fail("Zend\\Serializer\\Adapter\\Wddx needs missing ext/wddx but did't throw exception");
+                $this->fail("Laminas\\Serializer\\Adapter\\Wddx needs missing ext/wddx but did't throw exception");
             } catch (ExtensionNotLoadedException $e) {}
-            $this->markTestSkipped('Zend\\Serializer\\Adapter\\Wddx needs ext/wddx');
+            $this->markTestSkipped('Laminas\\Serializer\\Adapter\\Wddx needs ext/wddx');
         }
         $this->adapter = new Serializer\Adapter\Wddx();
     }
@@ -201,7 +200,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
         $value = 'not a serialized string';
         $this->setExpectedException(
-            'Zend\Serializer\Exception\RuntimeException',
+            'Laminas\Serializer\Exception\RuntimeException',
             'DOMDocument::loadXML(): Start tag expected'
         );
         $this->adapter->unserialize($value);
@@ -215,7 +214,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
         $value = '<wddxPacket version=\'1.0\'><header /></wddxPacket>';
         $this->setExpectedException(
-            'Zend\Serializer\Exception\RuntimeException',
+            'Laminas\Serializer\Exception\RuntimeException',
             'Invalid wddx packet'
         );
         $this->adapter->unserialize($value);
@@ -226,7 +225,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $value    = '<!DOCTYPE>'
                   . '<wddxPacket version=\'1.0\'><header/>'
                   . '<data><string>test</string></data></wddxPacket>';
-        $this->setExpectedException("Zend\Serializer\Exception\RuntimeException");
+        $this->setExpectedException("Laminas\Serializer\Exception\RuntimeException");
         $data = $this->adapter->unserialize($value);
     }
 }
