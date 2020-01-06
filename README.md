@@ -1,6 +1,6 @@
 # laminas-serializer
 
-[![Build Status](https://travis-ci.org/laminas/laminas-serializer.svg?branch=master)](https://travis-ci.org/laminas/laminas-serializer)
+[![Build Status](https://travis-ci.com/laminas/laminas-serializer.svg?branch=master)](https://travis-ci.com/laminas/laminas-serializer)
 [![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-serializer/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-serializer?branch=master)
 
 laminas-serializer provides an adapter-based interface for generating and
