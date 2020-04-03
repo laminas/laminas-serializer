@@ -272,7 +272,7 @@ deserializing PHP types to and from different representations.</p>
 <p>Serializing adapters can either be created from the provided
 <code>Laminas\Serializer\Serializer::factory</code> method, or by instantiating one of the
 <code>Laminas\Serializer\Adapter\*</code> classes.</p>
-<pre class=codehilite><code class=language-php>use Laminas\Serializer\Adapter;
+<pre class="highlight"><code class="language-php">use Laminas\Serializer\Adapter;
 use Laminas\Serializer\Exception;
 use Laminas\Serializer\Serializer;
 
@@ -294,6 +294,7 @@ try {
 } catch (Exception\ExceptionInterface $e) {
     echo $e;
 }</code></pre>
+
 <p>The method <code>serialize()</code> generates a storable string. To regenerate this
 serialized data, call the method <code>unserialize()</code>.</p>
 <p>Any time an error is encountered serializing or unserializing, the adapter will
@@ -303,7 +304,7 @@ to define and use a default serializer. That serializer will be used by default
 by other components like <code>Laminas\Cache\Storage\Plugin\Serializer</code>.</p>
 <p>To define and use the default serializer, use the static serialization methods
 of the basic <code>Laminas\Serializer\Serializer</code>:</p>
-<pre class=codehilite><code class=language-php>use Laminas\Serializer\Adapter;
+<pre class="highlight"><code class="language-php">use Laminas\Serializer\Adapter;
 use Laminas\Serializer\Exception;
 use Laminas\Serializer\Serializer;
 
@@ -318,6 +319,7 @@ try {
 } catch (Exception\ExceptionInterface $e) {
     echo $e;
 }</code></pre>
+
 <h2 id="basic-configuration-options">Basic configuration Options</h2>
 <p>To configure a serializer adapter, you can optionally use an instance of
 <code>Laminas\Serializer\Adapter\AdapterOptions</code>, an instance of one of the adapter
