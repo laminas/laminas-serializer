@@ -28,7 +28,9 @@ class MsgPackTest extends TestCase
         if (! extension_loaded('msgpack')) {
             try {
                 new Serializer\Adapter\MsgPack();
-                $this->fail("Laminas\\Serializer\\Adapter\\MsgPack needs missing ext/msgpack but did't throw exception");
+                $this->fail(
+                    "Laminas\\Serializer\\Adapter\\MsgPack needs missing ext/msgpack but did't throw exception"
+                );
             } catch (ExtensionNotLoadedException $e) {
             }
             $this->markTestSkipped('Laminas\\Serializer\\Adapter\\MsgPack needs ext/msgpack');
