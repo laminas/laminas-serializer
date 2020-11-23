@@ -19,7 +19,7 @@ class PhpCodeTest extends TestCase
     /** @var Serializer\Adapter\PhpCode */
     private $adapter;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->adapter = new Serializer\Adapter\PhpCode();
     }
