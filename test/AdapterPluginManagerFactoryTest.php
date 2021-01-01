@@ -71,4 +71,99 @@ class AdapterPluginManagerFactoryTest extends TestCase
         $serializers = $factory->createService($container->reveal());
         $this->assertSame($serializer, $serializers->get('test'));
     }
+
+    public function testConfiguresSerializerServicesWhenFound(): void
+    {
+        $serializer = $this->prophesize(AdapterInterface::class)->reveal();
+        $config = [
+            'serializers' => [
+                'aliases' => [
+                    'test' => 'test-too',
+                ],
+                'factories' => [
+                    'test-too' => function ($container) use ($serializer) {
+                        return $serializer;
+                    },
+                ],
+            ],
+        ];
+
+        $container = $this->prophesize(ServiceLocatorInterface::class);
+        $container->willImplement(ContainerInterface::class);
+
+        $container->has('ServiceListener')->willReturn(false);
+        $container->has('config')->willReturn(true);
+        $container->get('config')->willReturn($config);
+
+        $factory = new AdapterPluginManagerFactory();
+        $serializers = $factory($container->reveal(), 'SerializerAdapterManager');
+
+        $this->assertInstanceOf(AdapterPluginManager::class, $serializers);
+        $this->assertTrue($serializers->has('test'));
+        $this->assertSame($serializer, $serializers->get('test'));
+        $this->assertTrue($serializers->has('test-too'));
+        $this->assertSame($serializer, $serializers->get('test-too'));
+    }
+
+    public function testDoesNotConfigureSerializerServicesWhenServiceListenerPresent(): void
+    {
+        $serializer = $this->prophesize(AdapterInterface::class)->reveal();
+        $config = [
+            'serializers' => [
+                'aliases' => [
+                    'test' => 'test-too',
+                ],
+                'factories' => [
+                    'test-too' => function ($container) use ($serializer) {
+                        return $serializer;
+                    },
+                ],
+            ],
+        ];
+
+        $container = $this->prophesize(ServiceLocatorInterface::class);
+        $container->willImplement(ContainerInterface::class);
+
+        $container->has('ServiceListener')->willReturn(true);
+        $container->has('config')->shouldNotBeCalled();
+        $container->get('config')->shouldNotBeCalled();
+
+        $factory = new AdapterPluginManagerFactory();
+        $serializers = $factory($container->reveal(), 'SerializerAdapterManager');
+
+        $this->assertInstanceOf(AdapterPluginManager::class, $serializers);
+        $this->assertFalse($serializers->has('test'));
+        $this->assertFalse($serializers->has('test-too'));
+    }
+
+    public function testDoesNotConfigureSerializerServicesWhenConfigServiceNotPresent(): void
+    {
+        $container = $this->prophesize(ServiceLocatorInterface::class);
+        $container->willImplement(ContainerInterface::class);
+
+        $container->has('ServiceListener')->willReturn(false);
+        $container->has('config')->willReturn(false);
+        $container->get('config')->shouldNotBeCalled();
+
+        $factory = new AdapterPluginManagerFactory();
+        $serializers = $factory($container->reveal(), 'SerializerAdapterManager');
+
+        $this->assertInstanceOf(AdapterPluginManager::class, $serializers);
+    }
+
+    public function testDoesNotConfigureSerializerServicesWhenConfigServiceDoesNotContainSerializersConfig(): void
+    {
+        $container = $this->prophesize(ServiceLocatorInterface::class);
+        $container->willImplement(ContainerInterface::class);
+
+        $container->has('ServiceListener')->willReturn(false);
+        $container->has('config')->willReturn(true);
+        $container->get('config')->willReturn(['foo' => 'bar']);
+
+        $factory = new AdapterPluginManagerFactory();
+        $serializers = $factory($container->reveal(), 'SerializerAdapterManager');
+
+        $this->assertInstanceOf(AdapterPluginManager::class, $serializers);
+        $this->assertFalse($serializers->has('foo'));
+    }
 }
