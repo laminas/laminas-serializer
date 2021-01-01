@@ -72,7 +72,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
         $this->assertSame($serializer, $serializers->get('test'));
     }
 
-    public function testConfiguresSerializerServicesWhenFound(): void
+    public function testConfiguresSerializerServicesWhenFound()
     {
         $serializer = $this->prophesize(AdapterInterface::class)->reveal();
         $config = [
@@ -105,7 +105,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
         $this->assertSame($serializer, $serializers->get('test-too'));
     }
 
-    public function testDoesNotConfigureSerializerServicesWhenServiceListenerPresent(): void
+    public function testDoesNotConfigureSerializerServicesWhenServiceListenerPresent()
     {
         $serializer = $this->prophesize(AdapterInterface::class)->reveal();
         $config = [
@@ -136,7 +136,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
         $this->assertFalse($serializers->has('test-too'));
     }
 
-    public function testDoesNotConfigureSerializerServicesWhenConfigServiceNotPresent(): void
+    public function testDoesNotConfigureSerializerServicesWhenConfigServiceNotPresent()
     {
         $container = $this->prophesize(ServiceLocatorInterface::class);
         $container->willImplement(ContainerInterface::class);
@@ -151,7 +151,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
         $this->assertInstanceOf(AdapterPluginManager::class, $serializers);
     }
 
-    public function testDoesNotConfigureSerializerServicesWhenConfigServiceDoesNotContainSerializersConfig(): void
+    public function testDoesNotConfigureSerializerServicesWhenConfigServiceDoesNotContainSerializersConfig()
     {
         $container = $this->prophesize(ServiceLocatorInterface::class);
         $container->willImplement(ContainerInterface::class);
