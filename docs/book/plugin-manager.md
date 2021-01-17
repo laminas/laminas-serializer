@@ -17,3 +17,16 @@ injection container.
 The factory will look for the `config` service, and use the `serializers`
 configuration key to seed it with additional services. This configuration key
 should map to an array that follows [standard laminas-servicemanager configuration](https://docs.laminas.dev/laminas-servicemanager/configuring-the-service-manager/).
+
+To add your own serializer you can add the following configuration:
+
+```php
+// config/autoload/serializers.global.php
+return [    
+    'serializers' => [
+        'factories' => [
+            \App\MyCustomSerializer::class => \App\Container\MyCustomSerializerFactory::class,
+        ],
+    ],
+];
+```
