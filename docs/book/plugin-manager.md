@@ -1,7 +1,5 @@
 # Plugin Manager
 
-## AdapterPluginManager
-
 The `AdapterPluginManager` extends the laminas-servicemanager
 `AbstractPluginManager`, and has the following behaviors:
 
@@ -10,7 +8,7 @@ The `AdapterPluginManager` extends the laminas-servicemanager
   the namespace), in a variety of casing combinations.
 - All services are shared by default; a new instance will only be created once and shared each time you call `get()`.
 
-### AdapterPluginManagerFactory
+## Factory
 
 `Laminas\Serializer\AdapterPluginManager` is mapped to the factory
 `Laminas\Serializer\AdapterPluginManagerFactory` when wired to the dependency
