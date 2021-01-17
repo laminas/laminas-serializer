@@ -14,6 +14,8 @@ The `AdapterPluginManager` extends the laminas-servicemanager
 `Laminas\Serializer\AdapterPluginManagerFactory` when wired to the dependency
 injection container.
 
+The factory will be automatically registered when loading/installing the `Laminas\Serializer` module in `laminas-mvc` and/or loading/installing the `ConfigProvider` into a Mezzio application.
+
 The factory will look for the `config` service, and use the `serializers`
 configuration key to seed it with additional services. This configuration key
 should map to an array that follows [standard laminas-servicemanager configuration](https://docs.laminas.dev/laminas-servicemanager/configuring-the-service-manager/).
