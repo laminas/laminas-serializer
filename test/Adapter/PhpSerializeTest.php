@@ -181,21 +181,6 @@ class PhpSerializeTest extends TestCase
         $this->assertInstanceOf('__PHP_Incomplete_Class', $data);
     }
 
-    public function testWhenUnserializeClassWhiteListIsFalseButPHPIsPriorTo7AnExceptionIsRaised()
-    {
-        $value = 'O:8:"stdClass":0:{}';
-
-        if (PHP_MAJOR_VERSION >= 7) {
-            $this->markTestSkipped(sprintf('Test %s is only needed in PHP versions prior to 7.0', __FUNCTION__));
-        }
-
-        self::expectException(InvalidArgumentException::class);
-        self::expectExceptionMessage(
-            'Class whitelist for unserialize() is only available on PHP versions 7.0 or higher.'
-        );
-        $this->adapter->getOptions()->setUnserializeClassWhitelist(false);
-    }
-
     /**
      * @requires PHP 7.0
      */
