@@ -1,11 +1,5 @@
 {
     "extensions": [
         "bcmath"
-    ],
-    "exclude": [
-        {"name": "PHPUnit on PHP 5.6 with locked dependencies"},
-        {"name": "PHPUnit on PHP 7.0 with locked dependencies"},
-        {"name": "PHPUnit on PHP 7.1 with locked dependencies"},
-        {"name": "PHPUnit on PHP 7.2 with locked dependencies"}
     ]
 }
