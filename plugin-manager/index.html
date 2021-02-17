@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Serialize and deserialize PHP structures to a variety of representations">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-serializer/intro/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-serializer/plugin-manager/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Introduction - laminas-serializer - Laminas Docs</title>
+    <title>Plugin Manager - laminas-serializer - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -129,8 +129,8 @@
                     
                     
                         
-                            <li class="subnavigation__list-item subnavigation__list-item--active">
-                                <a href="./" class="subnavigation__link">Introduction</a>
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
                             </li>
                         
                     
@@ -157,8 +157,8 @@
                     
                     
                         
-                            <li class="subnavigation__list-item ">
-                                <a href="../plugin-manager/" class="subnavigation__link">Plugin Manager</a>
+                            <li class="subnavigation__list-item subnavigation__list-item--active">
+                                <a href="./" class="subnavigation__link">Plugin Manager</a>
                             </li>
                         
                     
@@ -234,15 +234,7 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#quick-start" class="toc__link nav-link">Quick Start</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#basic-configuration-options" class="toc__link nav-link">Basic configuration Options</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#available-methods" class="toc__link nav-link">Available Methods</a>
+                        <a href="#factory" class="toc__link nav-link">Factory</a>
                     </li>
                 
             </ul>
@@ -263,7 +255,7 @@
 
                 
 
-                <li class="breadcrumb-item active" aria-current="page">Introduction</li>
+                <li class="breadcrumb-item active" aria-current="page">Plugin Manager</li>
             
         
     </ol>
@@ -277,143 +269,28 @@
     
     
 
-    <h1 id="introduction">Introduction</h1>
-<p>laminas-serialzier provides an adapter-based interface for serializing and
-deserializing PHP types to and from different representations.</p>
-<p>For more information what a serializer is read the wikipedia page of
-<a href="http://en.wikipedia.org/wiki/Serialization">Serialization</a>.</p>
-<h2 id="quick-start">Quick Start</h2>
-<p>Serializing adapters can either be created from the provided
-<code>Laminas\Serializer\Serializer::factory</code> method, or by instantiating one of the
-<code>Laminas\Serializer\Adapter\*</code> classes.</p>
-<pre class="highlight"><code class="language-php">use Laminas\Serializer\Adapter;
-use Laminas\Serializer\Exception;
-use Laminas\Serializer\Serializer;
-
-// Via factory:
-$serializer = Serializer::factory(Adapter\PhpSerialize::class);
-
-// Alternately:
-$serializer = new Adapter\PhpSerialize();
-
-// Now $serializer is an instance of Laminas\Serializer\Adapter\AdapterInterface,
-// specifically Laminas\Serializer\Adapter\PhpSerialize
-
-try {
-    $serialized = $serializer-&gt;serialize($data);
-    // now $serialized is a string
-
-    $unserialized = $serializer-&gt;unserialize($serialized);
-    // now $data == $unserialized
-} catch (Exception\ExceptionInterface $e) {
-    echo $e;
-}</code></pre>
-<p>The method <code>serialize()</code> generates a storable string. To regenerate this
-serialized data, call the method <code>unserialize()</code>.</p>
-<p>Any time an error is encountered serializing or unserializing, the adapter will
-throw a <code>Laminas\Serializer\Exception\ExceptionInterface</code>.</p>
-<p>Because an application often uses only one serializer internally, it is possible
-to define and use a default serializer. That serializer will be used by default
-by other components like <code>Laminas\Cache\Storage\Plugin\Serializer</code>.</p>
-<p>To define and use the default serializer, use the static serialization methods
-of the basic <code>Laminas\Serializer\Serializer</code>:</p>
-<pre class="highlight"><code class="language-php">use Laminas\Serializer\Adapter;
-use Laminas\Serializer\Exception;
-use Laminas\Serializer\Serializer;
-
-Serializer::setDefaultAdapter(Adapter\PhpSerialize::class);
-
-try {
-    $serialized = Serializer::serialize($data);
-    // now $serialized is a string
-
-    $unserialized = Serializer::unserialize($serialized);
-    // now $data == $unserialized
-} catch (Exception\ExceptionInterface $e) {
-    echo $e;
-}</code></pre>
-<h2 id="basic-configuration-options">Basic configuration Options</h2>
-<p>To configure a serializer adapter, you can optionally use an instance of
-<code>Laminas\Serializer\Adapter\AdapterOptions</code>, an instance of one of the adapter
-specific options class, an <code>array</code>, or a <code>Traversable</code> object. The adapter
-will convert it into the adapter specific options class instance (if present) or
-into the basic <code>Laminas\Serializer\Adapter\AdapterOptions</code> class instance.</p>
-<p>Options can be passed as the second argument to the provided
-<code>Laminas\Serializer\Serializer::factory</code> and <code>::setDefaultAdapter</code> methods, via the
-adapter's <code>setOptions</code> method, or as constructor arguments when directly
-instantiating an adapter.</p>
-<h2 id="available-methods">Available Methods</h2>
-<p>Each serializer implements the interface <code>Laminas\Serializer\Adapter\AdapterInterface</code>.</p>
-<p>This interface defines the following methods:</p>
-<div class="table-responsive"><table>
-<thead>
-<tr>
-<th>Method signature</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>serialize(mixed $value) : string</code></td>
-<td>Generates a storable representation of a value.</td>
-</tr>
-<tr>
-<td><code>unserialize(string $value) : mixed</code></td>
-<td>Creates a PHP value from a stored representation.</td>
-</tr>
-</tbody>
-</table></div>
-<p>The base class <code>Laminas\Serializer\Serializer</code> is used to instantiate the
-adapters, to configure the factory, and as a proxy for serialization operations.</p>
-<p>It defines the following static methods, where the following references map to
-classes/interfaces as follows:</p>
+    <h1 id="plugin-manager">Plugin Manager</h1>
+<p>The <code>AdapterPluginManager</code> extends the laminas-servicemanager <code>AbstractPluginManager</code>, and has the following behaviors:</p>
 <ul>
-<li><code>AdapterPluginManager</code>: <code>Laminas\Serializer\AdapterPluginManager</code></li>
-<li><code>AdapterInterface</code>: <code>Laminas\Serializer\Adapter\AdapterInterface</code></li>
-<li><code>AdapterOptions</code>: <code>Laminas\Serializer\Adapter\AdapterOptions</code></li>
+<li>It will only return <code>Laminas\Serializer\Adapter\AdapterInterface</code> instances.</li>
+<li><strong>Since 2.10.0</strong>: It defines short-name aliases for all shipped serializers (the class name minus the namespace), in a variety of casing combinations.</li>
+<li>All services are shared by default; a new instance will only be created once and shared each time you call <code>get()</code>.</li>
 </ul>
-<div class="table-responsive"><table>
-<thead>
-<tr>
-<th>Method signature</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>factory(/* ... */) : AdapterInterface</code></td>
-<td>Create a serializer adapter instance. Arguments are: <code>string|AdapterInterface $adapterName, AdapterOptions|array|Traversable $adapterOptions = null</code>.</td>
-</tr>
-<tr>
-<td><code>setAdapterPluginManager(AdapterPluginManager $adapters) : void</code></td>
-<td>Change the adapter plugin manager.</td>
-</tr>
-<tr>
-<td><code>getAdapterPluginManager() : AdapterPluginManager</code></td>
-<td>Get the adapter plugin manager.</td>
-</tr>
-<tr>
-<td><code>resetAdapterPluginManager() : void</code></td>
-<td>Resets the internal adapter plugin manager.</td>
-</tr>
-<tr>
-<td><code>setDefaultAdapter(string|AdapterInterface $adapter /* ... */) : void</code></td>
-<td>Change the default adapter. Full argument list: <code>string|AdapterInterface $adapter, AdapterOptions|array|Traversable $adapterOptions = null</code>.</td>
-</tr>
-<tr>
-<td><code>getDefaultAdapter() : AdapterInterface</code></td>
-<td>Get the default adapter.</td>
-</tr>
-<tr>
-<td><code>serialize(mixed $data /* ... */) : string</code></td>
-<td>Generates a storable representation of a value using the default adapter. Optionally, provide a  different adapter via the second argument. Full argument list: <code>mixed $value, string|AdapterInterface $adapter = null, AdapterOptions|array|Traversable $adapterOptions = null</code>.</td>
-</tr>
-<tr>
-<td><code>unserialize(string $value /* ... */) : mixed</code></td>
-<td>Creates a PHP value from a stored representation using the default adapter. Optionally, provide a different adapter via the second argument. Full argument list: <code>string $value, string|AdapterInterface|null $adapter = null, AdapterOptions|array|Traversable $adapterOptions = null</code></td>
-</tr>
-</tbody>
-</table></div>
+<h2 id="factory">Factory</h2>
+<p><code>Laminas\Serializer\AdapterPluginManager</code> is mapped to the factory.
+<code>Laminas\Serializer\AdapterPluginManagerFactory</code> when wired to the dependency injection container.</p>
+<p>The factory will be automatically registered when loading/installing the <code>Laminas\Serializer</code> module in <code>laminas-mvc</code> and/or loading/installing the <code>ConfigProvider</code> into a Mezzio application.</p>
+<p>Since version 2.10.0, the factory will look for the <code>config</code> service, and use the <code>serializers</code> configuration key to seed it with additional services.
+This configuration key should map to an array that follows <a href="https://docs.laminas.dev/laminas-servicemanager/configuring-the-service-manager/">standard laminas-servicemanager configuration</a>.</p>
+<p>To add your own serializer you can add the following configuration:</p>
+<pre class="highlight"><code class="language-php">// config/autoload/serializers.global.php
+return [
+    'serializers' =&gt; [
+        'factories' =&gt; [
+            \App\MyCustomSerializer::class =&gt; \App\Container\MyCustomSerializerFactory::class,
+        ],
+    ],
+];</code></pre>
 
 
 
@@ -424,7 +301,7 @@ classes/interfaces as follows:</p>
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="..">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../adapter/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -432,10 +309,6 @@ classes/interfaces as follows:</p>
 
         
         <li class="page-nav__item">
-            
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../adapter/">
-                    Next <i class="fa fa-chevron-right"></i>
-                </a>
             
         </li>
     </ul>
@@ -447,7 +320,7 @@ classes/interfaces as follows:</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-serializer/edit/master/docs/book/intro.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-serializer/edit/master/docs/book/plugin-manager.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -490,8 +363,8 @@ classes/interfaces as follows:</p>
                     
                     
                         
-                            <li class="subnavigation__list-item subnavigation__list-item--active">
-                                <a href="./" class="subnavigation__link">Introduction</a>
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
                             </li>
                         
                     
@@ -518,8 +391,8 @@ classes/interfaces as follows:</p>
                     
                     
                         
-                            <li class="subnavigation__list-item ">
-                                <a href="../plugin-manager/" class="subnavigation__link">Plugin Manager</a>
+                            <li class="subnavigation__list-item subnavigation__list-item--active">
+                                <a href="./" class="subnavigation__link">Plugin Manager</a>
                             </li>
                         
                     
