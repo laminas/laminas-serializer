@@ -22,7 +22,6 @@ Option                      | Data Type         | Default Value | Description
 --------------------------- | ----------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------
 unserialize_class_whitelist | `array` or `bool` | `true`        | The allowed classes for unserialize(), see [unserialize()](http://php.net/unserialize) for more information. Only available on PHP 7.0 or higher.
 
-
 ## The IgBinary Adapter
 
 [Igbinary](http://pecl.php.net/package/igbinary) was originally released by
