@@ -26,19 +26,19 @@
     },
     "require": {
         "php": "^7.3 || ~8.0.0",
-        "laminas/laminas-json": "^2.5 || ^3.0",
-        "laminas/laminas-stdlib": "^2.7 || ^3.0",
+        "laminas/laminas-json": "^3.1",
+        "laminas/laminas-stdlib": "^3.2",
         "laminas/laminas-zendframework-bridge": "^1.0"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~1.0.0",
-        "laminas/laminas-math": "^2.6 || ^3.0",
-        "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+        "laminas/laminas-math": "^3.3",
+        "laminas/laminas-servicemanager": "^3.6",
         "phpunit/phpunit": "^9.3"
     },
     "suggest": {
-        "laminas/laminas-math": "(^2.6 || ^3.0) To support Python Pickle serialization",
-        "laminas/laminas-servicemanager": "(^2.7.5 || ^3.0.3) To support plugin manager support"
+        "laminas/laminas-math": "(^3.3) To support Python Pickle serialization",
+        "laminas/laminas-servicemanager": "(^3.6) To support plugin manager support"
     },
     "autoload": {
         "psr-4": {
