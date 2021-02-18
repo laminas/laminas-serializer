@@ -23,7 +23,7 @@ class MsgPackTest extends TestCase
      */
     private $adapter;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! extension_loaded('msgpack')) {
             try {
@@ -38,7 +38,7 @@ class MsgPackTest extends TestCase
         $this->adapter = new Serializer\Adapter\MsgPack();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->adapter = null;
     }

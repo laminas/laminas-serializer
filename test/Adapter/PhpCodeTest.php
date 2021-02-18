@@ -19,7 +19,7 @@ class PhpCodeTest extends TestCase
     /** @var Serializer\Adapter\PhpCode */
     private $adapter;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->adapter = new Serializer\Adapter\PhpCode();
     }
@@ -82,17 +82,5 @@ class PhpCodeTest extends TestCase
 
             'PHP Code with tags' => ['<?php echo "test"; ?>', var_export('<?php echo "test"; ?>', true)]
         ];
-    }
-
-    public function testUnserializeInvalid()
-    {
-        if (version_compare(PHP_VERSION, '7', 'ge')) {
-            $this->markTestSkipped('Cannot catch parse errors in PHP 7+');
-        }
-        $value = 'not a serialized string';
-
-        $this->expectException('Laminas\Serializer\Exception\RuntimeException');
-        $this->expectExceptionMessage('syntax error');
-        $this->adapter->unserialize($value);
     }
 }
