@@ -14,20 +14,25 @@ use Laminas\Serializer\AdapterPluginManager;
 use Laminas\Serializer\AdapterPluginManagerFactory;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
 class AdapterPluginManagerFactoryTest extends TestCase
 {
     public function testFactoryReturnsPluginManager()
     {
-        $container = $this->prophesize(ContainerInterface::class)->reveal();
+        $container = $this->createMock(ContainerInterface::class);
         $factory = new AdapterPluginManagerFactory();
 
         $serializers = $factory($container, AdapterPluginManagerFactory::class);
         $this->assertInstanceOf(AdapterPluginManager::class, $serializers);
 
         if (method_exists($serializers, 'configure')) {
+            $reflectionClass = new ReflectionClass($serializers);
+            $creationContextProperty = $reflectionClass->getProperty('creationContext');
+            $creationContextProperty->setAccessible(true);
+
             // laminas-servicemanager v3
-            $this->assertAttributeSame($container, 'creationContext', $serializers);
+            $this->assertEquals($container, $creationContextProperty->getValue($serializers));
         } else {
             // laminas-servicemanager v2
             $this->assertSame($container, $serializers->getServiceLocator());
@@ -39,8 +44,8 @@ class AdapterPluginManagerFactoryTest extends TestCase
      */
     public function testFactoryConfiguresPluginManagerUnderContainerInterop()
     {
-        $container = $this->prophesize(ContainerInterface::class)->reveal();
-        $serializer = $this->prophesize(AdapterInterface::class)->reveal();
+        $container = $this->createMock(ContainerInterface::class);
+        $serializer = $this->createMock(AdapterInterface::class);
 
         $factory = new AdapterPluginManagerFactory();
         $serializers = $factory($container, AdapterPluginManagerFactory::class, [
@@ -56,10 +61,8 @@ class AdapterPluginManagerFactoryTest extends TestCase
      */
     public function testFactoryConfiguresPluginManagerUnderServiceManagerV2()
     {
-        $container = $this->prophesize(ServiceLocatorInterface::class);
-        $container->willImplement(ContainerInterface::class);
-
-        $serializer = $this->prophesize(AdapterInterface::class)->reveal();
+        $container = $this->createMock(ServiceLocatorInterface::class);
+        $serializer = $this->createMock(AdapterInterface::class);
 
         $factory = new AdapterPluginManagerFactory();
         $factory->setCreationOptions([
@@ -68,13 +71,13 @@ class AdapterPluginManagerFactoryTest extends TestCase
             ],
         ]);
 
-        $serializers = $factory->createService($container->reveal());
+        $serializers = $factory->createService($container);
         $this->assertSame($serializer, $serializers->get('test'));
     }
 
     public function testConfiguresSerializerServicesWhenFound()
     {
-        $serializer = $this->prophesize(AdapterInterface::class)->reveal();
+        $serializer = $this->createMock(AdapterInterface::class);
         $config = [
             'serializers' => [
                 'aliases' => [
@@ -88,15 +91,24 @@ class AdapterPluginManagerFactoryTest extends TestCase
             ],
         ];
 
-        $container = $this->prophesize(ServiceLocatorInterface::class);
-        $container->willImplement(ContainerInterface::class);
+        $container = $this->createMock(ContainerInterface::class);
 
-        $container->has('ServiceListener')->willReturn(false);
-        $container->has('config')->willReturn(true);
-        $container->get('config')->willReturn($config);
+        $container
+            ->expects($this->atLeast(2))
+            ->method('has')
+            ->will($this->returnValueMap([
+                ['ServiceListener', false],
+                ['config', true]
+            ]));
+
+        $container
+            ->expects($this->atLeastOnce())
+            ->method('get')
+            ->with('config')
+            ->willReturn($config);
 
         $factory = new AdapterPluginManagerFactory();
-        $serializers = $factory($container->reveal(), 'SerializerAdapterManager');
+        $serializers = $factory($container, 'SerializerAdapterManager');
 
         $this->assertInstanceOf(AdapterPluginManager::class, $serializers);
         $this->assertTrue($serializers->has('test'));
@@ -107,7 +119,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
 
     public function testDoesNotConfigureSerializerServicesWhenServiceListenerPresent()
     {
-        $serializer = $this->prophesize(AdapterInterface::class)->reveal();
+        $serializer = $this->createMock(AdapterInterface::class);
         $config = [
             'serializers' => [
                 'aliases' => [
@@ -121,15 +133,21 @@ class AdapterPluginManagerFactoryTest extends TestCase
             ],
         ];
 
-        $container = $this->prophesize(ServiceLocatorInterface::class);
-        $container->willImplement(ContainerInterface::class);
+        $container = $this->createMock(ContainerInterface::class);
 
-        $container->has('ServiceListener')->willReturn(true);
-        $container->has('config')->shouldNotBeCalled();
-        $container->get('config')->shouldNotBeCalled();
+        $container
+            ->expects($this->atLeastOnce())
+            ->method('has')
+            ->with('ServiceListener')
+            ->willReturn(true);
+
+        $container
+            ->expects($this->never())
+            ->method('get')
+            ->with('config');
 
         $factory = new AdapterPluginManagerFactory();
-        $serializers = $factory($container->reveal(), 'SerializerAdapterManager');
+        $serializers = $factory($container, 'SerializerAdapterManager');
 
         $this->assertInstanceOf(AdapterPluginManager::class, $serializers);
         $this->assertFalse($serializers->has('test'));
@@ -138,30 +156,47 @@ class AdapterPluginManagerFactoryTest extends TestCase
 
     public function testDoesNotConfigureSerializerServicesWhenConfigServiceNotPresent()
     {
-        $container = $this->prophesize(ServiceLocatorInterface::class);
-        $container->willImplement(ContainerInterface::class);
+        $container = $this->createMock(ContainerInterface::class);
 
-        $container->has('ServiceListener')->willReturn(false);
-        $container->has('config')->willReturn(false);
-        $container->get('config')->shouldNotBeCalled();
+        $container
+            ->expects($this->atLeast(2))
+            ->method('has')
+            ->will($this->returnValueMap([
+                ['ServiceListener', false],
+                ['config', false]
+            ]));
+
+        $container
+            ->expects($this->never())
+            ->method('get')
+            ->with('config');
 
         $factory = new AdapterPluginManagerFactory();
-        $serializers = $factory($container->reveal(), 'SerializerAdapterManager');
+        $serializers = $factory($container, 'SerializerAdapterManager');
 
         $this->assertInstanceOf(AdapterPluginManager::class, $serializers);
     }
 
     public function testDoesNotConfigureSerializerServicesWhenConfigServiceDoesNotContainSerializersConfig()
     {
-        $container = $this->prophesize(ServiceLocatorInterface::class);
-        $container->willImplement(ContainerInterface::class);
+        $container = $this->createMock(ContainerInterface::class);
 
-        $container->has('ServiceListener')->willReturn(false);
-        $container->has('config')->willReturn(true);
-        $container->get('config')->willReturn(['foo' => 'bar']);
+        $container
+            ->expects($this->atLeast(2))
+            ->method('has')
+            ->will($this->returnValueMap([
+                ['ServiceListener', false],
+                ['config', true]
+            ]));
+
+        $container
+            ->expects($this->atLeastOnce())
+            ->method('get')
+            ->with('config')
+            ->willReturn(['foo' => 'bar']);
 
         $factory = new AdapterPluginManagerFactory();
-        $serializers = $factory($container->reveal(), 'SerializerAdapterManager');
+        $serializers = $factory($container, 'SerializerAdapterManager');
 
         $this->assertInstanceOf(AdapterPluginManager::class, $serializers);
         $this->assertFalse($serializers->has('foo'));

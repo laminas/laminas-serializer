@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
  */
 class SerializerTest extends TestCase
 {
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Serializer::resetAdapterPluginManager();
     }
@@ -72,9 +72,9 @@ class SerializerTest extends TestCase
             Serializer::factory('dummy');
             $this->fail('Expected exception when requesting invalid adapter type');
         } catch (InvalidServiceException $e) {
-            $this->assertContains('Dummy is invalid', $e->getMessage());
+            $this->assertStringContainsString('Dummy is invalid', $e->getMessage());
         } catch (RuntimeException $e) {
-            $this->assertContains('Dummy is invalid', $e->getMessage());
+            $this->assertStringContainsString('Dummy is invalid', $e->getMessage());
         } catch (\Exception $e) {
             $this->fail('Unexpected exception raised by plugin manager for invalid adapter type');
         }

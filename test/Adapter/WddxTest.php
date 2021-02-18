@@ -23,7 +23,7 @@ class WddxTest extends TestCase
      */
     private $adapter;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! extension_loaded('wddx')) {
             try {
@@ -36,7 +36,7 @@ class WddxTest extends TestCase
         $this->adapter = new Serializer\Adapter\Wddx();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->adapter = null;
     }

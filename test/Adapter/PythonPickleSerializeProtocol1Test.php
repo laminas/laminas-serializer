@@ -22,7 +22,7 @@ class PythonPickleSerializeProtocol1Test extends TestCase
      */
     private $adapter;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $options = new Serializer\Adapter\PythonPickleOptions([
             'protocol' => 1
@@ -30,7 +30,7 @@ class PythonPickleSerializeProtocol1Test extends TestCase
         $this->adapter = new Serializer\Adapter\PythonPickle($options);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->adapter = null;
     }
