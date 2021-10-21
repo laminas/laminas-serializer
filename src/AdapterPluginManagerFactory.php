@@ -29,7 +29,7 @@ class AdapterPluginManagerFactory implements FactoryInterface
      *
      * @return AdapterPluginManager
      */
-    public function __invoke(ContainerInterface $container, $name, ?array $options = null): self
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null): AdapterPluginManager
     {
         $pluginManager = new AdapterPluginManager($container, $options ?: []);
 
@@ -62,7 +62,7 @@ class AdapterPluginManagerFactory implements FactoryInterface
      *
      * @return AdapterPluginManager
      */
-    public function createService(ServiceLocatorInterface $container, $name = null, $requestedName = null): self
+    public function createService(ServiceLocatorInterface $container, $name = null, $requestedName = null): AdapterPluginManager
     {
         return $this($container, $requestedName ?: AdapterPluginManager::class, $this->creationOptions);
     }

@@ -20,7 +20,7 @@ use function method_exists;
 
 class AdapterPluginManagerFactoryTest extends TestCase
 {
-    public function testFactoryReturnsPluginManager()
+    public function testFactoryReturnsPluginManager(): void
     {
         $container = $this->createMock(ContainerInterface::class);
         $factory   = new AdapterPluginManagerFactory();
@@ -44,7 +44,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
     /**
      * @depends testFactoryReturnsPluginManager
      */
-    public function testFactoryConfiguresPluginManagerUnderContainerInterop()
+    public function testFactoryConfiguresPluginManagerUnderContainerInterop(): void
     {
         $container  = $this->createMock(ContainerInterface::class);
         $serializer = $this->createMock(AdapterInterface::class);
@@ -61,7 +61,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
     /**
      * @depends testFactoryReturnsPluginManager
      */
-    public function testFactoryConfiguresPluginManagerUnderServiceManagerV2()
+    public function testFactoryConfiguresPluginManagerUnderServiceManagerV2(): void
     {
         $container  = $this->createMock(ServiceLocatorInterface::class);
         $serializer = $this->createMock(AdapterInterface::class);
@@ -77,7 +77,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
         $this->assertSame($serializer, $serializers->get('test'));
     }
 
-    public function testConfiguresSerializerServicesWhenFound()
+    public function testConfiguresSerializerServicesWhenFound(): void
     {
         $serializer = $this->createMock(AdapterInterface::class);
         $config     = [
@@ -119,7 +119,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
         $this->assertSame($serializer, $serializers->get('test-too'));
     }
 
-    public function testDoesNotConfigureSerializerServicesWhenServiceListenerPresent()
+    public function testDoesNotConfigureSerializerServicesWhenServiceListenerPresent(): void
     {
         $serializer = $this->createMock(AdapterInterface::class);
         $config     = [
@@ -156,7 +156,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
         $this->assertFalse($serializers->has('test-too'));
     }
 
-    public function testDoesNotConfigureSerializerServicesWhenConfigServiceNotPresent()
+    public function testDoesNotConfigureSerializerServicesWhenConfigServiceNotPresent(): void
     {
         $container = $this->createMock(ContainerInterface::class);
 
@@ -179,7 +179,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
         $this->assertInstanceOf(AdapterPluginManager::class, $serializers);
     }
 
-    public function testDoesNotConfigureSerializerServicesWhenConfigServiceDoesNotContainSerializersConfig()
+    public function testDoesNotConfigureSerializerServicesWhenConfigServiceDoesNotContainSerializersConfig(): void
     {
         $container = $this->createMock(ContainerInterface::class);
 
