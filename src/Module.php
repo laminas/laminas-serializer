@@ -1,19 +1,23 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Serializer;
+
+use Laminas\ModuleManager\ModuleManager;
 
 class Module
 {
     /**
      * Return default laminas-serializer configuration for laminas-mvc applications.
+     *
+     * @return array{service_manager: mixed}
      */
-    public function getConfig()
+    public function getConfig(): array
     {
         $provider = new ConfigProvider();
 
@@ -24,14 +28,11 @@ class Module
 
     /**
      * Register a specification for the SerializerAdapterManager with the ServiceListener.
-     *
-     * @param \Laminas\ModuleManager\ModuleManager $moduleManager
-     * @return void
      */
-    public function init($moduleManager)
+    public function init(ModuleManager $moduleManager): void
     {
-        $event = $moduleManager->getEvent();
-        $container = $event->getParam('ServiceManager');
+        $event           = $moduleManager->getEvent();
+        $container       = $event->getParam('ServiceManager');
         $serviceListener = $container->get('ServiceListener');
 
         $serviceListener->addServiceManager(

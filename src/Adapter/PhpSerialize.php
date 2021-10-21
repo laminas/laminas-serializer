@@ -1,16 +1,27 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace Laminas\Serializer\Adapter;
 
 use Laminas\Serializer\Exception;
 use Laminas\Stdlib\ErrorHandler;
 use Traversable;
+
+use function gettype;
+use function is_object;
+use function is_string;
+use function preg_match;
+use function serialize;
+use function sprintf;
+use function unserialize;
+
+use const E_NOTICE;
+use const PHP_MAJOR_VERSION;
 
 class PhpSerialize extends AbstractAdapter
 {
@@ -19,11 +30,9 @@ class PhpSerialize extends AbstractAdapter
      *
      * @var null|string
      */
-    private static $serializedFalse = null;
+    private static $serializedFalse;
 
-    /**
-     * @var PhpSerializeOptions
-     */
+    /** @var PhpSerializeOptions */
     protected $options;
 
     /**
@@ -77,7 +86,7 @@ class PhpSerialize extends AbstractAdapter
      *
      * @param  mixed $value
      * @return string
-     * @throws Exception\RuntimeException On serialize error
+     * @throws Exception\RuntimeException On serialize error.
      */
     public function serialize($value)
     {
@@ -97,14 +106,14 @@ class PhpSerialize extends AbstractAdapter
      * @todo   Allow integration with unserialize_callback_func
      * @param  string $serialized
      * @return mixed
-     * @throws Exception\RuntimeException on unserialize error
+     * @throws Exception\RuntimeException On unserialize error.
      */
     public function unserialize($serialized)
     {
         if (! is_string($serialized) || ! preg_match('/^((s|i|d|b|a|O|C):|N;)/', $serialized)) {
             $value = $serialized;
             if (is_object($value)) {
-                $value = get_class($value);
+                $value = $value::class;
             } elseif (! is_string($value)) {
                 $value = gettype($value);
             }

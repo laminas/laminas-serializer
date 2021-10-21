@@ -1,17 +1,18 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace Laminas\Serializer;
 
 use Laminas\Serializer\Adapter\AdapterInterface as Adapter;
 use Laminas\ServiceManager\ServiceManager;
+use Traversable;
 
-abstract class Serializer
+abstract class AbstractSerializer
 {
     /**
      * Plugin manager for loading adapters
@@ -31,7 +32,7 @@ abstract class Serializer
      * Create a serializer adapter instance.
      *
      * @param  string|Adapter $adapterName Name of the adapter class
-     * @param  array |\Traversable|null $adapterOptions Serializer options
+     * @param array|Traversable|null $adapterOptions Serializer options
      * @return Adapter
      */
     public static function factory($adapterName, $adapterOptions = null)
@@ -45,7 +46,6 @@ abstract class Serializer
     /**
      * Change the adapter plugin manager
      *
-     * @param  AdapterPluginManager $adapters
      * @return void
      */
     public static function setAdapterPluginManager(AdapterPluginManager $adapters)
@@ -61,7 +61,7 @@ abstract class Serializer
     public static function getAdapterPluginManager()
     {
         if (static::$adapters === null) {
-            static::$adapters = new AdapterPluginManager(new ServiceManager);
+            static::$adapters = new AdapterPluginManager(new ServiceManager());
         }
         return static::$adapters;
     }
@@ -73,7 +73,7 @@ abstract class Serializer
      */
     public static function resetAdapterPluginManager()
     {
-        static::$adapters = new AdapterPluginManager(new ServiceManager);
+        static::$adapters = new AdapterPluginManager(new ServiceManager());
         return static::$adapters;
     }
 
@@ -81,7 +81,7 @@ abstract class Serializer
      * Change the default adapter.
      *
      * @param string|Adapter $adapter
-     * @param array|\Traversable|null $adapterOptions
+     * @param array|Traversable|null $adapterOptions
      */
     public static function setDefaultAdapter($adapter, $adapterOptions = null)
     {
@@ -107,8 +107,8 @@ abstract class Serializer
      *
      * @param  mixed $value
      * @param  string|Adapter $adapter
-     * @param  array|\Traversable|null $adapterOptions Adapter constructor options
-     *                                                 only used to create adapter instance
+     * @param array|Traversable|null $adapterOptions Adapter constructor options
+     * only used to create adapter instance
      * @return string
      */
     public static function serialize($value, $adapter = null, $adapterOptions = null)
@@ -128,8 +128,8 @@ abstract class Serializer
      *
      * @param  string $serialized
      * @param  string|Adapter $adapter
-     * @param  array|\Traversable|null $adapterOptions Adapter constructor options
-     *                                                 only used to create adapter instance
+     * @param array|Traversable|null $adapterOptions Adapter constructor options
+     * only used to create adapter instance
      * @return mixed
      */
     public static function unserialize($serialized, $adapter = null, $adapterOptions = null)

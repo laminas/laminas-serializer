@@ -1,27 +1,27 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace Laminas\Serializer\Adapter;
 
+use InvalidArgumentException;
 use Laminas\Json\Json as LaminasJson;
 use Laminas\Serializer\Exception;
+use Traversable;
 
 class Json extends AbstractAdapter
 {
-    /**
-     * @var JsonOptions
-     */
-    protected $options = null;
+    /** @var JsonOptions */
+    protected $options;
 
     /**
      * Set options
      *
-     * @param  array|\Traversable|JsonOptions $options
+     * @param array|Traversable|JsonOptions $options
      * @return Json
      */
     public function setOptions($options)
@@ -60,14 +60,14 @@ class Json extends AbstractAdapter
     {
         $options    = $this->getOptions();
         $cycleCheck = $options->getCycleCheck();
-        $opts = [
+        $opts       = [
             'enableJsonExprFinder' => $options->getEnableJsonExprFinder(),
             'objectDecodeType'     => $options->getObjectDecodeType(),
         ];
 
         try {
             return LaminasJson::encode($value, $cycleCheck, $opts);
-        } catch (\InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException('Serialization failed: ' . $e->getMessage(), 0, $e);
         } catch (\Exception $e) {
             throw new Exception\RuntimeException('Serialization failed: ' . $e->getMessage(), 0, $e);
@@ -86,7 +86,7 @@ class Json extends AbstractAdapter
     {
         try {
             $ret = LaminasJson::decode($json, $this->getOptions()->getObjectDecodeType());
-        } catch (\InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException('Unserialization failed: ' . $e->getMessage(), 0, $e);
         } catch (\Exception $e) {
             throw new Exception\RuntimeException('Unserialization failed: ' . $e->getMessage(), 0, $e);

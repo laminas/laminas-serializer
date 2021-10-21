@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace Laminas\Serializer\Adapter;
 
@@ -23,63 +23,51 @@ class JsonOptions extends AdapterOptions
     protected $objectDecodeType = LaminasJson::TYPE_ARRAY;
 
     /**
-     * @param  bool $flag
      * @return JsonOptions
      */
-    public function setCycleCheck($flag)
+    public function setCycleCheck(bool $flag): self
     {
-        $this->cycleCheck = (bool) $flag;
+        $this->cycleCheck = $flag;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function getCycleCheck()
+    public function getCycleCheck(): bool
     {
         return $this->cycleCheck;
     }
 
     /**
-     * @param  bool $flag
      * @return JsonOptions
      */
-    public function setEnableJsonExprFinder($flag)
+    public function setEnableJsonExprFinder(bool $flag): self
     {
-        $this->enableJsonExprFinder = (bool) $flag;
+        $this->enableJsonExprFinder = $flag;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function getEnableJsonExprFinder()
+    public function getEnableJsonExprFinder(): bool
     {
         return $this->enableJsonExprFinder;
     }
 
     /**
-     * @param  int $type
      * @return JsonOptions
      * @throws Exception\InvalidArgumentException
      */
-    public function setObjectDecodeType($type)
+    public function setObjectDecodeType(int $type): self
     {
-        if ($type != LaminasJson::TYPE_ARRAY && $type != LaminasJson::TYPE_OBJECT) {
+        if ($type !== LaminasJson::TYPE_ARRAY && $type !== LaminasJson::TYPE_OBJECT) {
             throw new Exception\InvalidArgumentException(
                 'Unknown decode type: ' . $type
             );
         }
 
-        $this->objectDecodeType = (int) $type;
+        $this->objectDecodeType = $type;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getObjectDecodeType()
+    public function getObjectDecodeType(): int
     {
         return $this->objectDecodeType;
     }

@@ -1,16 +1,27 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace Laminas\Serializer;
 
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Factory\InvokableFactory;
+use zend\serializer\adapter\igbinary;
+use zend\serializer\adapter\json;
+use zend\serializer\adapter\msgpack;
+use zend\serializer\adapter\phpcode;
+use zend\serializer\adapter\phpserialize;
+use zend\serializer\adapter\pythonpickle;
+use zend\serializer\adapter\wddx;
+
+use function gettype;
+use function is_object;
+use function sprintf;
 
 /**
  * Plugin manager implementation for serializer adapters.
@@ -21,6 +32,7 @@ use Laminas\ServiceManager\Factory\InvokableFactory;
  */
 class AdapterPluginManager extends AbstractPluginManager
 {
+    /** @var array<string, string> */
     protected $aliases = [
         'igbinary'     => Adapter\IgBinary::class,
         'igBinary'     => Adapter\IgBinary::class,
@@ -43,24 +55,25 @@ class AdapterPluginManager extends AbstractPluginManager
         'Wddx'         => Adapter\Wddx::class,
 
         // Legacy Zend Framework aliases
-        \Zend\Serializer\Adapter\IgBinary::class => Adapter\IgBinary::class,
-        \Zend\Serializer\Adapter\Json::class => Adapter\Json::class,
-        \Zend\Serializer\Adapter\MsgPack::class => Adapter\MsgPack::class,
-        \Zend\Serializer\Adapter\PhpCode::class => Adapter\PhpCode::class,
-        \Zend\Serializer\Adapter\PhpSerialize::class => Adapter\PhpSerialize::class,
-        \Zend\Serializer\Adapter\PythonPickle::class => Adapter\PythonPickle::class,
-        \Zend\Serializer\Adapter\Wddx::class => Adapter\Wddx::class,
+        igbinary::class     => Adapter\IgBinary::class,
+        json::class         => Adapter\Json::class,
+        msgpack::class      => Adapter\MsgPack::class,
+        phpcode::class      => Adapter\PhpCode::class,
+        phpserialize::class => Adapter\PhpSerialize::class,
+        pythonpickle::class => Adapter\PythonPickle::class,
+        wddx::class         => Adapter\Wddx::class,
 
         // v2 normalized FQCNs
-        'zendserializeradapterigbinary' => Adapter\IgBinary::class,
-        'zendserializeradapterjson' => Adapter\Json::class,
-        'zendserializeradaptermsgpack' => Adapter\MsgPack::class,
-        'zendserializeradapterphpcode' => Adapter\PhpCode::class,
+        'zendserializeradapterigbinary'     => Adapter\IgBinary::class,
+        'zendserializeradapterjson'         => Adapter\Json::class,
+        'zendserializeradaptermsgpack'      => Adapter\MsgPack::class,
+        'zendserializeradapterphpcode'      => Adapter\PhpCode::class,
         'zendserializeradapterphpserialize' => Adapter\PhpSerialize::class,
         'zendserializeradapterpythonpickle' => Adapter\PythonPickle::class,
-        'zendserializeradapterwddx' => Adapter\Wddx::class,
+        'zendserializeradapterwddx'         => Adapter\Wddx::class,
     ];
 
+    /** @var array<string, string> */
     protected $factories = [
         Adapter\IgBinary::class     => InvokableFactory::class,
         Adapter\Json::class         => InvokableFactory::class,
@@ -72,15 +85,16 @@ class AdapterPluginManager extends AbstractPluginManager
         // Legacy (v2) due to alias resolution; canonical form of resolved
         // alias is used to look up the factory, while the non-normalized
         // resolved alias is used as the requested name passed to the factory.
-        'laminasserializeradapterigbinary' => InvokableFactory::class,
-        'laminasserializeradapterjson' => InvokableFactory::class,
-        'laminasserializeradaptermsgpack' => InvokableFactory::class,
-        'laminasserializeradapterphpcode' => InvokableFactory::class,
+        'laminasserializeradapterigbinary'     => InvokableFactory::class,
+        'laminasserializeradapterjson'         => InvokableFactory::class,
+        'laminasserializeradaptermsgpack'      => InvokableFactory::class,
+        'laminasserializeradapterphpcode'      => InvokableFactory::class,
         'laminasserializeradapterphpserialize' => InvokableFactory::class,
         'laminasserializeradapterpythonpickle' => InvokableFactory::class,
-        'laminasserializeradapterwddx' => InvokableFactory::class,
+        'laminasserializeradapterwddx'         => InvokableFactory::class,
     ];
 
+    /** @var string */
     protected $instanceOf = Adapter\AdapterInterface::class;
 
     /**
@@ -96,9 +110,9 @@ class AdapterPluginManager extends AbstractPluginManager
         if (! $instance instanceof $this->instanceOf) {
             throw new InvalidServiceException(sprintf(
                 '%s can only create instances of %s; %s is invalid',
-                get_class($this),
+                static::class,
                 $this->instanceOf,
-                (is_object($instance) ? get_class($instance) : gettype($instance))
+                is_object($instance) ? $instance::class : gettype($instance)
             ));
         }
     }

@@ -1,15 +1,16 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace Laminas\Serializer\Adapter;
 
-use Laminas\Json\Json as LaminasJson;
 use Laminas\Serializer\Exception;
+
+use const PHP_MAJOR_VERSION;
 
 class PhpSerializeOptions extends AdapterOptions
 {

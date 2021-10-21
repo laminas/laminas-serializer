@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace Laminas\Serializer;
 
@@ -13,12 +13,14 @@ use Laminas\ServiceManager\Config;
 use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 
+use function is_array;
+
 class AdapterPluginManagerFactory implements FactoryInterface
 {
     /**
      * laminas-servicemanager v2 support for invocation options.
      *
-     * @param array
+     * @var array
      */
     protected $creationOptions;
 
@@ -27,7 +29,7 @@ class AdapterPluginManagerFactory implements FactoryInterface
      *
      * @return AdapterPluginManager
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null): self
     {
         $pluginManager = new AdapterPluginManager($container, $options ?: []);
 
@@ -60,7 +62,7 @@ class AdapterPluginManagerFactory implements FactoryInterface
      *
      * @return AdapterPluginManager
      */
-    public function createService(ServiceLocatorInterface $container, $name = null, $requestedName = null)
+    public function createService(ServiceLocatorInterface $container, $name = null, $requestedName = null): self
     {
         return $this($container, $requestedName ?: AdapterPluginManager::class, $this->creationOptions);
     }
@@ -69,9 +71,8 @@ class AdapterPluginManagerFactory implements FactoryInterface
      * laminas-servicemanager v2 support for invocation options.
      *
      * @param array $options
-     * @return void
      */
-    public function setCreationOptions(array $options)
+    public function setCreationOptions(array $options): void
     {
         $this->creationOptions = $options;
     }
