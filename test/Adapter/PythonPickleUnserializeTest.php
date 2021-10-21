@@ -154,6 +154,9 @@ class PythonPickleUnserializeTest extends TestCase
         $this->assertEquals($expected, $data);
     }
 
+    /**
+     * @requires extension gmp
+     */
     public function testUnserializeLong4BigInt(): void
     {
         $value    = "\x80\x02\x8b\x08\x00\x00\x00"
