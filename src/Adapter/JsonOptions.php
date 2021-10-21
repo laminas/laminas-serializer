@@ -23,39 +23,49 @@ class JsonOptions extends AdapterOptions
     protected $objectDecodeType = LaminasJson::TYPE_ARRAY;
 
     /**
+     * @param  bool $flag
      * @return JsonOptions
      */
-    public function setCycleCheck(bool $flag): self
+    public function setCycleCheck($flag)
     {
-        $this->cycleCheck = $flag;
+        $this->cycleCheck = (bool) $flag;
         return $this;
     }
 
-    public function getCycleCheck(): bool
+    /**
+     * @return bool
+     */
+    public function getCycleCheck()
     {
         return $this->cycleCheck;
     }
 
     /**
+     * @param bool $flag
      * @return JsonOptions
      */
-    public function setEnableJsonExprFinder(bool $flag): self
+    public function setEnableJsonExprFinder($flag)
     {
-        $this->enableJsonExprFinder = $flag;
+        $this->enableJsonExprFinder = (bool) $flag;
         return $this;
     }
 
-    public function getEnableJsonExprFinder(): bool
+    /**
+     * @return bool
+     */
+    public function getEnableJsonExprFinder()
     {
         return $this->enableJsonExprFinder;
     }
 
     /**
+     * @param int $type
      * @return JsonOptions
      * @throws Exception\InvalidArgumentException
      */
-    public function setObjectDecodeType(int $type): self
+    public function setObjectDecodeType($type)
     {
+        $type = (int) $type;
         if ($type !== LaminasJson::TYPE_ARRAY && $type !== LaminasJson::TYPE_OBJECT) {
             throw new Exception\InvalidArgumentException(
                 'Unknown decode type: ' . $type
@@ -67,7 +77,10 @@ class JsonOptions extends AdapterOptions
         return $this;
     }
 
-    public function getObjectDecodeType(): int
+    /**
+     * @return int
+     */
+    public function getObjectDecodeType()
     {
         return $this->objectDecodeType;
     }

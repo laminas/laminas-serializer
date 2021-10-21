@@ -17,7 +17,7 @@ use Laminas\Serializer\Adapter\PhpSerialize;
 use Laminas\Serializer\Adapter\PythonPickle;
 use Laminas\Serializer\AdapterPluginManager;
 use Laminas\Serializer\Exception\RuntimeException;
-use Laminas\Serializer\AbstractSerializer;
+use Laminas\Serializer\Serializer;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Exception\ServiceNotFoundException;
 use Laminas\ServiceManager\ServiceManager;
@@ -25,18 +25,18 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @group  Laminas_Serializer
- * @covers \Laminas\Serializer\AbstractSerializer
+ * @covers \Laminas\Serializer\Serializer
  */
 class SerializerTest extends TestCase
 {
     protected function tearDown(): void
     {
-        AbstractSerializer::resetAdapterPluginManager();
+        Serializer::resetAdapterPluginManager();
     }
 
     public function testGetDefaultAdapterPluginManager()
     {
-        $this->assertInstanceOf(AdapterPluginManager::class, AbstractSerializer::getAdapterPluginManager());
+        $this->assertInstanceOf(AdapterPluginManager::class, Serializer::getAdapterPluginManager());
     }
 
     public function testChangeAdapterPluginManager()
@@ -44,26 +44,26 @@ class SerializerTest extends TestCase
         $newPluginManager = new AdapterPluginManager(
             $this->getMockBuilder(ContainerInterface::class)->getMock()
         );
-        AbstractSerializer::setAdapterPluginManager($newPluginManager);
-        $this->assertSame($newPluginManager, AbstractSerializer::getAdapterPluginManager());
+        Serializer::setAdapterPluginManager($newPluginManager);
+        $this->assertSame($newPluginManager, Serializer::getAdapterPluginManager());
     }
 
     public function testDefaultAdapter()
     {
-        $adapter = AbstractSerializer::getDefaultAdapter();
+        $adapter = Serializer::getDefaultAdapter();
         $this->assertInstanceOf(AdapterInterface::class, $adapter);
     }
 
     public function testFactoryValidCall()
     {
-        $serializer = AbstractSerializer::factory('PhpSerialize');
+        $serializer = Serializer::factory('PhpSerialize');
         $this->assertInstanceOf(PhpSerialize::class, $serializer);
     }
 
     public function testFactoryUnknownAdapter()
     {
         $this->expectException(ServiceNotFoundException::class);
-        AbstractSerializer::factory('unknown');
+        Serializer::factory('unknown');
     }
 
     public function testFactoryOnADummyClassAdapter()
@@ -73,10 +73,10 @@ class SerializerTest extends TestCase
                 'dummy' => TestAsset\Dummy::class,
             ],
         ]);
-        AbstractSerializer::setAdapterPluginManager($adapters);
+        Serializer::setAdapterPluginManager($adapters);
 
         try {
-            AbstractSerializer::factory('dummy');
+            Serializer::factory('dummy');
             $this->fail('Expected exception when requesting invalid adapter type');
         } catch (InvalidServiceException $e) {
             $this->assertStringContainsString('Dummy is invalid', $e->getMessage());
@@ -89,23 +89,23 @@ class SerializerTest extends TestCase
 
     public function testChangeDefaultAdapterWithString()
     {
-        AbstractSerializer::setDefaultAdapter('Json');
-        $this->assertInstanceOf(Json::class, AbstractSerializer::getDefaultAdapter());
+        Serializer::setDefaultAdapter('Json');
+        $this->assertInstanceOf(Json::class, Serializer::getDefaultAdapter());
     }
 
     public function testChangeDefaultAdapterWithInstance()
     {
         $newAdapter = new Adapter\PhpSerialize();
 
-        AbstractSerializer::setDefaultAdapter($newAdapter);
-        $this->assertSame($newAdapter, AbstractSerializer::getDefaultAdapter());
+        Serializer::setDefaultAdapter($newAdapter);
+        $this->assertSame($newAdapter, Serializer::getDefaultAdapter());
     }
 
     public function testFactoryPassesAdapterOptions()
     {
         $options = new Adapter\PythonPickleOptions(['protocol' => 2]);
         /** @var Adapter\PythonPickle $adapter  */
-        $adapter = AbstractSerializer::factory('pythonpickle', $options->toArray());
+        $adapter = Serializer::factory('pythonpickle', $options->toArray());
         $this->assertInstanceOf(PythonPickle::class, $adapter);
         $this->assertEquals(2, $adapter->getOptions()->getProtocol());
     }
@@ -113,9 +113,9 @@ class SerializerTest extends TestCase
     public function testSerializeDefaultAdapter()
     {
         $value    = 'test';
-        $adapter  = AbstractSerializer::getDefaultAdapter();
+        $adapter  = Serializer::getDefaultAdapter();
         $expected = $adapter->serialize($value);
-        $this->assertEquals($expected, AbstractSerializer::serialize($value));
+        $this->assertEquals($expected, Serializer::serialize($value));
     }
 
     public function testSerializeSpecificAdapter()
@@ -123,16 +123,16 @@ class SerializerTest extends TestCase
         $value    = 'test';
         $adapter  = new Adapter\Json();
         $expected = $adapter->serialize($value);
-        $this->assertEquals($expected, AbstractSerializer::serialize($value, $adapter));
+        $this->assertEquals($expected, Serializer::serialize($value, $adapter));
     }
 
     public function testUnserializeDefaultAdapter()
     {
         $value    = 'test';
-        $adapter  = AbstractSerializer::getDefaultAdapter();
+        $adapter  = Serializer::getDefaultAdapter();
         $value    = $adapter->serialize($value);
         $expected = $adapter->unserialize($value);
-        $this->assertEquals($expected, AbstractSerializer::unserialize($value));
+        $this->assertEquals($expected, Serializer::unserialize($value));
     }
 
     public function testUnserializeSpecificAdapter()
@@ -140,6 +140,6 @@ class SerializerTest extends TestCase
         $adapter  = new Adapter\Json();
         $value    = '"test"';
         $expected = $adapter->unserialize($value);
-        $this->assertEquals($expected, AbstractSerializer::unserialize($value, $adapter));
+        $this->assertEquals($expected, Serializer::unserialize($value, $adapter));
     }
 }

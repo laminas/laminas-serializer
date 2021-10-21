@@ -12,7 +12,8 @@ use Laminas\Serializer\Adapter\AdapterInterface as Adapter;
 use Laminas\ServiceManager\ServiceManager;
 use Traversable;
 
-abstract class AbstractSerializer
+// phpcs:ignore
+abstract class Serializer
 {
     /**
      * Plugin manager for loading adapters

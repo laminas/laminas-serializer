@@ -29,7 +29,7 @@ class AdapterPluginManagerFactory implements FactoryInterface
      *
      * @return AdapterPluginManager
      */
-    public function __invoke(ContainerInterface $container, $name, ?array $options = null): AdapterPluginManager
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $pluginManager = new AdapterPluginManager($container, $options ?: []);
 
@@ -62,7 +62,7 @@ class AdapterPluginManagerFactory implements FactoryInterface
      *
      * @return AdapterPluginManager
      */
-    public function createService(ServiceLocatorInterface $container, $name = null, $requestedName = null): AdapterPluginManager
+    public function createService(ServiceLocatorInterface $container, $name = null, $requestedName = null)
     {
         return $this($container, $requestedName ?: AdapterPluginManager::class, $this->creationOptions);
     }
@@ -71,8 +71,9 @@ class AdapterPluginManagerFactory implements FactoryInterface
      * laminas-servicemanager v2 support for invocation options.
      *
      * @param array $options
+     * @return void
      */
-    public function setCreationOptions(array $options): void
+    public function setCreationOptions(array $options)
     {
         $this->creationOptions = $options;
     }

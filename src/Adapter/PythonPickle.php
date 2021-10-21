@@ -62,65 +62,65 @@ class PythonPickle extends AbstractAdapter
      * The listing here is in kind-of alphabetical order of 1-character pickle code.
      * pickletools groups them by purpose.
      */
-    private const OP_MARK            = '(';     // push special markobject on stack
-    private const OP_STOP            = '.';     // every pickle ends with STOP
-    private const OP_POP             = '0';     // discard topmost stack item
-    private const OP_POP_MARK        = '1';     // discard stack top through topmost markobject
-    private const OP_DUP             = '2';     // duplicate top stack item
-    private const OP_FLOAT           = 'F';     // push float object; decimal string argument
-    private const OP_INT             = 'I';     // push integer or bool; decimal string argument
-    private const OP_BININT          = 'J';     // push four-byte signed int
-    private const OP_BININT1         = 'K';     // push 1-byte unsigned int
-    private const OP_LONG            = 'L';     // push long; decimal string argument
-    private const OP_BININT2         = 'M';     // push 2-byte unsigned int
-    private const OP_NONE            = 'N';     // push None
-    private const OP_PERSID          = 'P';     // push persistent object; id is taken from string arg
-    private const OP_BINPERSID       = 'Q';     //  "       "         "  ;  "  "   "     "  stack
-    private const OP_REDUCE          = 'R';     // apply callable to argtuple, both on stack
-    private const OP_STRING          = 'S';     // push string; NL-terminated string argument
-    private const OP_BINSTRING       = 'T';     // push string; counted binary string argument
-    private const OP_SHORT_BINSTRING = 'U';     //  "     "   ;    "      "       "      " < 256 bytes
-    private const OP_UNICODE         = 'V';     // push Unicode string; raw-unicode-escaped'd argument
-    private const OP_BINUNICODE      = 'X';     //   "     "       "  ; counted UTF-8 string argument
-    private const OP_APPEND          = 'a';     // append stack top to list below it
-    private const OP_BUILD           = 'b';     // call __setstate__ or __dict__.update()
-    private const OP_GLOBAL          = 'c';     // push self.find_class(modname, name); 2 string args
-    private const OP_DICT            = 'd';     // build a dict from stack items
-    private const OP_EMPTY_DICT      = '}';     // push empty dict
-    private const OP_APPENDS         = 'e';     // extend list on stack by topmost stack slice
-    private const OP_GET             = 'g';     // push item from memo on stack; index is string arg
-    private const OP_BINGET          = 'h';     //   "    "    "    "   "   "  ;   "    " 1-byte arg
-    private const OP_INST            = 'i';     // build & push class instance
-    private const OP_LONG_BINGET     = 'j';     // push item from memo on stack; index is 4-byte arg
-    private const OP_LIST            = 'l';     // build list from topmost stack items
-    private const OP_EMPTY_LIST      = ']';     // push empty list
-    private const OP_OBJ             = 'o';     // build & push class instance
-    private const OP_PUT             = 'p';     // store stack top in memo; index is string arg
-    private const OP_BINPUT          = 'q';     //   "     "    "   "   " ;   "    " 1-byte arg
-    private const OP_LONG_BINPUT     = 'r';     //   "     "    "   "   " ;   "    " 4-byte arg
-    private const OP_SETITEM         = 's';     // add key+value pair to dict
-    private const OP_TUPLE           = 't';     // build tuple from topmost stack items
-    private const OP_EMPTY_TUPLE     = ')';     // push empty tuple
-    private const OP_SETITEMS        = 'u';     // modify dict by adding topmost key+value pairs
-    private const OP_BINFLOAT        = 'G';     // push float; arg is 8-byte float encoding
+    public const OP_MARK            = '(';     // push special markobject on stack
+    public const OP_STOP            = '.';     // every pickle ends with STOP
+    public const OP_POP             = '0';     // discard topmost stack item
+    public const OP_POP_MARK        = '1';     // discard stack top through topmost markobject
+    public const OP_DUP             = '2';     // duplicate top stack item
+    public const OP_FLOAT           = 'F';     // push float object; decimal string argument
+    public const OP_INT             = 'I';     // push integer or bool; decimal string argument
+    public const OP_BININT          = 'J';     // push four-byte signed int
+    public const OP_BININT1         = 'K';     // push 1-byte unsigned int
+    public const OP_LONG            = 'L';     // push long; decimal string argument
+    public const OP_BININT2         = 'M';     // push 2-byte unsigned int
+    public const OP_NONE            = 'N';     // push None
+    public const OP_PERSID          = 'P';     // push persistent object; id is taken from string arg
+    public const OP_BINPERSID       = 'Q';     //  "       "         "  ;  "  "   "     "  stack
+    public const OP_REDUCE          = 'R';     // apply callable to argtuple, both on stack
+    public const OP_STRING          = 'S';     // push string; NL-terminated string argument
+    public const OP_BINSTRING       = 'T';     // push string; counted binary string argument
+    public const OP_SHORT_BINSTRING = 'U';     //  "     "   ;    "      "       "      " < 256 bytes
+    public const OP_UNICODE         = 'V';     // push Unicode string; raw-unicode-escaped'd argument
+    public const OP_BINUNICODE      = 'X';     //   "     "       "  ; counted UTF-8 string argument
+    public const OP_APPEND          = 'a';     // append stack top to list below it
+    public const OP_BUILD           = 'b';     // call __setstate__ or __dict__.update()
+    public const OP_GLOBAL          = 'c';     // push self.find_class(modname, name); 2 string args
+    public const OP_DICT            = 'd';     // build a dict from stack items
+    public const OP_EMPTY_DICT      = '}';     // push empty dict
+    public const OP_APPENDS         = 'e';     // extend list on stack by topmost stack slice
+    public const OP_GET             = 'g';     // push item from memo on stack; index is string arg
+    public const OP_BINGET          = 'h';     //   "    "    "    "   "   "  ;   "    " 1-byte arg
+    public const OP_INST            = 'i';     // build & push class instance
+    public const OP_LONG_BINGET     = 'j';     // push item from memo on stack; index is 4-byte arg
+    public const OP_LIST            = 'l';     // build list from topmost stack items
+    public const OP_EMPTY_LIST      = ']';     // push empty list
+    public const OP_OBJ             = 'o';     // build & push class instance
+    public const OP_PUT             = 'p';     // store stack top in memo; index is string arg
+    public const OP_BINPUT          = 'q';     //   "     "    "   "   " ;   "    " 1-byte arg
+    public const OP_LONG_BINPUT     = 'r';     //   "     "    "   "   " ;   "    " 4-byte arg
+    public const OP_SETITEM         = 's';     // add key+value pair to dict
+    public const OP_TUPLE           = 't';     // build tuple from topmost stack items
+    public const OP_EMPTY_TUPLE     = ')';     // push empty tuple
+    public const OP_SETITEMS        = 'u';     // modify dict by adding topmost key+value pairs
+    public const OP_BINFLOAT        = 'G';     // push float; arg is 8-byte float encoding
 
     /* Protocol 2 */
-    private const OP_PROTO    = "\x80";  // identify pickle protocol
-    private const OP_NEWOBJ   = "\x81";  // build object by applying cls.__new__ to argtuple
-    private const OP_EXT1     = "\x82";  // push object from extension registry; 1-byte index
-    private const OP_EXT2     = "\x83";  // ditto, but 2-byte index
-    private const OP_EXT4     = "\x84";  // ditto, but 4-byte index
-    private const OP_TUPLE1   = "\x85";  // build 1-tuple from stack top
-    private const OP_TUPLE2   = "\x86";  // build 2-tuple from two topmost stack items
-    private const OP_TUPLE3   = "\x87";  // build 3-tuple from three topmost stack items
-    private const OP_NEWTRUE  = "\x88";  // push True
-    private const OP_NEWFALSE = "\x89";  // push False
-    private const OP_LONG1    = "\x8a";  // push long from < 256 bytes
-    private const OP_LONG4    = "\x8b";  // push really big long
+    public const OP_PROTO    = "\x80";  // identify pickle protocol
+    public const OP_NEWOBJ   = "\x81";  // build object by applying cls.__new__ to argtuple
+    public const OP_EXT1     = "\x82";  // push object from extension registry; 1-byte index
+    public const OP_EXT2     = "\x83";  // ditto, but 2-byte index
+    public const OP_EXT4     = "\x84";  // ditto, but 4-byte index
+    public const OP_TUPLE1   = "\x85";  // build 1-tuple from stack top
+    public const OP_TUPLE2   = "\x86";  // build 2-tuple from two topmost stack items
+    public const OP_TUPLE3   = "\x87";  // build 3-tuple from three topmost stack items
+    public const OP_NEWTRUE  = "\x88";  // push True
+    public const OP_NEWFALSE = "\x89";  // push False
+    public const OP_LONG1    = "\x8a";  // push long from < 256 bytes
+    public const OP_LONG4    = "\x8b";  // push really big long
 
     /* Protocol 3 (Python 3.x) */
-    private const OP_BINBYTES       = 'B';     // push bytes; counted binary string argument
-    private const OP_SHORT_BINBYTES = 'C';     //  "     "   ;    "      "       "      " < 256 bytes
+    public const OP_BINBYTES       = 'B';     // push bytes; counted binary string argument
+    public const OP_SHORT_BINBYTES = 'C';     //  "     "   ;    "      "       "      " < 256 bytes
 
     /**
      * Whether or not the system is little-endian
@@ -210,7 +210,7 @@ class PythonPickle extends AbstractAdapter
      * @param  array|Traversable|PythonPickleOptions $options
      * @return PythonPickle
      */
-    public function setOptions($options): self
+    public function setOptions($options)
     {
         if (! $options instanceof PythonPickleOptions) {
             $options = new PythonPickleOptions($options);
@@ -222,8 +222,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Get options
+     *
+     * @return PythonPickleOptions
      */
-    public function getOptions(): PythonPickleOptions
+    public function getOptions()
     {
         if ($this->options === null) {
             $this->options = new PythonPickleOptions();
@@ -292,9 +294,10 @@ class PythonPickle extends AbstractAdapter
      * Write a value
      *
      * @param mixed $value
+     * @return void
      * @throws Exception\RuntimeException On invalid or unrecognized value type.
      */
-    protected function write($value): void
+    protected function write($value)
     {
         if ($value === null) {
             $this->writeNull();
@@ -326,8 +329,11 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Write pickle protocol
+     *
+     * @param int $protocol
+     * @return void
      */
-    protected function writeProto(int $protocol): void
+    protected function writeProto($protocol)
     {
         $this->pickle .= self::OP_PROTO . $protocol;
     }
@@ -336,8 +342,9 @@ class PythonPickle extends AbstractAdapter
      * Write a get
      *
      * @param  int $id Id of memo
+     * @return void
      */
-    protected function writeGet($id): void
+    protected function writeGet($id)
     {
         if ($this->protocol === 0) {
             $this->pickle .= self::OP_GET . $id . "\r\n";
@@ -358,8 +365,9 @@ class PythonPickle extends AbstractAdapter
      * Write a put
      *
      * @param  int $id Id of memo
+     * @return void
      */
-    protected function writePut($id): void
+    protected function writePut($id)
     {
         if ($this->protocol === 0) {
             $this->pickle .= self::OP_PUT . $id . "\r\n";
@@ -378,8 +386,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Write a null as None
+     *
+     * @return void
      */
-    protected function writeNull(): void
+    protected function writeNull()
     {
         $this->pickle .= self::OP_NONE;
     }
@@ -388,8 +398,9 @@ class PythonPickle extends AbstractAdapter
      * Write boolean value
      *
      * @param bool $value
+     * @return void
      */
-    protected function writeBool($value): void
+    protected function writeBool($value)
     {
         if ($this->protocol >= 2) {
             $this->pickle .= $value === true ? self::OP_NEWTRUE : self::OP_NEWFALSE;
@@ -402,8 +413,9 @@ class PythonPickle extends AbstractAdapter
      * Write an integer value
      *
      * @param  int $value
+     * @return void
      */
-    protected function writeInt($value): void
+    protected function writeInt($value)
     {
         if ($this->protocol === 0) {
             $this->pickle .= self::OP_INT . $value . "\r\n";
@@ -440,8 +452,9 @@ class PythonPickle extends AbstractAdapter
      * Write a float value
      *
      * @param  float $value
+     * @return void
      */
-    protected function writeFloat($value): void
+    protected function writeFloat($value)
     {
         if ($this->protocol === 0) {
             $this->pickle .= self::OP_FLOAT . $value . "\r\n";
@@ -459,8 +472,9 @@ class PythonPickle extends AbstractAdapter
      * Write a string value
      *
      * @param  string $value
+     * @return void
      */
-    protected function writeString($value): void
+    protected function writeString($value)
     {
         if (($id = $this->searchMemo($value)) !== false) {
             $this->writeGet($id);
@@ -491,8 +505,9 @@ class PythonPickle extends AbstractAdapter
      * Write an associative array value as dictionary
      *
      * @param  array|Traversable $value
+     * @return void
      */
-    protected function writeArrayDict($value): void
+    protected function writeArrayDict($value)
     {
         if (($id = $this->searchMemo($value)) !== false) {
             $this->writeGet($id);
@@ -513,8 +528,9 @@ class PythonPickle extends AbstractAdapter
      * Write a simple array value as list
      *
      * @param  array $value
+     * @return void
      */
-    protected function writeArrayList(array $value): void
+    protected function writeArrayList(array $value)
     {
         if (($id = $this->searchMemo($value)) !== false) {
             $this->writeGet($id);
@@ -534,8 +550,9 @@ class PythonPickle extends AbstractAdapter
      * Write an object as a dictionary
      *
      * @param  object $value
+     * @return void
      */
-    protected function writeObject($value): void
+    protected function writeObject($value)
     {
         // The main differences between a SplFixedArray and a normal PHP array is
         // that the SplFixedArray is of fixed length and allows only integers
@@ -560,8 +577,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Write stop
+     *
+     * @return void
      */
-    protected function writeStop(): void
+    protected function writeStop()
     {
         $this->pickle .= self::OP_STOP;
     }
@@ -572,8 +591,9 @@ class PythonPickle extends AbstractAdapter
      * Add a value to the memo and write the id
      *
      * @param mixed $value
+     * @return void
      */
-    protected function memorize($value): void
+    protected function memorize($value)
     {
         $id              = count($this->memo);
         $this->memo[$id] = $value;
@@ -594,9 +614,10 @@ class PythonPickle extends AbstractAdapter
     /**
      * Quote/Escape a string
      *
+     * @param string $str
      * @return string quoted string
      */
-    protected function quoteString(string $str): string
+    protected function quoteString($str)
     {
         $quoteArr = static::$quoteString;
 
@@ -619,8 +640,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Clear temp variables needed for processing
+     *
+     * @return void
      */
-    protected function clearProcessVars(): void
+    protected function clearProcessVars()
     {
         $this->pos       = 0;
         $this->pickle    = '';
@@ -632,9 +655,11 @@ class PythonPickle extends AbstractAdapter
     /**
      * Load a pickle opcode
      *
+     * @param string $op
+     * @return void
      * @throws Exception\RuntimeException On invalid opcode.
      */
-    protected function load(string $op): void
+    protected function load($op)
     {
         switch ($op) {
             case self::OP_PUT:
@@ -763,8 +788,9 @@ class PythonPickle extends AbstractAdapter
      * Load a PUT opcode
      *
      * @throws Exception\RuntimeException On missing stack.
+     * @return void
      */
-    protected function loadPut(): void
+    protected function loadPut()
     {
         $id = (int) $this->readline();
 
@@ -779,8 +805,9 @@ class PythonPickle extends AbstractAdapter
      * Load a binary PUT
      *
      * @throws Exception\RuntimeException On missing stack.
+     * @return void
      */
-    protected function loadBinPut(): void
+    protected function loadBinPut()
     {
         $id = ord($this->read(1));
 
@@ -795,8 +822,9 @@ class PythonPickle extends AbstractAdapter
      * Load a long binary PUT
      *
      * @throws Exception\RuntimeException On missing stack.
+     * @return void
      */
-    protected function loadLongBinPut(): void
+    protected function loadLongBinPut()
     {
         $bin = $this->read(4);
         if (static::$isLittleEndian === false) {
@@ -815,8 +843,9 @@ class PythonPickle extends AbstractAdapter
      * Load a GET operation
      *
      * @throws Exception\RuntimeException On missing GET identifier.
+     * @return void
      */
-    protected function loadGet(): void
+    protected function loadGet()
     {
         $id = (int) $this->readline();
 
@@ -830,8 +859,9 @@ class PythonPickle extends AbstractAdapter
      * Load a binary GET operation
      *
      * @throws Exception\RuntimeException On missing GET identifier.
+     * @return void
      */
-    protected function loadBinGet(): void
+    protected function loadBinGet()
     {
         $id = ord($this->read(1));
 
@@ -845,8 +875,9 @@ class PythonPickle extends AbstractAdapter
      * Load a long binary GET operation
      *
      * @throws Exception\RuntimeException On missing GET identifier.
+     * @return void
      */
-    protected function loadLongBinGet(): void
+    protected function loadLongBinGet()
     {
         $bin = $this->read(4);
         if (static::$isLittleEndian === false) {
@@ -862,32 +893,40 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load a NONE operator
+     *
+     * @return void
      */
-    protected function loadNone(): void
+    protected function loadNone()
     {
         $this->stack[] = null;
     }
 
     /**
      * Load a boolean TRUE operator
+     *
+     * @return void
      */
-    protected function loadNewTrue(): void
+    protected function loadNewTrue()
     {
         $this->stack[] = true;
     }
 
     /**
      * Load a boolean FALSE operator
+     *
+     * @return void
      */
-    protected function loadNewFalse(): void
+    protected function loadNewFalse()
     {
         $this->stack[] = false;
     }
 
     /**
      * Load an integer operator
+     *
+     * @return void
      */
-    protected function loadInt(): void
+    protected function loadInt()
     {
         $line = $this->readline();
         if ($line === '01') {
@@ -901,8 +940,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load a binary integer operator
+     *
+     * @return void
      */
-    protected function loadBinInt(): void
+    protected function loadBinInt()
     {
         $bin = $this->read(4);
         if (static::$isLittleEndian === false) {
@@ -914,16 +955,20 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load the first byte of a binary integer
+     *
+     * @return void
      */
-    protected function loadBinInt1(): void
+    protected function loadBinInt1()
     {
         $this->stack[] = ord($this->read(1));
     }
 
     /**
      * Load the second byte of a binary integer
+     *
+     * @return void
      */
-    protected function loadBinInt2(): void
+    protected function loadBinInt2()
     {
         $bin           = $this->read(2);
         [, $int]       = unpack('v', $bin);
@@ -932,8 +977,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load a long (float) operator
+     *
+     * @return void
      */
-    protected function loadLong(): void
+    protected function loadLong()
     {
         $data = rtrim($this->readline(), 'L');
         if ($data === '') {
@@ -945,8 +992,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load a one byte long integer
+     *
+     * @return void
      */
-    protected function loadLong1(): void
+    protected function loadLong1()
     {
         $n             = ord($this->read(1));
         $data          = $this->read($n);
@@ -955,8 +1004,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load a 4 byte long integer
+     *
+     * @return void
      */
-    protected function loadLong4(): void
+    protected function loadLong4()
     {
         $nBin = $this->read(4);
         if (static::$isLittleEndian === false) {
@@ -970,8 +1021,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load a float value
+     *
+     * @return void
      */
-    protected function loadFloat(): void
+    protected function loadFloat()
     {
         $float         = (float) $this->readline();
         $this->stack[] = $float;
@@ -979,8 +1032,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load a binary float value
+     *
+     * @return void
      */
-    protected function loadBinFloat(): void
+    protected function loadBinFloat()
     {
         $bin = $this->read(8);
         if (static::$isLittleEndian === true) {
@@ -992,16 +1047,20 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load a string
+     *
+     * @return void
      */
-    protected function loadString(): void
+    protected function loadString()
     {
         $this->stack[] = $this->unquoteString((string) $this->readline());
     }
 
     /**
      * Load a binary string
+     *
+     * @return void
      */
-    protected function loadBinString(): void
+    protected function loadBinString()
     {
         $bin = $this->read(4);
         if (! static::$isLittleEndian) {
@@ -1013,6 +1072,8 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load a short binary string
+     *
+     * @return void
      */
     protected function loadShortBinString()
     {
@@ -1022,8 +1083,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load arbitrary binary bytes
+     *
+     * @return void
      */
-    protected function loadBinBytes(): void
+    protected function loadBinBytes()
     {
         // read byte length
         $nBin = $this->read(4);
@@ -1036,8 +1099,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load a single binary byte
+     *
+     * @return void
      */
-    protected function loadShortBinBytes(): void
+    protected function loadShortBinBytes()
     {
         $n             = ord($this->read(1));
         $this->stack[] = $this->read($n);
@@ -1045,8 +1110,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load a unicode string
+     *
+     * @return void
      */
-    protected function loadUnicode(): void
+    protected function loadUnicode()
     {
         $data    = $this->readline();
         $pattern = '/\\\\u([a-fA-F0-9]{4})/u'; // \uXXXX
@@ -1059,8 +1126,9 @@ class PythonPickle extends AbstractAdapter
      * Convert a unicode sequence to UTF-8
      *
      * @param  array $match
+     * @return string
      */
-    protected function convertMatchingUnicodeSequence2Utf8(array $match): string
+    protected function convertMatchingUnicodeSequence2Utf8(array $match)
     {
         return $this->hex2Utf8($match[1]);
     }
@@ -1069,9 +1137,10 @@ class PythonPickle extends AbstractAdapter
      * Convert a hex string to a UTF-8 string
      *
      * @param  string $hex
+     * @return string
      * @throws Exception\RuntimeException On unmatched unicode sequence.
      */
-    protected function hex2Utf8($hex): string
+    protected function hex2Utf8($hex)
     {
         $uniCode = hexdec($hex);
 
@@ -1100,8 +1169,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load binary unicode sequence
+     *
+     * @return void
      */
-    protected function loadBinUnicode(): void
+    protected function loadBinUnicode()
     {
         // read byte length
         $n = $this->read(4);
@@ -1116,16 +1187,20 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load a marker sequence
+     *
+     * @return void
      */
-    protected function loadMark(): void
+    protected function loadMark()
     {
         $this->stack[] = $this->marker;
     }
 
     /**
      * Load an array (list)
+     *
+     * @return void
      */
-    protected function loadList(): void
+    protected function loadList()
     {
         $k               = $this->lastMarker();
         $this->stack[$k] = [];
@@ -1138,8 +1213,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load an append (to list) sequence
+     *
+     * @return void
      */
-    protected function loadAppend(): void
+    protected function loadAppend()
     {
         $value  = array_pop($this->stack);
         $list   = &$this->stack[count($this->stack) - 1];
@@ -1148,16 +1225,20 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load an empty list sequence
+     *
+     * @return void
      */
-    protected function loadEmptyList(): void
+    protected function loadEmptyList()
     {
         $this->stack[] = [];
     }
 
     /**
      * Load multiple append (to list) sequences at once
+     *
+     * @return void
      */
-    protected function loadAppends(): void
+    protected function loadAppends()
     {
         $k    = $this->lastMarker();
         $list = &$this->stack[$k - 1];
@@ -1171,8 +1252,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load an associative array (Python dictionary)
+     *
+     * @return void
      */
-    protected function loadDict(): void
+    protected function loadDict()
     {
         $k               = $this->lastMarker();
         $this->stack[$k] = [];
@@ -1186,8 +1269,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load an item from a set
+     *
+     * @return void
      */
-    protected function loadSetItem(): void
+    protected function loadSetItem()
     {
         $value      = array_pop($this->stack);
         $key        = array_pop($this->stack);
@@ -1197,16 +1282,20 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load an empty dictionary
+     *
+     * @return void
      */
-    protected function loadEmptyDict(): void
+    protected function loadEmptyDict()
     {
         $this->stack[] = [];
     }
 
     /**
      * Load set items
+     *
+     * @return void
      */
-    protected function loadSetItems(): void
+    protected function loadSetItems()
     {
         $k    = $this->lastMarker();
         $dict = &$this->stack[$k - 1];
@@ -1222,8 +1311,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load a tuple
+     *
+     * @return void
      */
-    protected function loadTuple(): void
+    protected function loadTuple()
     {
         $k               = $this->lastMarker();
         $this->stack[$k] = [];
@@ -1237,8 +1328,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load single item tuple
+     *
+     * @return void
      */
-    protected function loadTuple1(): void
+    protected function loadTuple1()
     {
         $value1        = array_pop($this->stack);
         $this->stack[] = [$value1];
@@ -1246,8 +1339,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load two item tuple
+     *
+     * @return void
      */
-    protected function loadTuple2(): void
+    protected function loadTuple2()
     {
         $value2        = array_pop($this->stack);
         $value1        = array_pop($this->stack);
@@ -1256,8 +1351,10 @@ class PythonPickle extends AbstractAdapter
 
     /**
      * Load three item tuple
+     *
+     * @return void
      */
-    protected function loadTuple3(): void
+    protected function loadTuple3()
     {
         $value3        = array_pop($this->stack);
         $value2        = array_pop($this->stack);
@@ -1269,8 +1366,9 @@ class PythonPickle extends AbstractAdapter
      * Load a proto value
      *
      * @throws Exception\RuntimeException If Pickle version does not support this feature.
+     * @return void
      */
-    protected function loadProto(): void
+    protected function loadProto()
     {
         $proto = ord($this->read(1));
         $this->setProtocol($proto);

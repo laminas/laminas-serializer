@@ -113,7 +113,7 @@ class PhpSerialize extends AbstractAdapter
         if (! is_string($serialized) || ! preg_match('/^((s|i|d|b|a|O|C):|N;)/', $serialized)) {
             $value = $serialized;
             if (is_object($value)) {
-                $value = get_class($value);
+                $value = $value::class;
             } elseif (! is_string($value)) {
                 $value = gettype($value);
             }

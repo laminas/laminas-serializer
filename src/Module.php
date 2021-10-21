@@ -17,7 +17,7 @@ class Module
      *
      * @return array{service_manager: mixed}
      */
-    public function getConfig(): array
+    public function getConfig()
     {
         $provider = new ConfigProvider();
 
@@ -28,8 +28,11 @@ class Module
 
     /**
      * Register a specification for the SerializerAdapterManager with the ServiceListener.
+     *
+     * @param ModuleManager $moduleManager
+     * @return void
      */
-    public function init(ModuleManager $moduleManager): void
+    public function init($moduleManager)
     {
         $event           = $moduleManager->getEvent();
         $container       = $event->getParam('ServiceManager');

@@ -15,10 +15,10 @@ Serializing adapters can either be created from the provided
 ```php
 use Laminas\Serializer\Adapter;
 use Laminas\Serializer\Exception;
-use Laminas\Serializer\AbstractSerializer;
+use Laminas\Serializer\Serializer;
 
 // Via factory:
-$serializer = AbstractSerializer::factory(Adapter\PhpSerialize::class);
+$serializer = Serializer::factory(Adapter\PhpSerialize::class);
 
 // Alternately:
 $serializer = new Adapter\PhpSerialize();
@@ -53,15 +53,15 @@ of the basic `Laminas\Serializer\Serializer`:
 ```php
 use Laminas\Serializer\Adapter;
 use Laminas\Serializer\Exception;
-use Laminas\Serializer\AbstractSerializer;
+use Laminas\Serializer\Serializer;
 
-AbstractSerializer::setDefaultAdapter(Adapter\PhpSerialize::class);
+Serializer::setDefaultAdapter(Adapter\PhpSerialize::class);
 
 try {
-    $serialized = AbstractSerializer::serialize($data);
+    $serialized = Serializer::serialize($data);
     // now $serialized is a string
 
-    $unserialized = AbstractSerializer::unserialize($serialized);
+    $unserialized = Serializer::unserialize($serialized);
     // now $data == $unserialized
 } catch (Exception\ExceptionInterface $e) {
     echo $e;

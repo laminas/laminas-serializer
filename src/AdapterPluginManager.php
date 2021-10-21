@@ -19,7 +19,6 @@ use zend\serializer\adapter\phpserialize;
 use zend\serializer\adapter\pythonpickle;
 use zend\serializer\adapter\wddx;
 
-use function get_class;
 use function gettype;
 use function is_object;
 use function sprintf;
@@ -113,7 +112,7 @@ class AdapterPluginManager extends AbstractPluginManager
                 '%s can only create instances of %s; %s is invalid',
                 static::class,
                 $this->instanceOf,
-                is_object($instance) ? get_class($instance) : gettype($instance)
+                is_object($instance) ? $instance::class : gettype($instance)
             ));
         }
     }
