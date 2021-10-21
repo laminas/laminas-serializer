@@ -1,16 +1,21 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace LaminasTest\Serializer\Adapter;
 
 use Laminas\Serializer;
 use Laminas\Serializer\Exception\ExtensionNotLoadedException;
+use Laminas\Serializer\Exception\RuntimeException;
 use PHPUnit\Framework\TestCase;
+use stdClass;
+
+use function class_exists;
+use function extension_loaded;
 
 /**
  * @group      Laminas_Serializer
@@ -18,9 +23,7 @@ use PHPUnit\Framework\TestCase;
  */
 class WddxTest extends TestCase
 {
-    /**
-     * @var Serializer\Adapter\Wddx
-     */
+    /** @var Serializer\Adapter\Wddx */
     private $adapter;
 
     protected function setUp(): void
@@ -104,13 +107,13 @@ class WddxTest extends TestCase
 
     public function testSerializeObject()
     {
-        $value = new \stdClass();
+        $value       = new stdClass();
         $value->test = "test";
-        $expected = '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><struct>'
-                  . '<var name=\'php_class_name\'><string>stdClass</string></var>'
-                  . '<var name=\'test\'><string>test</string></var>'
-                  . '</struct></data></wddxPacket>';
+        $expected    = '<wddxPacket version=\'1.0\'><header/>'
+            . '<data><struct>'
+            . '<var name=\'php_class_name\'><string>stdClass</string></var>'
+            . '<var name=\'test\'><string>test</string></var>'
+            . '</struct></data></wddxPacket>';
 
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -183,12 +186,12 @@ class WddxTest extends TestCase
 
     public function testUnserializeObject()
     {
-        $value    = '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><struct>'
-                  . '<var name=\'php_class_name\'><string>stdClass</string></var>'
-                  . '<var name=\'test\'><string>test</string></var>'
-                  . '</struct></data></wddxPacket>';
-        $expected = new \stdClass();
+        $value          = '<wddxPacket version=\'1.0\'><header/>'
+            . '<data><struct>'
+            . '<var name=\'php_class_name\'><string>stdClass</string></var>'
+            . '<var name=\'test\'><string>test</string></var>'
+            . '</struct></data></wddxPacket>';
+        $expected       = new stdClass();
         $expected->test = 'test';
 
         $data = $this->adapter->unserialize($value);
@@ -202,7 +205,7 @@ class WddxTest extends TestCase
         }
 
         $value = 'not a serialized string';
-        $this->expectException('Laminas\Serializer\Exception\RuntimeException');
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('DOMDocument::loadXML(): Start tag expected');
         $this->adapter->unserialize($value);
     }
@@ -214,17 +217,17 @@ class WddxTest extends TestCase
         }
 
         $value = '<wddxPacket version=\'1.0\'><header /></wddxPacket>';
-        $this->expectException('Laminas\Serializer\Exception\RuntimeException');
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Invalid wddx packet');
         $this->adapter->unserialize($value);
     }
 
     public function testShouldThrowExceptionIfXmlToUnserializeFromContainsADoctype()
     {
-        $value    = '<!DOCTYPE>'
-                  . '<wddxPacket version=\'1.0\'><header/>'
-                  . '<data><string>test</string></data></wddxPacket>';
-        $this->expectException("Laminas\Serializer\Exception\RuntimeException");
+        $value = '<!DOCTYPE>'
+            . '<wddxPacket version=\'1.0\'><header/>'
+            . '<data><string>test</string></data></wddxPacket>';
+        $this->expectException(RuntimeException::class);
         $data = $this->adapter->unserialize($value);
     }
 }

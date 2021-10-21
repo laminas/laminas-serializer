@@ -1,15 +1,18 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace LaminasTest\Serializer\Adapter;
 
+use Laminas\Json\Json;
 use Laminas\Serializer;
+use Laminas\Serializer\Exception\RuntimeException;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 /**
  * @group      Laminas_Serializer
@@ -17,9 +20,7 @@ use PHPUnit\Framework\TestCase;
  */
 class JsonTest extends TestCase
 {
-    /**
-     * @var Serializer\Adapter\Json
-     */
+    /** @var Serializer\Adapter\Json */
     private $adapter;
 
     protected function setUp(): void
@@ -85,7 +86,7 @@ class JsonTest extends TestCase
 
     public function testSerializeObject()
     {
-        $value       = new \stdClass();
+        $value       = new stdClass();
         $value->test = "test";
         $expected    = '{"test":"test"}';
 
@@ -140,11 +141,11 @@ class JsonTest extends TestCase
 
     public function testUnserializeAsObject()
     {
-        $value      = '{"test":"test"}';
-        $expected   = new \stdClass();
+        $value          = '{"test":"test"}';
+        $expected       = new stdClass();
         $expected->test = 'test';
 
-        $this->adapter->getOptions()->setObjectDecodeType(\Laminas\Json\Json::TYPE_OBJECT);
+        $this->adapter->getOptions()->setObjectDecodeType(Json::TYPE_OBJECT);
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
@@ -153,7 +154,7 @@ class JsonTest extends TestCase
     public function testUnserialzeInvalid()
     {
         $value = 'not a serialized string';
-        $this->expectException('Laminas\Serializer\Exception\RuntimeException');
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Unserialization failed: Decoding failed: Syntax error');
         $this->adapter->unserialize($value);
     }
