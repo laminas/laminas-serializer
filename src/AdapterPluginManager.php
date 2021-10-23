@@ -12,6 +12,7 @@ use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Zend\Serializer\Adapter as ZendAdapter;
+
 use function get_class;
 use function gettype;
 use function is_object;

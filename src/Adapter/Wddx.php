@@ -17,6 +17,8 @@ use function class_exists;
 use function extension_loaded;
 use function libxml_disable_entity_loader;
 use function simplexml_import_dom;
+use function wddx_deserialize;
+use function wddx_serialize_value;
 
 use const PHP_VERSION_ID;
 use const XML_DOCUMENT_TYPE_NODE;
