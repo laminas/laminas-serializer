@@ -12,6 +12,7 @@ use Laminas\Serializer\Exception;
 use Laminas\Stdlib\ErrorHandler;
 use Traversable;
 
+use function get_class;
 use function gettype;
 use function is_object;
 use function is_string;
@@ -113,7 +114,7 @@ class PhpSerialize extends AbstractAdapter
         if (! is_string($serialized) || ! preg_match('/^((s|i|d|b|a|O|C):|N;)/', $serialized)) {
             $value = $serialized;
             if (is_object($value)) {
-                $value = $value::class;
+                $value = get_class($value);
             } elseif (! is_string($value)) {
                 $value = gettype($value);
             }
