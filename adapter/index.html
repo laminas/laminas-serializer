@@ -414,7 +414,7 @@ read Pickled data from Python with PHP.</p>
 </tr>
 </tbody>
 </table></div>
-<h3>Datatype merging (PHP to Python Pickle)</h3>
+<h3 id="datatype-merging-php-to-python-pickle">Datatype merging (PHP to Python Pickle)</h3>
 <div class="table-responsive"><table>
 <thead>
 <tr>
@@ -457,7 +457,7 @@ read Pickled data from Python with PHP.</p>
 </tr>
 </tbody>
 </table></div>
-<h3>Datatype merging (Python Pickle to PHP)</h3>
+<h3 id="datatype-merging-python-pickle-to-php">Datatype merging (Python Pickle to PHP)</h3>
 <div class="table-responsive"><table>
 <thead>
 <tr>
@@ -522,12 +522,12 @@ representation using <a href="http://php.net/var_export">var_export()</a>. To re
 the data will be executed using <a href="http://php.net/eval">eval</a>.</p>
 <p>There are no configuration options for this adapter.</p>
 <blockquote>
-<h3>Warning: Unserializing objects</h3>
+<h3 id="warning-unserializing-objects">Warning: Unserializing objects</h3>
 <p>Objects will be serialized using the
 <a href="http://php.net/language.oop5.magic#language.oop5.magic.set-state">__set_state</a> magic
 method. If the class doesn't implement this method, a fatal error will occur
 during execution.</p>
-<h3>Warning: Uses eval()</h3>
+<h3 id="warning-uses-eval">Warning: Uses eval()</h3>
 <p>The <code>PhpCode</code> adapter utilizes <code>eval()</code> to unserialize. This introduces both a
 performance and potential security issue as a new process will be executed.
 Typically, you should use the <code>PhpSerialize</code> adapter unless you require
@@ -561,16 +561,6 @@ human-readability of the serialized data.</p>
 </nav>
 
 
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-serializer/edit/master/docs/book/adapter.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
 
                 
             </div>
