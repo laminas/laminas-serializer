@@ -1,15 +1,16 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace LaminasTest\Serializer\Adapter;
 
 use Laminas\Serializer;
-use Laminas\Serializer\Exception\InvalidArgumentException;
+use Laminas\Serializer\Exception\RuntimeException;
+use My\Dummy;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -19,9 +20,7 @@ use stdClass;
  */
 class PhpSerializeTest extends TestCase
 {
-    /**
-     * @var Serializer\Adapter\PhpSerialize
-     */
+    /** @var Serializer\Adapter\PhpSerialize */
     private $adapter;
 
     protected function setUp(): void
@@ -34,7 +33,7 @@ class PhpSerializeTest extends TestCase
         $this->adapter = null;
     }
 
-    public function testSerializeString()
+    public function testSerializeString(): void
     {
         $value    = 'test';
         $expected = 's:4:"test";';
@@ -43,7 +42,7 @@ class PhpSerializeTest extends TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testSerializeFalse()
+    public function testSerializeFalse(): void
     {
         $value    = false;
         $expected = 'b:0;';
@@ -52,7 +51,7 @@ class PhpSerializeTest extends TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testSerializeNull()
+    public function testSerializeNull(): void
     {
         $value    = null;
         $expected = 'N;';
@@ -61,7 +60,7 @@ class PhpSerializeTest extends TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testSerializeNumeric()
+    public function testSerializeNumeric(): void
     {
         $value    = 100;
         $expected = 'i:100;';
@@ -70,16 +69,16 @@ class PhpSerializeTest extends TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testSerializeObject()
+    public function testSerializeObject(): void
     {
-        $value    = new \stdClass();
+        $value    = new stdClass();
         $expected = 'O:8:"stdClass":0:{}';
 
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeString()
+    public function testUnserializeString(): void
     {
         $value    = 's:4:"test";';
         $expected = 'test';
@@ -88,7 +87,7 @@ class PhpSerializeTest extends TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeFalse()
+    public function testUnserializeFalse(): void
     {
         $value    = 'b:0;';
         $expected = false;
@@ -97,7 +96,7 @@ class PhpSerializeTest extends TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeNull()
+    public function testUnserializeNull(): void
     {
         $value    = 'N;';
         $expected = null;
@@ -106,7 +105,7 @@ class PhpSerializeTest extends TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeNumeric()
+    public function testUnserializeNumeric(): void
     {
         $value    = 'i:100;';
         $expected = 100;
@@ -115,16 +114,19 @@ class PhpSerializeTest extends TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeObject()
+    public function testUnserializeObject(): void
     {
         $value    = 'O:8:"stdClass":0:{}';
-        $expected = new \stdClass();
+        $expected = new stdClass();
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
-    public function invalidSerializationTypes()
+    /**
+     * @return array<string, array{0: mixed, 1: string}>
+     */
+    public function invalidSerializationTypes(): array
     {
         return [
             'null'       => [null, 'NULL'],
@@ -141,15 +143,19 @@ class PhpSerializeTest extends TestCase
 
     /**
      * @dataProvider invalidSerializationTypes
+     * @param mixed $value
      */
-    public function testUnserializingNoStringRaisesException($value, $expected)
+    public function testUnserializingNoStringRaisesException($value, string $expected): void
     {
-        $this->expectException('Laminas\Serializer\Exception\RuntimeException');
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage($expected);
         $this->adapter->unserialize($value);
     }
 
-    public function invalidStrings()
+    /**
+     * @return array<string, array<int, string>>
+     */
+    public function invalidStrings(): array
     {
         return [
             'not-serialized'        => ['foobar', 'foobar'],
@@ -160,7 +166,7 @@ class PhpSerializeTest extends TestCase
     /**
      * @dataProvider invalidStrings
      */
-    public function testUnserializingInvalidStringRaisesException($string, $expected)
+    public function testUnserializingInvalidStringRaisesException(string $string, string $expected): void
     {
         $this->expectException(Serializer\Exception\RuntimeException::class);
         $this->expectExceptionMessage($expected);
@@ -170,7 +176,7 @@ class PhpSerializeTest extends TestCase
     /**
      * @requires PHP 7.0
      */
-    public function testPhp7WillNotUnserializeObjectsWhenUnserializeWhitelistedClassesIsFalse()
+    public function testPhp7WillNotUnserializeObjectsWhenUnserializeWhitelistedClassesIsFalse(): void
     {
         $value = 'O:8:"stdClass":0:{}';
         $this->adapter->getOptions()->setUnserializeClassWhitelist(false);
@@ -184,11 +190,11 @@ class PhpSerializeTest extends TestCase
     /**
      * @requires PHP 7.0
      */
-    public function testUnserializeWillNotUnserializeClassesThatAreNotInTheWhitelist()
+    public function testUnserializeWillNotUnserializeClassesThatAreNotInTheWhitelist(): void
     {
         $value = 'O:8:"stdClass":0:{}';
 
-        $this->adapter->getOptions()->setUnserializeClassWhitelist([\My\Dummy::class]);
+        $this->adapter->getOptions()->setUnserializeClassWhitelist([Dummy::class]);
 
         $data = $this->adapter->unserialize($value);
 
@@ -199,7 +205,7 @@ class PhpSerializeTest extends TestCase
     /**
      * @requires PHP 7.0
      */
-    public function testUnserializeWillUnserializeAnyClassWhenUnserializeWhitelistedClassesIsTrue()
+    public function testUnserializeWillUnserializeAnyClassWhenUnserializeWhitelistedClassesIsTrue(): void
     {
         $value = 'O:8:"stdClass":0:{}';
 

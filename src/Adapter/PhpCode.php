@@ -1,15 +1,20 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace Laminas\Serializer\Adapter;
 
 use Laminas\Serializer\Exception;
 use Laminas\Stdlib\ErrorHandler;
+
+use function error_get_last;
+use function var_export;
+
+use const E_ALL;
 
 class PhpCode extends AbstractAdapter
 {
@@ -31,12 +36,12 @@ class PhpCode extends AbstractAdapter
      *
      * @param  string $code
      * @return mixed
-     * @throws Exception\RuntimeException on eval error
+     * @throws Exception\RuntimeException On eval error.
      */
     public function unserialize($code)
     {
         ErrorHandler::start(E_ALL);
-        $ret  = null;
+        $ret = null;
         // This suppression is due to the fact that the ErrorHandler cannot
         // catch syntax errors, and is intentionally left in place.
         $eval = @eval('$ret=' . $code . ';');

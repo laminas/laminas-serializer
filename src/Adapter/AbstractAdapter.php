@@ -1,24 +1,24 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace Laminas\Serializer\Adapter;
 
+use Traversable;
+
 abstract class AbstractAdapter implements AdapterInterface
 {
-    /**
-     * @var AdapterOptions
-     */
-    protected $options = null;
+    /** @var AdapterOptions */
+    protected $options;
 
     /**
      * Constructor
      *
-     * @param array|\Traversable|AdapterOptions $options
+     * @param array|Traversable|AdapterOptions $options
      */
     public function __construct($options = null)
     {
@@ -30,7 +30,7 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Set adapter options
      *
-     * @param  array|\Traversable|AdapterOptions $options
+     * @param array|Traversable|AdapterOptions $options
      * @return AbstractAdapter
      */
     public function setOptions($options)

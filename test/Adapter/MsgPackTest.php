@@ -1,16 +1,20 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace LaminasTest\Serializer\Adapter;
 
 use Laminas\Serializer;
 use Laminas\Serializer\Exception\ExtensionNotLoadedException;
+use Laminas\Serializer\Exception\RuntimeException;
 use PHPUnit\Framework\TestCase;
+use stdClass;
+
+use function extension_loaded;
 
 /**
  * @group      Laminas_Serializer
@@ -18,9 +22,7 @@ use PHPUnit\Framework\TestCase;
  */
 class MsgPackTest extends TestCase
 {
-    /**
-     * @var Serializer\Adapter\MsgPack
-     */
+    /** @var Serializer\Adapter\MsgPack */
     private $adapter;
 
     protected function setUp(): void
@@ -81,7 +83,7 @@ class MsgPackTest extends TestCase
 
     public function testSerializeObject()
     {
-        $value    = new \stdClass();
+        $value    = new stdClass();
         $expected = msgpack_serialize($value);
 
         $data = $this->adapter->serialize($value);
@@ -126,7 +128,7 @@ class MsgPackTest extends TestCase
 
     public function testUnserializeObject()
     {
-        $expected = new \stdClass();
+        $expected = new stdClass();
         $value    = msgpack_serialize($expected);
 
         $data = $this->adapter->unserialize($value);
@@ -145,7 +147,7 @@ class MsgPackTest extends TestCase
     public function testUnserializeInvalid()
     {
         $value = "\0\1\r\n";
-        $this->expectException('Laminas\Serializer\Exception\RuntimeException');
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Unserialization failed');
         $this->adapter->unserialize($value);
     }

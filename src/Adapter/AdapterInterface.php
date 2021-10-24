@@ -1,12 +1,14 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Serializer\Adapter;
+
+use Laminas\Serializer\Exception\ExceptionInterface;
 
 interface AdapterInterface
 {
@@ -15,7 +17,7 @@ interface AdapterInterface
      *
      * @param  mixed $value Data to serialize
      * @return string
-     * @throws \Laminas\Serializer\Exception\ExceptionInterface
+     * @throws ExceptionInterface
      */
     public function serialize($value);
 
@@ -24,7 +26,7 @@ interface AdapterInterface
      *
      * @param  string $serialized Serialized string
      * @return mixed
-     * @throws \Laminas\Serializer\Exception\ExceptionInterface
+     * @throws ExceptionInterface
      */
     public function unserialize($serialized);
 }

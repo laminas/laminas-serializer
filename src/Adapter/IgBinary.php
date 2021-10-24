@@ -1,27 +1,27 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace Laminas\Serializer\Adapter;
 
 use Laminas\Serializer\Exception;
 use Laminas\Stdlib\ErrorHandler;
+use Traversable;
+
+use function extension_loaded;
 
 class IgBinary extends AbstractAdapter
 {
-    /**
-     * @var string Serialized null value
-     */
-    private static $serializedNull = null;
+    /** @var string Serialized null value */
+    private static $serializedNull;
 
     /**
-     * Constructor
-     *
-     * @throws Exception\ExtensionNotLoadedException If igbinary extension is not present
+     * @throws Exception\ExtensionNotLoadedException If igbinary extension is not present.
+     * @param array|Traversable|AdapterOptions $options
      */
     public function __construct($options = null)
     {
@@ -43,7 +43,7 @@ class IgBinary extends AbstractAdapter
      *
      * @param  mixed $value
      * @return string
-     * @throws Exception\RuntimeException on igbinary error
+     * @throws Exception\RuntimeException On igbinary error.
      */
     public function serialize($value)
     {
@@ -63,7 +63,7 @@ class IgBinary extends AbstractAdapter
      *
      * @param  string $serialized
      * @return mixed
-     * @throws Exception\RuntimeException on igbinary error
+     * @throws Exception\RuntimeException On igbinary error.
      */
     public function unserialize($serialized)
     {

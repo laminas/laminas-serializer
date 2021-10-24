@@ -1,15 +1,27 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace Laminas\Serializer\Adapter;
 
+use DOMDocument;
 use Laminas\Serializer\Exception;
 use Laminas\Stdlib\ErrorHandler;
+use Traversable;
+
+use function class_exists;
+use function extension_loaded;
+use function libxml_disable_entity_loader;
+use function simplexml_import_dom;
+use function wddx_deserialize;
+use function wddx_serialize_value;
+
+use const PHP_VERSION_ID;
+use const XML_DOCUMENT_TYPE_NODE;
 
 /**
  * @link       http://www.infoloom.com/gcaconfs/WEB/chicago98/simeonov.HTM
@@ -17,16 +29,14 @@ use Laminas\Stdlib\ErrorHandler;
  */
 class Wddx extends AbstractAdapter
 {
-    /**
-     * @var WddxOptions
-     */
-    protected $options = null;
+    /** @var WddxOptions */
+    protected $options;
 
     /**
      * Constructor
      *
-     * @param  array|\Traversable|WddxOptions $options
-     * @throws Exception\ExtensionNotLoadedException if wddx extension not found
+     * @param array|Traversable|WddxOptions $options
+     * @throws Exception\ExtensionNotLoadedException If wddx extension not found.
      */
     public function __construct($options = null)
     {
@@ -42,7 +52,7 @@ class Wddx extends AbstractAdapter
     /**
      * Set options
      *
-     * @param  array|\Traversable|WddxOptions $options
+     * @param array|Traversable|WddxOptions $options
      * @return Wddx
      */
     public function setOptions($options)
@@ -73,7 +83,7 @@ class Wddx extends AbstractAdapter
      *
      * @param  mixed $value
      * @return string
-     * @throws Exception\RuntimeException on wddx error
+     * @throws Exception\RuntimeException On wddx error.
      */
     public function serialize($value)
     {
@@ -99,8 +109,8 @@ class Wddx extends AbstractAdapter
      *
      * @param  string $wddx
      * @return mixed
-     * @throws Exception\RuntimeException on wddx error
-     * @throws Exception\InvalidArgumentException if invalid xml
+     * @throws Exception\RuntimeException On wddx error.
+     * @throws Exception\InvalidArgumentException If invalid xml.
      */
     public function unserialize($wddx)
     {
@@ -110,8 +120,11 @@ class Wddx extends AbstractAdapter
             // check if the returned NULL is valid
             // or based on an invalid wddx string
             try {
-                $oldLibxmlDisableEntityLoader = libxml_disable_entity_loader(true);
-                $dom = new \DOMDocument;
+                if (PHP_VERSION_ID < 80000) {
+                    // phpcs:ignore
+                    $oldLibxmlDisableEntityLoader = libxml_disable_entity_loader(true);
+                }
+                $dom = new DOMDocument();
                 $dom->loadXML($wddx);
                 foreach ($dom->childNodes as $child) {
                     if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
@@ -122,7 +135,10 @@ class Wddx extends AbstractAdapter
                 }
                 $simpleXml = simplexml_import_dom($dom);
                 //$simpleXml = new \SimpleXMLElement($wddx);
-                libxml_disable_entity_loader($oldLibxmlDisableEntityLoader);
+                if (PHP_VERSION_ID < 80000) {
+                    // phpcs:ignore
+                    libxml_disable_entity_loader($oldLibxmlDisableEntityLoader);
+                }
                 if (isset($simpleXml->data[0]->null[0])) {
                     return; // valid null
                 }

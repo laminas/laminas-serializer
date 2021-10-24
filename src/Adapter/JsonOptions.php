@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @see       https://github.com/laminas/laminas-serializer for the canonical source repository
- * @copyright https://github.com/laminas/laminas-serializer/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-serializer/blob/master/LICENSE.md New BSD License
+ * @see https://github.com/laminas/laminas-serializer for the canonical source repository
  */
+
+declare(strict_types=1);
 
 namespace Laminas\Serializer\Adapter;
 
@@ -41,7 +41,7 @@ class JsonOptions extends AdapterOptions
     }
 
     /**
-     * @param  bool $flag
+     * @param bool $flag
      * @return JsonOptions
      */
     public function setEnableJsonExprFinder($flag)
@@ -59,19 +59,20 @@ class JsonOptions extends AdapterOptions
     }
 
     /**
-     * @param  int $type
+     * @param int $type
      * @return JsonOptions
      * @throws Exception\InvalidArgumentException
      */
     public function setObjectDecodeType($type)
     {
-        if ($type != LaminasJson::TYPE_ARRAY && $type != LaminasJson::TYPE_OBJECT) {
+        $type = (int) $type;
+        if ($type !== LaminasJson::TYPE_ARRAY && $type !== LaminasJson::TYPE_OBJECT) {
             throw new Exception\InvalidArgumentException(
                 'Unknown decode type: ' . $type
             );
         }
 
-        $this->objectDecodeType = (int) $type;
+        $this->objectDecodeType = $type;
 
         return $this;
     }
