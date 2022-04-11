@@ -13,6 +13,8 @@ use Laminas\Stdlib\ErrorHandler;
 use Traversable;
 
 use function extension_loaded;
+use function igbinary_serialize;
+use function igbinary_unserialize;
 
 class IgBinary extends AbstractAdapter
 {

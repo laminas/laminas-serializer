@@ -15,6 +15,7 @@ use PHPUnit\Framework\TestCase;
 use stdClass;
 
 use function extension_loaded;
+use function igbinary_serialize;
 
 /**
  * @group      Laminas_Serializer
