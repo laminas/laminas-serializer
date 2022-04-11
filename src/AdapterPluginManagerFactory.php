@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Laminas\Serializer;
 
-use Interop\Container\ContainerInterface;
+use interop\container\containerinterface;
 use Laminas\ServiceManager\Config;
 use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
@@ -29,7 +29,7 @@ class AdapterPluginManagerFactory implements FactoryInterface
      *
      * @return AdapterPluginManager
      */
-    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
+    public function __invoke(containerinterface $container, $name, ?array $options = null)
     {
         $pluginManager = new AdapterPluginManager($container, $options ?: []);
 

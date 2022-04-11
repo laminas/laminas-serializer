@@ -13,6 +13,8 @@ use Laminas\Stdlib\ErrorHandler;
 use Traversable;
 
 use function extension_loaded;
+use function msgpack_serialize;
+use function msgpack_unserialize;
 
 class MsgPack extends AbstractAdapter
 {

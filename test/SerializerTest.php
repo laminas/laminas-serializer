@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace LaminasTest\Serializer;
 
 use Exception;
-use Interop\Container\ContainerInterface;
+use interop\container\containerinterface;
 use Laminas\Serializer\Adapter;
 use Laminas\Serializer\Adapter\AdapterInterface;
 use Laminas\Serializer\Adapter\Json;
@@ -42,7 +42,7 @@ class SerializerTest extends TestCase
     public function testChangeAdapterPluginManager()
     {
         $newPluginManager = new AdapterPluginManager(
-            $this->getMockBuilder(ContainerInterface::class)->getMock()
+            $this->getMockBuilder(containerinterface::class)->getMock()
         );
         Serializer::setAdapterPluginManager($newPluginManager);
         $this->assertSame($newPluginManager, Serializer::getAdapterPluginManager());
