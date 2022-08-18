@@ -27,8 +27,55 @@
 
 [![Build Status](https://github.com/laminas/laminas-serializer/workflows/Continuous%20Integration/badge.svg)](https://github.com/laminas/laminas-serializer/actions?query=workflow%3A"Continuous+Integration")
 
-laminas-serializer provides an adapter-based interface for generating and
+
+### Laminas Serializer
+laminas-serializer component provides an adapter-based interface for generating and
 recovering from storable representations of PHP types.
 
+### Documentation
+
+- [An introduction to this component](https://docs.laminas.dev/laminas-serializer/intro/)
+- [Full documentation](https://docs.laminas.dev/laminas-serializer/)
+- [Complete adapter list and configuration](https://docs.laminas.dev/laminas-serializer/adapter/)
 - File issues at https://github.com/laminas/laminas-serializer/issues
-- Documentation is at https://docs.laminas.dev/laminas-serializer/
+
+### Usage
+
+Direct adapter usage is as follows:
+
+```php
+$adapter1  = new Adapter\Json();
+$adapter2  = new Adapter\PhpSerialize();
+$adapter3  = new Adapter\PhpCode();
+$adapter4  = new Adapter\PythonPickle();
+
+$value    = ["v1","v2"];
+
+printf("serialize1: %s\n\n", $adapter1->serialize($value) );  
+printf("serialize2: %s\n\n", $adapter2->serialize($value) );
+printf("serialize3: %s\n\n", $adapter3->serialize($value) );
+printf("serialize4: %s\n\n", $adapter4->serialize($value) );
+```
+
+Which outputs:
+
+```php
+serialize1: ["v1","v2"]
+
+serialize2: a:2:{i:0;s:2:"v1";i:1;s:2:"v2";}
+
+serialize3: array (
+  0 => 'v1',
+  1 => 'v2',
+)
+
+serialize4: (lp0
+S'v1'
+p1
+aS'v2'
+p2
+a.
+
+```
+
+A more comprensive guite can be seen [here](https://docs.laminas.dev/laminas-serializer/intro/)
