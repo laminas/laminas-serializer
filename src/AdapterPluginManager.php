@@ -11,7 +11,6 @@ namespace Laminas\Serializer;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Factory\InvokableFactory;
-use Zend\Serializer\Adapter as ZendAdapter;
 
 use function gettype;
 use function is_object;
@@ -47,24 +46,6 @@ class AdapterPluginManager extends AbstractPluginManager
         'PythonPickle' => Adapter\PythonPickle::class,
         'wddx'         => Adapter\Wddx::class,
         'Wddx'         => Adapter\Wddx::class,
-
-        // Legacy Zend Framework aliases
-        ZendAdapter\IgBinary::class     => Adapter\IgBinary::class,
-        ZendAdapter\Json::class         => Adapter\Json::class,
-        ZendAdapter\MsgPack::class      => Adapter\MsgPack::class,
-        ZendAdapter\PhpCode::class      => Adapter\PhpCode::class,
-        ZendAdapter\PhpSerialize::class => Adapter\PhpSerialize::class,
-        ZendAdapter\PythonPickle::class => Adapter\PythonPickle::class,
-        ZendAdapter\Wddx::class         => Adapter\Wddx::class,
-
-        // v2 normalized FQCNs
-        'zendserializeradapterigbinary'     => Adapter\IgBinary::class,
-        'zendserializeradapterjson'         => Adapter\Json::class,
-        'zendserializeradaptermsgpack'      => Adapter\MsgPack::class,
-        'zendserializeradapterphpcode'      => Adapter\PhpCode::class,
-        'zendserializeradapterphpserialize' => Adapter\PhpSerialize::class,
-        'zendserializeradapterpythonpickle' => Adapter\PythonPickle::class,
-        'zendserializeradapterwddx'         => Adapter\Wddx::class,
     ];
 
     /** @var array<string, string> */
