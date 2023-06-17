@@ -30,8 +30,6 @@ class ConfigProvider
     public function getDependencyConfig()
     {
         return [
-            // Legacy Zend Framework aliases
-            'aliases'   => [],
             'factories' => [
                 'SerializerAdapterManager' => AdapterPluginManagerFactory::class,
             ],
