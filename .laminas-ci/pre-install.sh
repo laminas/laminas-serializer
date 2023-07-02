@@ -1,5 +1,8 @@
 #!/bin/bash
 
+JOB=${2}
+PHP_VERSION=$(echo "${JOB}" | jq -r '.php // ""')
+
 export DEBIAN_FRONTEND=noninteractive
 apt update && apt install -y --no-install-recommends libxml2-dev
 
@@ -12,3 +15,5 @@ phpize
 make
 make install
 cd $CURRENT_DIRECTORY
+
+echo "extension=wddx.so" > /etc/php/${PHP_VERSION}/mods-available/wddx.ini
