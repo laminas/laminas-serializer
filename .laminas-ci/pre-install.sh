@@ -1,5 +1,7 @@
 #!/bin/bash
 
+apt install libxml-2.0
+
 CURRENT_DIRECTORY=$(pwd)
 cd $TMPDIR
 git clone https://github.com/php/pecl-text-wddx.git wddx
