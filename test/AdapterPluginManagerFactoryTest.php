@@ -8,37 +8,33 @@ declare(strict_types=1);
 
 namespace LaminasTest\Serializer;
 
-use interop\container\containerinterface;
 use Laminas\Serializer\Adapter\AdapterInterface;
 use Laminas\Serializer\AdapterPluginManager;
 use Laminas\Serializer\AdapterPluginManagerFactory;
-use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\ServiceManager;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use ReflectionClass;
-
-use function method_exists;
 
 class AdapterPluginManagerFactoryTest extends TestCase
 {
     public function testFactoryReturnsPluginManager(): void
     {
-        $container = $this->createMock(containerinterface::class);
+        $container = $this->createMock(ContainerInterface::class);
         $factory   = new AdapterPluginManagerFactory();
 
         $serializers = $factory($container, AdapterPluginManagerFactory::class);
         $this->assertInstanceOf(AdapterPluginManager::class, $serializers);
 
-        if (method_exists($serializers, 'configure')) {
-            $reflectionClass         = new ReflectionClass($serializers);
-            $creationContextProperty = $reflectionClass->getProperty('creationContext');
-            $creationContextProperty->setAccessible(true);
+        $reflectionClass           = new ReflectionClass(AbstractPluginManager::class);
+        $internalContainerProperty = $reflectionClass->getProperty('plugins');
+        $internalContainer         = $internalContainerProperty->getValue($serializers);
+        self::assertInstanceOf(ServiceManager::class, $internalContainer);
 
-            // laminas-servicemanager v3
-            $this->assertEquals($container, $creationContextProperty->getValue($serializers));
-        } else {
-            // laminas-servicemanager v2
-            $this->assertSame($container, $serializers->getServiceLocator());
-        }
+        $reflectionClass         = new ReflectionClass(ServiceManager::class);
+        $creationContextProperty = $reflectionClass->getProperty('creationContext');
+        $this->assertEquals($container, $creationContextProperty->getValue($internalContainer));
     }
 
     /**
@@ -46,7 +42,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
      */
     public function testFactoryConfiguresPluginManagerUnderContainerInterop(): void
     {
-        $container  = $this->createMock(containerinterface::class);
+        $container  = $this->createMock(ContainerInterface::class);
         $serializer = $this->createMock(AdapterInterface::class);
 
         $factory     = new AdapterPluginManagerFactory();
@@ -55,25 +51,6 @@ class AdapterPluginManagerFactoryTest extends TestCase
                 'test' => $serializer,
             ],
         ]);
-        $this->assertSame($serializer, $serializers->get('test'));
-    }
-
-    /**
-     * @depends testFactoryReturnsPluginManager
-     */
-    public function testFactoryConfiguresPluginManagerUnderServiceManagerV2(): void
-    {
-        $container  = $this->createMock(ServiceLocatorInterface::class);
-        $serializer = $this->createMock(AdapterInterface::class);
-
-        $factory = new AdapterPluginManagerFactory();
-        $factory->setCreationOptions([
-            'services' => [
-                'test' => $serializer,
-            ],
-        ]);
-
-        $serializers = $factory->createService($container);
         $this->assertSame($serializer, $serializers->get('test'));
     }
 
@@ -93,7 +70,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
             ],
         ];
 
-        $container = $this->createMock(containerinterface::class);
+        $container = $this->createMock(ContainerInterface::class);
 
         $container
             ->expects($this->atLeast(2))
@@ -135,7 +112,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
             ],
         ];
 
-        $container = $this->createMock(containerinterface::class);
+        $container = $this->createMock(ContainerInterface::class);
 
         $container
             ->expects($this->atLeastOnce())
@@ -158,7 +135,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
 
     public function testDoesNotConfigureSerializerServicesWhenConfigServiceNotPresent(): void
     {
-        $container = $this->createMock(containerinterface::class);
+        $container = $this->createMock(ContainerInterface::class);
 
         $container
             ->expects($this->atLeast(2))
@@ -181,7 +158,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
 
     public function testDoesNotConfigureSerializerServicesWhenConfigServiceDoesNotContainSerializersConfig(): void
     {
-        $container = $this->createMock(containerinterface::class);
+        $container = $this->createMock(ContainerInterface::class);
 
         $container
             ->expects($this->atLeast(2))

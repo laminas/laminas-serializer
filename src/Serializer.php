@@ -41,7 +41,7 @@ abstract class Serializer
         if ($adapterName instanceof Adapter) {
             return $adapterName; // $adapterName is already an adapter object
         }
-        return static::getAdapterPluginManager()->get($adapterName, $adapterOptions);
+        return static::getAdapterPluginManager()->build($adapterName, $adapterOptions);
     }
 
     /**

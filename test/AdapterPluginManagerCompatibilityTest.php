@@ -10,7 +10,7 @@ namespace LaminasTest\Serializer;
 
 use Laminas\Serializer\Adapter;
 use Laminas\Serializer\AdapterPluginManager;
-use Laminas\Serializer\Exception\RuntimeException;
+use Laminas\ServiceManager\AbstractSingleInstancePluginManager;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\ServiceManager\Test\CommonPluginManagerTrait;
 use PHPUnit\Framework\TestCase;
@@ -23,14 +23,9 @@ class AdapterPluginManagerCompatibilityTest extends TestCase
 {
     use CommonPluginManagerTrait;
 
-    protected function getPluginManager(): AdapterPluginManager
+    protected static function getPluginManager(array $config = []): AbstractSingleInstancePluginManager
     {
-        return new AdapterPluginManager(new ServiceManager());
-    }
-
-    protected function getV2InvalidPluginException(): string
-    {
-        return RuntimeException::class;
+        return new AdapterPluginManager(new ServiceManager(), $config);
     }
 
     protected function getInstanceOf(): string
@@ -46,9 +41,9 @@ class AdapterPluginManagerCompatibilityTest extends TestCase
      *
      * @return Traversable
      */
-    public function aliasProvider()
+    public static function aliasProvider(): iterable
     {
-        $pluginManager = $this->getPluginManager();
+        $pluginManager = self::getPluginManager();
         $r             = new ReflectionProperty($pluginManager, 'aliases');
         $r->setAccessible(true);
         $aliases = $r->getValue($pluginManager);
