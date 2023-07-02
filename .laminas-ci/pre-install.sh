@@ -1,6 +1,6 @@
 #!/bin/bash
 
-JOB=${2}
+JOB=${3}
 PHP_VERSION=$(echo "${JOB}" | jq -r '.php // ""')
 
 export DEBIAN_FRONTEND=noninteractive
