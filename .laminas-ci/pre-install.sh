@@ -1,6 +1,7 @@
 #!/bin/bash
 
-apt install libxml2-dev
+export DEBIAN_FRONTEND=noninteractive
+apt install -y --no-install-recommends libxml2-dev
 
 CURRENT_DIRECTORY=$(pwd)
 cd $TMPDIR
