@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt install libxml-2.0
+apt install libxml2
 
 CURRENT_DIRECTORY=$(pwd)
 cd $TMPDIR
