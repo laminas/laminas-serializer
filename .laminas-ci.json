@@ -2,7 +2,6 @@
     "extensions": [
         "bcmath",
         "igbinary",
-        "msgpack",
-        "wddx"
+        "msgpack"
     ]
 }
