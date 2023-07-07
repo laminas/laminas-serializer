@@ -8,6 +8,9 @@ declare(strict_types=1);
 
 namespace Laminas\Serializer\Adapter;
 
+/**
+ * @deprecated This serializer will get removed in v3.0.0. There is no replacement.
+ */
 class WddxOptions extends AdapterOptions
 {
     /**
