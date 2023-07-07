@@ -16,7 +16,6 @@
 >
 > You trust us enough to use our software. We ask that you trust us to say the truth on this. We need your help. Go out and protest this unnecessary war. Stop the bloodshed. Say "stop the war!"
 
-
 [![Build Status](https://github.com/laminas/laminas-serializer/workflows/Continuous%20Integration/badge.svg)](https://github.com/laminas/laminas-serializer/actions?query=workflow%3A"Continuous+Integration")
 
 laminas-serializer provides an adapter-based interface for generating and
