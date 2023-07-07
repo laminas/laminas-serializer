@@ -16,6 +16,9 @@ use function extension_loaded;
 use function msgpack_serialize;
 use function msgpack_unserialize;
 
+/**
+ * @deprecated This serializer will get removed in v3.0.0. There is no replacement.
+ */
 class MsgPack extends AbstractAdapter
 {
     /** @var string Serialized 0 value */

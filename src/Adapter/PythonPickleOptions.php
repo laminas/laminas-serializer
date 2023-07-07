@@ -10,6 +10,9 @@ namespace Laminas\Serializer\Adapter;
 
 use Laminas\Serializer\Exception;
 
+/**
+ * @deprecated This serializer will get removed in v3.0.0. There is no replacement.
+ */
 class PythonPickleOptions extends AdapterOptions
 {
     /**
