@@ -36,26 +36,6 @@ this adapter.
 
 There are no configurable options for this adapter.
 
-## The Wddx Adapter
-
-[WDDX](http://wikipedia.org/wiki/WDDX) (Web Distributed Data eXchange) is a
-programming-language-, platform-, and transport-neutral data interchange
-mechanism for passing data between different environments and different
-computers.
-
-The adapter uses the [wddx](http://php.net/wddx) PHP functions. Please read the
-PHP manual to determine how you may enable them in your installation.
-
-Additionally, the [SimpleXML](http://php.net/simplexml) extension is used to
-check if a returned `NULL` value from `wddx_unserialize()` is based on a
-serialized `NULL` or on invalid data.
-
-Available options include:
-
-Option  | Data Type | Default Value | Description
-------- | --------- | ------------- | -----------
-comment | `string`  |               | An optional comment that appears in the packet header.
-
 ## The Json Adapter
 
 The [JSON](http://wikipedia.org/wiki/JavaScript_Object_Notation) adapter provides a bridge to the
@@ -68,54 +48,6 @@ Option                    | Data Type                | Default Value
 `cycle_check`             | `boolean`                | `false`
 `object_decode_type`      | `Laminas\Json\Json::TYPE_*` | `Laminas\Json\Json::TYPE_ARRAY`
 `enable_json_expr_finder` | `boolean`                | `false`
-
-## The PythonPickle Adapter
-
-This adapter converts PHP types to a [Python Pickle](http://docs.python.org/library/pickle.html)
-string representation. With it, you can read the serialized data with Python and
-read Pickled data from Python with PHP.
-
-This adapter requires the [laminas-math](https://docs.laminas.dev/laminas-math/) component:
-
-```bash
-$ composer require laminas/laminas-math
-```
-
-Available options include:
-
-Option   | Data Type           | Default Value | Description
----------|---------------------|---------------|------------
-protocol | `integer` (0/1/2/3) | 0             | The Pickle protocol version used on serialize
-
-### Datatype merging (PHP to Python Pickle)
-
-PHP Type     | Python Pickle Type
------------- | ------------------
-`NULL`       | None
-`boolean`    | `boolean`
-`integer`    | `integer`
-`float`      | `float`
-`string`     | `string`
-`array` list | `list`
-`array` map  | `dictionary`
-`object`     | `dictionary`
-
-### Datatype merging (Python Pickle to PHP)
-
-Python Pickle Type | PHP Type
--------------------|---------
-`None`             | `NULL`
-`boolean`          | `boolean`
-`integer`          | `integer`
-`long`             | `integer`, `float`, `string`, or `Laminas\Serializer\Exception\ExceptionInterface`
-`float`            | `float`
-`string`           | `string`
-`bytes`            | `string`
-`unicode string`   | `string` UTF-8
-`list`             | `array` list
-`tuple`            | `array` list
-`dictionary`       | `array` map
-All other types    | `Laminas\Serializer\Exception\ExceptionInterface`
 
 ## The PhpCode Adapter
 
