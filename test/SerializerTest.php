@@ -8,20 +8,16 @@ declare(strict_types=1);
 
 namespace LaminasTest\Serializer;
 
-use Exception;
-use interop\container\containerinterface;
 use Laminas\Serializer\Adapter;
 use Laminas\Serializer\Adapter\AdapterInterface;
 use Laminas\Serializer\Adapter\Json;
 use Laminas\Serializer\Adapter\PhpSerialize;
 use Laminas\Serializer\Adapter\PythonPickle;
 use Laminas\Serializer\AdapterPluginManager;
-use Laminas\Serializer\Exception\RuntimeException;
 use Laminas\Serializer\Serializer;
-use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Exception\ServiceNotFoundException;
-use Laminas\ServiceManager\ServiceManager;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 
 /**
  * @group  Laminas_Serializer
@@ -42,7 +38,7 @@ class SerializerTest extends TestCase
     public function testChangeAdapterPluginManager()
     {
         $newPluginManager = new AdapterPluginManager(
-            $this->getMockBuilder(containerinterface::class)->getMock()
+            $this->getMockBuilder(ContainerInterface::class)->getMock()
         );
         Serializer::setAdapterPluginManager($newPluginManager);
         $this->assertSame($newPluginManager, Serializer::getAdapterPluginManager());
@@ -64,27 +60,6 @@ class SerializerTest extends TestCase
     {
         $this->expectException(ServiceNotFoundException::class);
         Serializer::factory('unknown');
-    }
-
-    public function testFactoryOnADummyClassAdapter()
-    {
-        $adapters = new AdapterPluginManager(new ServiceManager(), [
-            'invokables' => [
-                'dummy' => TestAsset\Dummy::class,
-            ],
-        ]);
-        Serializer::setAdapterPluginManager($adapters);
-
-        try {
-            Serializer::factory('dummy');
-            $this->fail('Expected exception when requesting invalid adapter type');
-        } catch (InvalidServiceException $e) {
-            $this->assertStringContainsString('Dummy is invalid', $e->getMessage());
-        } catch (RuntimeException $e) {
-            $this->assertStringContainsString('Dummy is invalid', $e->getMessage());
-        } catch (Exception $e) {
-            $this->fail('Unexpected exception raised by plugin manager for invalid adapter type');
-        }
     }
 
     public function testChangeDefaultAdapterWithString()

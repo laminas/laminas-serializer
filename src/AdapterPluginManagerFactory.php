@@ -8,30 +8,22 @@ declare(strict_types=1);
 
 namespace Laminas\Serializer;
 
-use interop\container\containerinterface;
-use Laminas\ServiceManager\Config;
-use Laminas\ServiceManager\FactoryInterface;
-use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 use function is_array;
 
 class AdapterPluginManagerFactory implements FactoryInterface
 {
     /**
-     * laminas-servicemanager v2 support for invocation options.
-     *
-     * @var array
-     */
-    protected $creationOptions;
-
-    /**
      * {@inheritDoc}
-     *
-     * @return AdapterPluginManager
      */
-    public function __invoke(containerinterface $container, $name, ?array $options = null)
-    {
-        $pluginManager = new AdapterPluginManager($container, $options ?: []);
+    public function __invoke(
+        ContainerInterface $container,
+        string $requestedName,
+        ?array $options = null
+    ): AdapterPluginManager {
+        $pluginManager = new AdapterPluginManager($container, $options ?? []);
 
         // If this is in a laminas-mvc application, the ServiceListener will inject
         // merged configuration during bootstrap.
@@ -51,30 +43,8 @@ class AdapterPluginManagerFactory implements FactoryInterface
             return $pluginManager;
         }
 
-        // Wire service configuration for serializers
-        (new Config($config['serializers']))->configureServiceManager($pluginManager);
+        $pluginManager->configure($config['serializers']);
 
         return $pluginManager;
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return AdapterPluginManager
-     */
-    public function createService(ServiceLocatorInterface $container, $name = null, $requestedName = null)
-    {
-        return $this($container, $requestedName ?: AdapterPluginManager::class, $this->creationOptions);
-    }
-
-    /**
-     * laminas-servicemanager v2 support for invocation options.
-     *
-     * @param array $options
-     * @return void
-     */
-    public function setCreationOptions(array $options)
-    {
-        $this->creationOptions = $options;
     }
 }
