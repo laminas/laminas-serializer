@@ -48,6 +48,8 @@ use function trim;
 use function unpack;
 
 /**
+ * @deprecated This serializer will get removed in v3.0.0. There is no replacement.
+ *
  * @link       http://www.python.org
  * @link       http://pickle-js.googlecode.com
  * @see        Phython3.1/Lib/pickle.py
