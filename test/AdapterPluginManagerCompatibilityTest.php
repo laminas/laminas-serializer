@@ -14,10 +14,6 @@ use Laminas\ServiceManager\AbstractSingleInstancePluginManager;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\ServiceManager\Test\CommonPluginManagerTrait;
 use PHPUnit\Framework\TestCase;
-use ReflectionProperty;
-use Traversable;
-
-use function extension_loaded;
 
 class AdapterPluginManagerCompatibilityTest extends TestCase
 {
@@ -31,43 +27,5 @@ class AdapterPluginManagerCompatibilityTest extends TestCase
     protected function getInstanceOf(): string
     {
         return Adapter\AdapterInterface::class;
-    }
-
-    /**
-     * Overrides CommonPluginManagerTrait::aliasProvider
-     *
-     * Iterates through aliases, and for adapters that require extensions,
-     * tests if the extension is loaded, skipping that alias if not.
-     *
-     * @return Traversable
-     */
-    public static function aliasProvider(): iterable
-    {
-        $pluginManager = self::getPluginManager();
-        $r             = new ReflectionProperty($pluginManager, 'aliases');
-        $r->setAccessible(true);
-        $aliases = $r->getValue($pluginManager);
-
-        foreach ($aliases as $alias => $target) {
-            switch ($target) {
-                case Adapter\IgBinary::class:
-                    if (extension_loaded('igbinary')) {
-                        yield $alias => [$alias, $target];
-                    }
-                    break;
-                case Adapter\MsgPack::class:
-                    if (extension_loaded('msgpack')) {
-                        yield $alias => [$alias, $target];
-                    }
-                    break;
-                case Adapter\Wddx::class:
-                    if (extension_loaded('wddx')) {
-                        yield $alias => [$alias, $target];
-                    }
-                    break;
-                default:
-                    yield $alias => [$alias, $target];
-            }
-        }
     }
 }

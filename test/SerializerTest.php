@@ -12,7 +12,6 @@ use Laminas\Serializer\Adapter;
 use Laminas\Serializer\Adapter\AdapterInterface;
 use Laminas\Serializer\Adapter\Json;
 use Laminas\Serializer\Adapter\PhpSerialize;
-use Laminas\Serializer\Adapter\PythonPickle;
 use Laminas\Serializer\AdapterPluginManager;
 use Laminas\Serializer\Serializer;
 use Laminas\ServiceManager\Exception\ServiceNotFoundException;
@@ -78,11 +77,12 @@ class SerializerTest extends TestCase
 
     public function testFactoryPassesAdapterOptions()
     {
-        $options = new Adapter\PythonPickleOptions(['protocol' => 2]);
-        /** @var Adapter\PythonPickle $adapter  */
-        $adapter = Serializer::factory('pythonpickle', $options->toArray());
-        $this->assertInstanceOf(PythonPickle::class, $adapter);
-        $this->assertEquals(2, $adapter->getOptions()->getProtocol());
+        $options = new Adapter\JsonOptions();
+        self::assertFalse($options->getCycleCheck());
+        $options = $options->setCycleCheck(true);
+        $adapter = Serializer::factory('json', $options->toArray());
+        self::assertInstanceOf(Json::class, $adapter);
+        self::assertEquals(true, $adapter->getOptions()->getCycleCheck());
     }
 
     public function testSerializeDefaultAdapter()

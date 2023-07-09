@@ -1,7 +1,5 @@
 {
     "extensions": [
-        "bcmath",
-        "igbinary",
-        "msgpack"
+        "igbinary"
     ]
 }
