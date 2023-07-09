@@ -24,6 +24,8 @@ use const PHP_VERSION_ID;
 use const XML_DOCUMENT_TYPE_NODE;
 
 /**
+ * @deprecated This serializer will get removed in v3.0.0. There is no replacement.
+ *
  * @link       http://www.infoloom.com/gcaconfs/WEB/chicago98/simeonov.HTM
  * @link       http://en.wikipedia.org/wiki/WDDX
  */
