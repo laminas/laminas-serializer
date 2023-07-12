@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace LaminasTest\Serializer\Adapter;
 
 use Laminas\Serializer;
+use Laminas\Serializer\Adapter\IgBinary;
 use Laminas\Serializer\Exception\ExtensionNotLoadedException;
 use Laminas\Serializer\Exception\RuntimeException;
 use PHPUnit\Framework\TestCase;
@@ -17,10 +18,7 @@ use stdClass;
 use function extension_loaded;
 use function igbinary_serialize;
 
-/**
- * @group      Laminas_Serializer
- * @covers \Laminas\Serializer\Adapter\IgBinary
- */
+#[CoversClass(IgBinary::class)]
 class IgBinaryTest extends TestCase
 {
     /** @var Serializer\Adapter\IgBinary */

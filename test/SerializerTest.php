@@ -18,10 +18,7 @@ use Laminas\ServiceManager\Exception\ServiceNotFoundException;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
-/**
- * @group  Laminas_Serializer
- * @covers \Laminas\Serializer\Serializer
- */
+#[CoversClass(Serializer::class)]
 class SerializerTest extends TestCase
 {
     protected function tearDown(): void

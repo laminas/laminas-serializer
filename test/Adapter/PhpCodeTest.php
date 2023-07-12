@@ -9,14 +9,14 @@ declare(strict_types=1);
 namespace LaminasTest\Serializer\Adapter;
 
 use Laminas\Serializer;
+use Laminas\Serializer\Adapter\PhpCode;
 use LaminasTest\Serializer\TestAsset\Dummy;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function var_export;
 
-/**
- * @covers \Laminas\Serializer\Adapter\PhpCode
- */
+#[CoversClass(PhpCode::class)]
 class PhpCodeTest extends TestCase
 {
     /** @var Serializer\Adapter\PhpCode */
@@ -39,29 +39,28 @@ class PhpCodeTest extends TestCase
     }
 
     /* TODO: PHP Fatal error:  Call to undefined method stdClass::__set_state()
-        public function testUnserializeObject()
-        {
-            $value    = "stdClass::__set_state(array(\n))";
-            $expected = new stdClass();
+            public function testUnserializeObject()
+            {
+                $value    = "stdClass::__set_state(array(\n))";
+                $expected = new stdClass();
 
-            $data = $this->adapter->unserialize($value);
-            $this->assertEquals($expected, $data);
-        }
-    */
-
+                $data = $this->adapter->unserialize($value);
+                $this->assertEquals($expected, $data);
+            }
+        */
     /**
-     * @dataProvider serializedValuesProvider
      * @param mixed $unserialized
      */
+    #[DataProvider('serializedValuesProvider')]
     public function testSerialize($unserialized, string $serialized): void
     {
         $this->assertEquals($serialized, $this->adapter->serialize($unserialized));
     }
 
     /**
-     * @dataProvider serializedValuesProvider
      * @param mixed $unserialized
      */
+    #[DataProvider('serializedValuesProvider')]
     public function testUnserialize($unserialized, string $serialized): void
     {
         $this->assertEquals($unserialized, $this->adapter->unserialize($serialized));
@@ -70,7 +69,7 @@ class PhpCodeTest extends TestCase
     /**
      * @return array<string, array<int, string|mixed>>
      */
-    public function serializedValuesProvider(): array
+    public static function serializedValuesProvider(): array
     {
         return [
             // Description => [unserialized, serialized]
