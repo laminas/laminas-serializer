@@ -37,7 +37,7 @@
         "laminas/laminas-stdlib": "^3.2"
     },
     "require-dev": {
-        "laminas/laminas-coding-standard": "~2.4.0",
+        "laminas/laminas-coding-standard": "~2.5.0",
         "phpunit/phpunit": "^10.2.4"
     },
     "autoload": {
