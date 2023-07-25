@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @see https://github.com/laminas/laminas-serializer for the canonical source repository
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Serializer;
@@ -15,6 +11,7 @@ use Laminas\Serializer\Adapter\PhpSerialize;
 use Laminas\Serializer\AdapterPluginManager;
 use Laminas\Serializer\Serializer;
 use Laminas\ServiceManager\Exception\ServiceNotFoundException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
