@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @see https://github.com/laminas/laminas-serializer for the canonical source repository
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Serializer;
@@ -13,6 +9,7 @@ use Laminas\Serializer\AdapterPluginManager;
 use Laminas\Serializer\AdapterPluginManagerFactory;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\ServiceManager;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
@@ -37,9 +34,7 @@ class AdapterPluginManagerFactoryTest extends TestCase
         $this->assertEquals($container, $creationContextProperty->getValue($internalContainer));
     }
 
-    /**
-     * @depends testFactoryReturnsPluginManager
-     */
+    #[Depends('testFactoryReturnsPluginManager')]
     public function testFactoryConfiguresPluginManagerUnderContainerInterop(): void
     {
         $container  = $this->createMock(ContainerInterface::class);

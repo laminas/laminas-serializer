@@ -1,23 +1,19 @@
 <?php
 
-/**
- * @see https://github.com/laminas/laminas-serializer for the canonical source repository
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Serializer\Adapter;
 
 use Laminas\Serializer;
+use Laminas\Serializer\Adapter\PhpSerialize;
 use Laminas\Serializer\Exception\RuntimeException;
 use My\Dummy;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-/**
- * @group  Laminas_Serializer
- * @covers \Laminas\Serializer\Adapter\PhpSerialize
- */
+#[CoversClass(PhpSerialize::class)]
 class PhpSerializeTest extends TestCase
 {
     /** @var Serializer\Adapter\PhpSerialize */
@@ -126,7 +122,7 @@ class PhpSerializeTest extends TestCase
     /**
      * @return array<string, array{0: mixed, 1: string}>
      */
-    public function invalidSerializationTypes(): array
+    public static function invalidSerializationTypes(): array
     {
         return [
             'null'       => [null, 'NULL'],
@@ -142,9 +138,9 @@ class PhpSerializeTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidSerializationTypes
      * @param mixed $value
      */
+    #[DataProvider('invalidSerializationTypes')]
     public function testUnserializingNoStringRaisesException($value, string $expected): void
     {
         $this->expectException(RuntimeException::class);
@@ -155,7 +151,7 @@ class PhpSerializeTest extends TestCase
     /**
      * @return array<string, array<int, string>>
      */
-    public function invalidStrings(): array
+    public static function invalidStrings(): array
     {
         return [
             'not-serialized'        => ['foobar', 'foobar'],
@@ -163,9 +159,7 @@ class PhpSerializeTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider invalidStrings
-     */
+    #[DataProvider('invalidStrings')]
     public function testUnserializingInvalidStringRaisesException(string $string, string $expected): void
     {
         $this->expectException(Serializer\Exception\RuntimeException::class);

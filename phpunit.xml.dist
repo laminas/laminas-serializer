@@ -8,10 +8,9 @@
             <directory>./test</directory>
         </testsuite>
     </testsuites>
-
-    <coverage includeUncoveredFiles="true">
+    <source>
         <include>
             <directory suffix=".php">./src</directory>
         </include>
-    </coverage>
+    </source>
 </phpunit>

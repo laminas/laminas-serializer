@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @see https://github.com/laminas/laminas-serializer for the canonical source repository
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Serializer\Adapter;
@@ -11,13 +7,11 @@ namespace LaminasTest\Serializer\Adapter;
 use Laminas\Json\Json;
 use Laminas\Serializer;
 use Laminas\Serializer\Exception\RuntimeException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-/**
- * @group      Laminas_Serializer
- * @covers \Laminas\Serializer\Adapter\Json
- */
+#[CoversClass(Serializer\Adapter\Json::class)]
 class JsonTest extends TestCase
 {
     /** @var Serializer\Adapter\Json */

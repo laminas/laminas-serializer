@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <ruleset name="Laminas coding standard">
     <rule ref="./vendor/laminas/laminas-coding-standard/src/LaminasCodingStandard/ruleset.xml"/>
+    <arg value="nps" />
 
     <!-- Paths to check -->
     <file>src</file>
