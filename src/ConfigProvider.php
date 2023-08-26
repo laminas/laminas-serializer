@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Laminas\Serializer;
 
+use Laminas\ServiceManager\ServiceManager;
+
+/**
+ * @psalm-import-type ServiceManagerConfiguration from ServiceManager
+ */
 class ConfigProvider
 {
     /**
@@ -11,7 +16,7 @@ class ConfigProvider
      *
      * @return array
      */
-    public function __invoke()
+    public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencyConfig(),
@@ -21,9 +26,9 @@ class ConfigProvider
     /**
      * Return dependency mappings for this component.
      *
-     * @return array
+     * @return ServiceManagerConfiguration
      */
-    public function getDependencyConfig()
+    public function getDependencyConfig(): array
     {
         return [
             'factories' => [

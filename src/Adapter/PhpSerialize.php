@@ -6,42 +6,29 @@ namespace Laminas\Serializer\Adapter;
 
 use Laminas\Serializer\Exception;
 use Laminas\Stdlib\ErrorHandler;
-use Traversable;
 
-use function gettype;
-use function is_object;
-use function is_string;
 use function preg_match;
 use function serialize;
-use function sprintf;
 use function unserialize;
 
 use const E_NOTICE;
-use const PHP_MAJOR_VERSION;
 
-class PhpSerialize extends AbstractAdapter
+final class PhpSerialize extends AbstractAdapter
 {
     /**
      * Serialized boolean false value
-     *
-     * @var null|string
      */
-    private static $serializedFalse;
+    private static null|string $serializedFalse = null;
 
-    /** @var PhpSerializeOptions */
-    protected $options;
+    /** @var PhpSerializeOptions|null */
+    protected AdapterOptions|null $options = null;
 
-    /**
-     * Constructor
-     *
-     * @param  array|Traversable|PhpSerializeOptions|null $options
-     */
-    public function __construct($options = null)
+    public function __construct(iterable|PhpSerializeOptions|null $options = null)
     {
         // needed to check if a returned false is based on a serialize false
         // or based on failure (igbinary can overwrite [un]serialize functions)
-        if (static::$serializedFalse === null) {
-            static::$serializedFalse = serialize(false);
+        if (self::$serializedFalse === null) {
+            self::$serializedFalse = serialize(false);
         }
 
         parent::__construct($options);
@@ -50,25 +37,21 @@ class PhpSerialize extends AbstractAdapter
     /**
      * Set options
      *
-     * @param  array|Traversable|PhpSerializeOptions $options
-     * @return PhpSerialize
+     * @param iterable|PhpSerializeOptions $options
      */
-    public function setOptions($options)
+    public function setOptions(iterable|AdapterOptions $options): void
     {
         if (! $options instanceof PhpSerializeOptions) {
             $options = new PhpSerializeOptions($options);
         }
 
         $this->options = $options;
-        return $this;
     }
 
     /**
      * Get options
-     *
-     * @return PhpSerializeOptions
      */
-    public function getOptions()
+    public function getOptions(): PhpSerializeOptions
     {
         if ($this->options === null) {
             $this->options = new PhpSerializeOptions();
@@ -80,11 +63,9 @@ class PhpSerialize extends AbstractAdapter
     /**
      * Serialize using serialize()
      *
-     * @param  mixed $value
-     * @return string
      * @throws Exception\RuntimeException On serialize error.
      */
-    public function serialize($value)
+    public function serialize(mixed $value): string
     {
         ErrorHandler::start();
         $ret = serialize($value);
@@ -100,40 +81,28 @@ class PhpSerialize extends AbstractAdapter
      * Unserialize
      *
      * @todo   Allow integration with unserialize_callback_func
-     * @param  string $serialized
-     * @return mixed
      * @throws Exception\RuntimeException On unserialize error.
      */
-    public function unserialize($serialized)
+    public function unserialize(string $serialized): mixed
     {
-        if (! is_string($serialized) || ! preg_match('/^((s|i|d|b|a|O|C):|N;)/', $serialized)) {
-            $value = $serialized;
-            if (is_object($value)) {
-                $value = $value::class;
-            } elseif (! is_string($value)) {
-                $value = gettype($value);
-            }
-
-            throw new Exception\RuntimeException(sprintf(
-                'Serialized data must be a string containing serialized PHP code; received: %s',
-                $value
-            ));
+        if (! preg_match('/^((s|i|d|b|a|O|C):|N;)/', $serialized)) {
+            throw new Exception\RuntimeException(
+                'Serialized data must be a string containing serialized PHP code; received a string with incompatible'
+                . ' value.',
+            );
         }
 
         // If we have a serialized boolean false value, just return false;
         // prevents the unserialize handler from creating an error.
-        if ($serialized === static::$serializedFalse) {
+        if ($serialized === self::$serializedFalse) {
             return false;
         }
 
         ErrorHandler::start(E_NOTICE);
-
         // The second parameter to unserialize() is only available on PHP 7.0 or higher
-        $ret = PHP_MAJOR_VERSION >= 7
-            ? unserialize($serialized, ['allowed_classes' => $this->getOptions()->getUnserializeClassWhitelist()])
-            : unserialize($serialized);
-
+        $ret = unserialize($serialized, ['allowed_classes' => $this->getOptions()->getUnserializeClassWhitelist()]);
         $err = ErrorHandler::stop();
+
         if ($ret === false) {
             throw new Exception\RuntimeException('Unserialization failed', 0, $err);
         }

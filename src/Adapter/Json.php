@@ -7,35 +7,30 @@ namespace Laminas\Serializer\Adapter;
 use InvalidArgumentException;
 use Laminas\Json\Json as LaminasJson;
 use Laminas\Serializer\Exception;
-use Traversable;
 
-class Json extends AbstractAdapter
+final class Json extends AbstractAdapter
 {
-    /** @var JsonOptions */
-    protected $options;
+    /** @var JsonOptions|null */
+    protected AdapterOptions|null $options = null;
 
     /**
      * Set options
      *
-     * @param array|Traversable|JsonOptions $options
-     * @return Json
+     * @param iterable|JsonOptions $options
      */
-    public function setOptions($options)
+    public function setOptions(iterable|AdapterOptions $options): void
     {
         if (! $options instanceof JsonOptions) {
             $options = new JsonOptions($options);
         }
 
         $this->options = $options;
-        return $this;
     }
 
     /**
      * Get options
-     *
-     * @return JsonOptions
      */
-    public function getOptions()
+    public function getOptions(): JsonOptions
     {
         if ($this->options === null) {
             $this->options = new JsonOptions();
@@ -47,12 +42,10 @@ class Json extends AbstractAdapter
     /**
      * Serialize PHP value to JSON
      *
-     * @param  mixed $value
-     * @return string
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public function serialize($value)
+    public function serialize(mixed $value): string
     {
         $options    = $this->getOptions();
         $cycleCheck = $options->getCycleCheck();
@@ -73,15 +66,13 @@ class Json extends AbstractAdapter
     /**
      * Deserialize JSON to PHP value
      *
-     * @param  string $json
-     * @return mixed
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public function unserialize($json)
+    public function unserialize(string $serialized): mixed
     {
         try {
-            $ret = LaminasJson::decode($json, $this->getOptions()->getObjectDecodeType());
+            $ret = LaminasJson::decode($serialized, $this->getOptions()->getObjectDecodeType());
         } catch (InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException('Unserialization failed: ' . $e->getMessage(), 0, $e);
         } catch (\Exception $e) {

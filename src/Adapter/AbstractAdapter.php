@@ -4,19 +4,11 @@ declare(strict_types=1);
 
 namespace Laminas\Serializer\Adapter;
 
-use Traversable;
-
 abstract class AbstractAdapter implements AdapterInterface
 {
-    /** @var AdapterOptions */
-    protected $options;
+    protected AdapterOptions|null $options = null;
 
-    /**
-     * Constructor
-     *
-     * @param array|Traversable|AdapterOptions $options
-     */
-    public function __construct($options = null)
+    public function __construct(iterable|AdapterOptions|null $options = null)
     {
         if ($options !== null) {
             $this->setOptions($options);
@@ -25,26 +17,20 @@ abstract class AbstractAdapter implements AdapterInterface
 
     /**
      * Set adapter options
-     *
-     * @param array|Traversable|AdapterOptions $options
-     * @return AbstractAdapter
      */
-    public function setOptions($options)
+    public function setOptions(iterable|AdapterOptions $options): void
     {
         if (! $options instanceof AdapterOptions) {
             $options = new AdapterOptions($options);
         }
 
         $this->options = $options;
-        return $this;
     }
 
     /**
      * Get adapter options
-     *
-     * @return AdapterOptions
      */
-    public function getOptions()
+    public function getOptions(): AdapterOptions
     {
         if ($this->options === null) {
             $this->options = new AdapterOptions();

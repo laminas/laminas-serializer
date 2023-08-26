@@ -4,148 +4,143 @@ declare(strict_types=1);
 
 namespace LaminasTest\Serializer\Adapter;
 
-use Laminas\Json\Json;
-use Laminas\Serializer;
+use Laminas\Json\Json as LaminasJson;
+use Laminas\Serializer\Adapter\Json;
+use Laminas\Serializer\Adapter\JsonOptions;
 use Laminas\Serializer\Exception\RuntimeException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-#[CoversClass(Serializer\Adapter\Json::class)]
+#[CoversClass(Json::class)]
 class JsonTest extends TestCase
 {
-    /** @var Serializer\Adapter\Json */
-    private $adapter;
+    private Json $adapter;
 
     protected function setUp(): void
     {
-        $this->adapter = new Serializer\Adapter\Json();
+        $this->adapter = new Json();
     }
 
-    protected function tearDown(): void
+    public function testAdapterAcceptsOptions(): void
     {
-        $this->adapter = null;
-    }
-
-    public function testAdapterAcceptsOptions()
-    {
-        $adapter = new Serializer\Adapter\Json();
-        $options = new Serializer\Adapter\JsonOptions([
+        $adapter = new Json();
+        $options = new JsonOptions([
             'cycle_check'             => true,
             'enable_json_expr_finder' => true,
             'object_decode_type'      => 1,
         ]);
         $adapter->setOptions($options);
 
-        $this->assertEquals(true, $adapter->getOptions()->getCycleCheck());
-        $this->assertEquals(true, $adapter->getOptions()->getEnableJsonExprFinder());
-        $this->assertEquals(1, $adapter->getOptions()->getObjectDecodeType());
+        self::assertEquals(true, $adapter->getOptions()->getCycleCheck());
+        self::assertEquals(true, $adapter->getOptions()->getEnableJsonExprFinder());
+        self::assertEquals(1, $adapter->getOptions()->getObjectDecodeType());
     }
 
-    public function testSerializeString()
+    public function testSerializeString(): void
     {
         $value    = 'test';
         $expected = '"test"';
 
         $data = $this->adapter->serialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
-    public function testSerializeFalse()
+    public function testSerializeFalse(): void
     {
         $value    = false;
         $expected = 'false';
 
         $data = $this->adapter->serialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
-    public function testSerializeNull()
+    public function testSerializeNull(): void
     {
         $value    = null;
         $expected = 'null';
 
         $data = $this->adapter->serialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
-    public function testSerializeNumeric()
+    public function testSerializeNumeric(): void
     {
         $value    = 100;
         $expected = '100';
 
         $data = $this->adapter->serialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
-    public function testSerializeObject()
+    public function testSerializeObject(): void
     {
         $value       = new stdClass();
         $value->test = "test";
         $expected    = '{"test":"test"}';
 
         $data = $this->adapter->serialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
-    public function testUnserializeString()
+    public function testUnserializeString(): void
     {
         $value    = '"test"';
         $expected = 'test';
 
         $data = $this->adapter->unserialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
-    public function testUnserializeFalse()
+    public function testUnserializeFalse(): void
     {
         $value    = 'false';
         $expected = false;
 
         $data = $this->adapter->unserialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
-    public function testUnserializeNull()
+    public function testUnserializeNull(): void
     {
         $value    = 'null';
         $expected = null;
 
         $data = $this->adapter->unserialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
-    public function testUnserializeNumeric()
+    public function testUnserializeNumeric(): void
     {
         $value    = '100';
         $expected = 100;
 
         $data = $this->adapter->unserialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
-    public function testUnserializeAsArray()
+    public function testUnserializeAsArray(): void
     {
         $value    = '{"test":"test"}';
         $expected = ['test' => 'test'];
 
         $data = $this->adapter->unserialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
-    public function testUnserializeAsObject()
+    public function testUnserializeAsObject(): void
     {
         $value          = '{"test":"test"}';
         $expected       = new stdClass();
         $expected->test = 'test';
 
-        $this->adapter->getOptions()->setObjectDecodeType(Json::TYPE_OBJECT);
+        $this->adapter->getOptions()->setObjectDecodeType(LaminasJson::TYPE_OBJECT);
 
         $data = $this->adapter->unserialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
-    public function testUnserialzeInvalid()
+    public function testUnserialzeInvalid(): void
     {
         $value = 'not a serialized string';
         $this->expectException(RuntimeException::class);

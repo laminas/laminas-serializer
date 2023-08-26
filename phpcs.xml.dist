@@ -6,4 +6,8 @@
     <!-- Paths to check -->
     <file>src</file>
     <file>test</file>
+    <rule ref="LaminasCodingStandard">
+        <!-- Typed nullable properties do need null defualt values -->
+        <exclude name="WebimpressCodingStandard.Classes.NoNullValues.Invalid"/>
+    </rule>
 </ruleset>

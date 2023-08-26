@@ -4,116 +4,112 @@ declare(strict_types=1);
 
 namespace Laminas\Serializer;
 
-use Laminas\Serializer\Adapter\AdapterInterface as Adapter;
+use Laminas\Serializer\Adapter\AdapterInterface;
 use Laminas\ServiceManager\ServiceManager;
-use Traversable;
+
+use function is_array;
+use function is_string;
+use function iterator_to_array;
 
 // phpcs:ignore
-abstract class Serializer
+final class Serializer
 {
     /**
      * Plugin manager for loading adapters
-     *
-     * @var null|AdapterPluginManager
      */
-    protected static $adapters;
+    protected static null|AdapterPluginManager $adapters = null;
 
     /**
      * The default adapter.
-     *
-     * @var string|Adapter
      */
-    protected static $defaultAdapter = 'PhpSerialize';
+    protected static string|AdapterInterface $defaultAdapter = 'PhpSerialize';
 
     /**
      * Create a serializer adapter instance.
      *
-     * @param  string|Adapter $adapterName Name of the adapter class
-     * @param array|Traversable|null $adapterOptions Serializer options
-     * @return Adapter
+     * @param  string|AdapterInterface $adapterName Name of the adapter class
+     * @param iterable|null $adapterOptions Serializer options
      */
-    public static function factory($adapterName, $adapterOptions = null)
-    {
-        if ($adapterName instanceof Adapter) {
+    public static function factory(
+        string|AdapterInterface $adapterName,
+        iterable|null $adapterOptions = null
+    ): AdapterInterface {
+        if ($adapterName instanceof AdapterInterface) {
             return $adapterName; // $adapterName is already an adapter object
         }
-        return static::getAdapterPluginManager()->build($adapterName, $adapterOptions);
+
+        if ($adapterOptions !== null && ! is_array($adapterOptions)) {
+            $adapterOptions = iterator_to_array($adapterOptions);
+        }
+
+        return self::getAdapterPluginManager()->build($adapterName, $adapterOptions);
     }
 
     /**
      * Change the adapter plugin manager
-     *
-     * @return void
      */
-    public static function setAdapterPluginManager(AdapterPluginManager $adapters)
+    public static function setAdapterPluginManager(AdapterPluginManager $adapters): void
     {
-        static::$adapters = $adapters;
+        self::$adapters = $adapters;
     }
 
     /**
      * Get the adapter plugin manager
-     *
-     * @return AdapterPluginManager
      */
-    public static function getAdapterPluginManager()
+    public static function getAdapterPluginManager(): AdapterPluginManager
     {
-        if (static::$adapters === null) {
-            static::$adapters = new AdapterPluginManager(new ServiceManager());
+        if (self::$adapters === null) {
+            self::$adapters = new AdapterPluginManager(new ServiceManager());
         }
-        return static::$adapters;
+        return self::$adapters;
     }
 
     /**
      * Resets the internal adapter plugin manager
-     *
-     * @return AdapterPluginManager
      */
-    public static function resetAdapterPluginManager()
+    public static function resetAdapterPluginManager(): AdapterPluginManager
     {
-        static::$adapters = new AdapterPluginManager(new ServiceManager());
-        return static::$adapters;
+        self::$adapters = new AdapterPluginManager(new ServiceManager());
+        return self::$adapters;
     }
 
     /**
      * Change the default adapter.
      *
-     * @param string|Adapter $adapter
-     * @param array|Traversable|null $adapterOptions
+     * @psalm-assert AdapterInterface self::$defaultAdapter
      */
-    public static function setDefaultAdapter($adapter, $adapterOptions = null)
+    public static function setDefaultAdapter(string|AdapterInterface $adapter, iterable|null $adapterOptions = null): void
     {
-        static::$defaultAdapter = static::factory($adapter, $adapterOptions);
+        self::$defaultAdapter = self::factory($adapter, $adapterOptions);
     }
 
     /**
      * Get the default adapter.
-     *
-     * @return Adapter
      */
-    public static function getDefaultAdapter()
+    public static function getDefaultAdapter(): AdapterInterface
     {
-        if (! static::$defaultAdapter instanceof Adapter) {
-            static::setDefaultAdapter(static::$defaultAdapter);
+        if (! self::$defaultAdapter instanceof AdapterInterface) {
+            self::setDefaultAdapter(self::$defaultAdapter);
         }
-        return static::$defaultAdapter;
+        return self::$defaultAdapter;
     }
 
     /**
      * Generates a storable representation of a value using the default adapter.
      * Optionally different adapter could be provided as second argument
      *
-     * @param  mixed $value
-     * @param  string|Adapter $adapter
-     * @param array|Traversable|null $adapterOptions Adapter constructor options
+     * @param iterable|null $adapterOptions Adapter constructor options
      * only used to create adapter instance
-     * @return string
      */
-    public static function serialize($value, $adapter = null, $adapterOptions = null)
-    {
-        if ($adapter !== null) {
-            $adapter = static::factory($adapter, $adapterOptions);
-        } else {
-            $adapter = static::getDefaultAdapter();
+    public static function serialize(
+        mixed $value,
+        string|AdapterInterface|null $adapter = null,
+        iterable|null $adapterOptions = null
+    ): string {
+        $adapter ??= self::getDefaultAdapter();
+
+        if (is_string($adapter)) {
+            $adapter = self::factory($adapter, $adapterOptions);
         }
 
         return $adapter->serialize($value);
@@ -123,18 +119,18 @@ abstract class Serializer
      * Creates a PHP value from a stored representation using the default adapter.
      * Optionally different adapter could be provided as second argument
      *
-     * @param  string $serialized
-     * @param  string|Adapter $adapter
-     * @param array|Traversable|null $adapterOptions Adapter constructor options
+     * @param iterable|null $adapterOptions Adapter constructor options
      * only used to create adapter instance
-     * @return mixed
      */
-    public static function unserialize($serialized, $adapter = null, $adapterOptions = null)
-    {
-        if ($adapter !== null) {
-            $adapter = static::factory($adapter, $adapterOptions);
-        } else {
-            $adapter = static::getDefaultAdapter();
+    public static function unserialize(
+        string $serialized,
+        string|AdapterInterface|null $adapter = null,
+        iterable|null $adapterOptions = null
+    ): mixed {
+        $adapter ??= self::getDefaultAdapter();
+
+        if (is_string($adapter)) {
+            $adapter = self::factory($adapter, $adapterOptions);
         }
 
         return $adapter->unserialize($serialized);

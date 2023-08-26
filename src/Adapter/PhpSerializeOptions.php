@@ -4,11 +4,7 @@ declare(strict_types=1);
 
 namespace Laminas\Serializer\Adapter;
 
-use Laminas\Serializer\Exception;
-
-use const PHP_MAJOR_VERSION;
-
-class PhpSerializeOptions extends AdapterOptions
+final class PhpSerializeOptions extends AdapterOptions
 {
     /**
      * The list of allowed classes for unserialization (PHP 7.0+).
@@ -21,27 +17,20 @@ class PhpSerializeOptions extends AdapterOptions
      *
      * @var string[]|bool
      */
-    protected $unserializeClassWhitelist = true;
+    protected bool|array $unserializeClassWhitelist = true;
 
     /**
      * @param string[]|bool $unserializeClassWhitelist
-     * @return void
      */
-    public function setUnserializeClassWhitelist($unserializeClassWhitelist)
+    public function setUnserializeClassWhitelist(bool|array $unserializeClassWhitelist): void
     {
-        if ($unserializeClassWhitelist !== true && PHP_MAJOR_VERSION < 7) {
-            throw new Exception\InvalidArgumentException(
-                'Class whitelist for unserialize() is only available on PHP versions 7.0 or higher.'
-            );
-        }
-
         $this->unserializeClassWhitelist = $unserializeClassWhitelist;
     }
 
     /**
      * @return string[]|bool
      */
-    public function getUnserializeClassWhitelist()
+    public function getUnserializeClassWhitelist(): bool|array
     {
         return $this->unserializeClassWhitelist;
     }
