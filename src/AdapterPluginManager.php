@@ -23,7 +23,7 @@ use function array_replace_recursive;
  */
 final class AdapterPluginManager extends AbstractSingleInstancePluginManager
 {
-    private const CONFIGURATION  = [
+    private const CONFIGURATION = [
         'aliases'   => [
             'igbinary'     => Adapter\IgBinary::class,
             'igBinary'     => Adapter\IgBinary::class,
@@ -44,13 +44,15 @@ final class AdapterPluginManager extends AbstractSingleInstancePluginManager
             Adapter\PhpSerialize::class => InvokableFactory::class,
         ],
     ];
-    protected string $instanceOf = Adapter\AdapterInterface::class;
 
     /**
      * @param ServiceManagerConfiguration $config
      */
     public function __construct(ContainerInterface $creationContext, array $config = [])
     {
-        parent::__construct($creationContext, array_replace_recursive(self::CONFIGURATION, $config));
+        $this->instanceOf = Adapter\AdapterInterface::class;
+        /** @var ServiceManagerConfiguration $config */
+        $config = array_replace_recursive(self::CONFIGURATION, $config);
+        parent::__construct($creationContext, $config);
     }
 }

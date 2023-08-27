@@ -7,61 +7,46 @@ namespace Laminas\Serializer\Adapter;
 use Laminas\Json\Json as LaminasJson;
 use Laminas\Serializer\Exception;
 
-class JsonOptions extends AdapterOptions
+final class JsonOptions extends AdapterOptions
 {
-    /** @var bool */
-    protected $cycleCheck = false;
+    protected bool $cycleCheck = false;
 
-    /** @var bool */
-    protected $enableJsonExprFinder = false;
+    protected bool $enableJsonExprFinder = false;
 
-    /** @var int */
-    protected $objectDecodeType = LaminasJson::TYPE_ARRAY;
+    /** @var LaminasJson::TYPE_* */
+    protected int $objectDecodeType = LaminasJson::TYPE_ARRAY;
 
-    /**
-     * @param  bool $flag
-     * @return JsonOptions
-     */
-    public function setCycleCheck($flag)
+    public function setCycleCheck(bool $flag): void
     {
-        $this->cycleCheck = (bool) $flag;
-        return $this;
+        $this->cycleCheck = $flag;
     }
 
-    /**
-     * @return bool
-     */
-    public function getCycleCheck()
+    public function getCycleCheck(): bool
     {
         return $this->cycleCheck;
     }
 
-    /**
-     * @param bool $flag
-     * @return JsonOptions
-     */
-    public function setEnableJsonExprFinder($flag)
+    public function setEnableJsonExprFinder(bool $flag): void
     {
-        $this->enableJsonExprFinder = (bool) $flag;
-        return $this;
+        $this->enableJsonExprFinder = $flag;
     }
 
-    /**
-     * @return bool
-     */
-    public function getEnableJsonExprFinder()
+    public function getEnableJsonExprFinder(): bool
     {
         return $this->enableJsonExprFinder;
     }
 
     /**
-     * @param int $type
-     * @return JsonOptions
+     * @param LaminasJson::TYPE_* $type
      * @throws Exception\InvalidArgumentException
      */
-    public function setObjectDecodeType($type)
+    public function setObjectDecodeType(int $type): void
     {
-        $type = (int) $type;
+        /**
+         * @psalm-suppress DocblockTypeContradiction Due to the way how the options for plugins work, i.e. using
+         *                                        {@see AbstractOptions::setFromArray()}, having an additional check
+         *                                        here can provide more detailed errors.
+         */
         if ($type !== LaminasJson::TYPE_ARRAY && $type !== LaminasJson::TYPE_OBJECT) {
             throw new Exception\InvalidArgumentException(
                 'Unknown decode type: ' . $type
@@ -69,14 +54,12 @@ class JsonOptions extends AdapterOptions
         }
 
         $this->objectDecodeType = $type;
-
-        return $this;
     }
 
     /**
-     * @return int
+     * @return LaminasJson::TYPE_*
      */
-    public function getObjectDecodeType()
+    public function getObjectDecodeType(): int
     {
         return $this->objectDecodeType;
     }

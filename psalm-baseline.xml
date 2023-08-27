@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
+  <file src="src/Adapter/Json.php">
+    <MoreSpecificImplementedParamType>
+      <code>$options</code>
+    </MoreSpecificImplementedParamType>
+    <NonInvariantDocblockPropertyType>
+      <code>$options</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
+  <file src="src/Adapter/JsonOptions.php">
+    <PossiblyUnusedMethod>
+      <code>setEnableJsonExprFinder</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Adapter/PhpSerialize.php">
+    <MoreSpecificImplementedParamType>
+      <code>$options</code>
+    </MoreSpecificImplementedParamType>
+    <NonInvariantDocblockPropertyType>
+      <code>$options</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
+  <file src="src/Adapter/PhpSerializeOptions.php">
+    <PossiblyUnusedMethod>
+      <code>setUnserializeClassWhitelist</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/AdapterPluginManagerFactory.php">
+    <ArgumentTypeCoercion>
+      <code>$options ?? []</code>
+    </ArgumentTypeCoercion>
+    <MixedArgument>
+      <code><![CDATA[$config['serializers']]]></code>
+    </MixedArgument>
+  </file>
+  <file src="src/Module.php">
+    <PossiblyUnusedParam>
+      <code>$moduleManager</code>
+    </PossiblyUnusedParam>
+    <UndefinedDocblockClass>
+      <code>ModuleManager</code>
+    </UndefinedDocblockClass>
+    <UnusedClass>
+      <code>Module</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Serializer.php">
+    <MixedInferredReturnType>
+      <code>AdapterInterface</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[self::getAdapterPluginManager()->build($adapterName, $adapterOptions)]]></code>
+      <code><![CDATA[self::getAdapterPluginManager()->build($adapterName, $adapterOptions)]]></code>
+    </MixedReturnStatement>
+    <PossiblyUnusedReturnValue>
+      <code>AdapterPluginManager</code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="test/Adapter/PhpCodeTest.php">
+    <PossiblyUnusedMethod>
+      <code>serializedValuesProvider</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Adapter/PhpSerializeTest.php">
+    <PossiblyUnusedMethod>
+      <code>invalidStrings</code>
+    </PossiblyUnusedMethod>
+  </file>
+</files>

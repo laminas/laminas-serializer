@@ -12,17 +12,15 @@ interface AdapterInterface
      * Generates a storable representation of a value.
      *
      * @param  mixed $value Data to serialize
-     * @return string
      * @throws ExceptionInterface
      */
-    public function serialize($value);
+    public function serialize(mixed $value): string;
 
     /**
      * Creates a PHP value from a stored representation.
      *
      * @param  string $serialized Serialized string
-     * @return mixed
      * @throws ExceptionInterface
      */
-    public function unserialize($serialized);
+    public function unserialize(string $serialized): mixed;
 }

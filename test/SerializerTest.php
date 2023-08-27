@@ -23,92 +23,92 @@ class SerializerTest extends TestCase
         Serializer::resetAdapterPluginManager();
     }
 
-    public function testGetDefaultAdapterPluginManager()
+    public function testGetDefaultAdapterPluginManager(): void
     {
-        $this->assertInstanceOf(AdapterPluginManager::class, Serializer::getAdapterPluginManager());
+        self::assertInstanceOf(AdapterPluginManager::class, Serializer::getAdapterPluginManager());
     }
 
-    public function testChangeAdapterPluginManager()
+    public function testChangeAdapterPluginManager(): void
     {
         $newPluginManager = new AdapterPluginManager(
             $this->getMockBuilder(ContainerInterface::class)->getMock()
         );
         Serializer::setAdapterPluginManager($newPluginManager);
-        $this->assertSame($newPluginManager, Serializer::getAdapterPluginManager());
+        self::assertSame($newPluginManager, Serializer::getAdapterPluginManager());
     }
 
-    public function testDefaultAdapter()
+    public function testDefaultAdapter(): void
     {
         $adapter = Serializer::getDefaultAdapter();
-        $this->assertInstanceOf(AdapterInterface::class, $adapter);
+        self::assertInstanceOf(AdapterInterface::class, $adapter);
     }
 
-    public function testFactoryValidCall()
+    public function testFactoryValidCall(): void
     {
         $serializer = Serializer::factory('PhpSerialize');
-        $this->assertInstanceOf(PhpSerialize::class, $serializer);
+        self::assertInstanceOf(PhpSerialize::class, $serializer);
     }
 
-    public function testFactoryUnknownAdapter()
+    public function testFactoryUnknownAdapter(): void
     {
         $this->expectException(ServiceNotFoundException::class);
         Serializer::factory('unknown');
     }
 
-    public function testChangeDefaultAdapterWithString()
+    public function testChangeDefaultAdapterWithString(): void
     {
         Serializer::setDefaultAdapter('Json');
-        $this->assertInstanceOf(Json::class, Serializer::getDefaultAdapter());
+        self::assertInstanceOf(Json::class, Serializer::getDefaultAdapter());
     }
 
-    public function testChangeDefaultAdapterWithInstance()
+    public function testChangeDefaultAdapterWithInstance(): void
     {
         $newAdapter = new Adapter\PhpSerialize();
 
         Serializer::setDefaultAdapter($newAdapter);
-        $this->assertSame($newAdapter, Serializer::getDefaultAdapter());
+        self::assertSame($newAdapter, Serializer::getDefaultAdapter());
     }
 
-    public function testFactoryPassesAdapterOptions()
+    public function testFactoryPassesAdapterOptions(): void
     {
         $options = new Adapter\JsonOptions();
         self::assertFalse($options->getCycleCheck());
-        $options = $options->setCycleCheck(true);
+        $options->setCycleCheck(true);
         $adapter = Serializer::factory('json', $options->toArray());
         self::assertInstanceOf(Json::class, $adapter);
         self::assertEquals(true, $adapter->getOptions()->getCycleCheck());
     }
 
-    public function testSerializeDefaultAdapter()
+    public function testSerializeDefaultAdapter(): void
     {
         $value    = 'test';
         $adapter  = Serializer::getDefaultAdapter();
         $expected = $adapter->serialize($value);
-        $this->assertEquals($expected, Serializer::serialize($value));
+        self::assertEquals($expected, Serializer::serialize($value));
     }
 
-    public function testSerializeSpecificAdapter()
+    public function testSerializeSpecificAdapter(): void
     {
         $value    = 'test';
         $adapter  = new Adapter\Json();
         $expected = $adapter->serialize($value);
-        $this->assertEquals($expected, Serializer::serialize($value, $adapter));
+        self::assertEquals($expected, Serializer::serialize($value, $adapter));
     }
 
-    public function testUnserializeDefaultAdapter()
+    public function testUnserializeDefaultAdapter(): void
     {
         $value    = 'test';
         $adapter  = Serializer::getDefaultAdapter();
         $value    = $adapter->serialize($value);
         $expected = $adapter->unserialize($value);
-        $this->assertEquals($expected, Serializer::unserialize($value));
+        self::assertEquals($expected, Serializer::unserialize($value));
     }
 
-    public function testUnserializeSpecificAdapter()
+    public function testUnserializeSpecificAdapter(): void
     {
         $adapter  = new Adapter\Json();
         $value    = '"test"';
         $expected = $adapter->unserialize($value);
-        $this->assertEquals($expected, Serializer::unserialize($value, $adapter));
+        self::assertEquals($expected, Serializer::unserialize($value, $adapter));
     }
 }

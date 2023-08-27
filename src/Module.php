@@ -13,7 +13,7 @@ class Module
      *
      * @return array{service_manager: mixed}
      */
-    public function getConfig()
+    public function getConfig(): array
     {
         $provider = new ConfigProvider();
 

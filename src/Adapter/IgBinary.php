@@ -6,22 +6,20 @@ namespace Laminas\Serializer\Adapter;
 
 use Laminas\Serializer\Exception;
 use Laminas\Stdlib\ErrorHandler;
-use Traversable;
 
 use function extension_loaded;
 use function igbinary_serialize;
 use function igbinary_unserialize;
 
-class IgBinary extends AbstractAdapter
+final class IgBinary extends AbstractAdapter
 {
-    /** @var string Serialized null value */
-    private static $serializedNull;
+    /** @var string|null Serialized null value */
+    private static string|null $serializedNull = null;
 
     /**
      * @throws Exception\ExtensionNotLoadedException If igbinary extension is not present.
-     * @param array|Traversable|AdapterOptions $options
      */
-    public function __construct($options = null)
+    public function __construct()
     {
         if (! extension_loaded('igbinary')) {
             throw new Exception\ExtensionNotLoadedException(
@@ -29,21 +27,19 @@ class IgBinary extends AbstractAdapter
             );
         }
 
-        if (static::$serializedNull === null) {
-            static::$serializedNull = igbinary_serialize(null);
+        if (self::$serializedNull === null) {
+            self::$serializedNull = igbinary_serialize(null);
         }
 
-        parent::__construct($options);
+        parent::__construct(null);
     }
 
     /**
      * Serialize PHP value to igbinary
      *
-     * @param  mixed $value
-     * @return string
      * @throws Exception\RuntimeException On igbinary error.
      */
-    public function serialize($value)
+    public function serialize(mixed $value): string
     {
         ErrorHandler::start();
         $ret = igbinary_serialize($value);
@@ -59,14 +55,12 @@ class IgBinary extends AbstractAdapter
     /**
      * Deserialize igbinary string to PHP value
      *
-     * @param  string $serialized
-     * @return mixed
      * @throws Exception\RuntimeException On igbinary error.
      */
-    public function unserialize($serialized)
+    public function unserialize(string $serialized): mixed
     {
-        if ($serialized === static::$serializedNull) {
-            return;
+        if ($serialized === self::$serializedNull) {
+            return null;
         }
 
         ErrorHandler::start();

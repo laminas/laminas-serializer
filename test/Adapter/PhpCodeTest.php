@@ -7,6 +7,7 @@ namespace LaminasTest\Serializer\Adapter;
 use Laminas\Serializer;
 use Laminas\Serializer\Adapter\PhpCode;
 use LaminasTest\Serializer\TestAsset\Dummy;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -31,39 +32,23 @@ class PhpCodeTest extends TestCase
         $object = new Dummy();
         $data   = $this->adapter->serialize($object);
 
-        $this->assertEquals(var_export($object, true), $data);
+        self::assertEquals(var_export($object, true), $data);
     }
 
-    /* TODO: PHP Fatal error:  Call to undefined method stdClass::__set_state()
-            public function testUnserializeObject()
-            {
-                $value    = "stdClass::__set_state(array(\n))";
-                $expected = new stdClass();
-
-                $data = $this->adapter->unserialize($value);
-                $this->assertEquals($expected, $data);
-            }
-        */
-    /**
-     * @param mixed $unserialized
-     */
     #[DataProvider('serializedValuesProvider')]
-    public function testSerialize($unserialized, string $serialized): void
+    public function testSerialize(mixed $unserialized, string $serialized): void
     {
-        $this->assertEquals($serialized, $this->adapter->serialize($unserialized));
+        self::assertEquals($serialized, $this->adapter->serialize($unserialized));
     }
 
-    /**
-     * @param mixed $unserialized
-     */
     #[DataProvider('serializedValuesProvider')]
-    public function testUnserialize($unserialized, string $serialized): void
+    public function testUnserialize(mixed $unserialized, string $serialized): void
     {
-        $this->assertEquals($unserialized, $this->adapter->unserialize($serialized));
+        self::assertEquals($unserialized, $this->adapter->unserialize($serialized));
     }
 
     /**
-     * @return array<string, array<int, string|mixed>>
+     * @return array<non-empty-string, array{mixed,string}>
      */
     public static function serializedValuesProvider(): array
     {

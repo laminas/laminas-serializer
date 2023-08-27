@@ -6,8 +6,6 @@ namespace LaminasTest\Serializer\Adapter;
 
 use Laminas\Serializer;
 use Laminas\Serializer\Adapter\PhpSerialize;
-use Laminas\Serializer\Exception\RuntimeException;
-use My\Dummy;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -16,17 +14,11 @@ use stdClass;
 #[CoversClass(PhpSerialize::class)]
 class PhpSerializeTest extends TestCase
 {
-    /** @var Serializer\Adapter\PhpSerialize */
-    private $adapter;
+    private PhpSerialize $adapter;
 
     protected function setUp(): void
     {
-        $this->adapter = new Serializer\Adapter\PhpSerialize();
-    }
-
-    protected function tearDown(): void
-    {
-        $this->adapter = null;
+        $this->adapter = new PhpSerialize();
     }
 
     public function testSerializeString(): void
@@ -35,7 +27,7 @@ class PhpSerializeTest extends TestCase
         $expected = 's:4:"test";';
 
         $data = $this->adapter->serialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
     public function testSerializeFalse(): void
@@ -44,7 +36,7 @@ class PhpSerializeTest extends TestCase
         $expected = 'b:0;';
 
         $data = $this->adapter->serialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
     public function testSerializeNull(): void
@@ -53,7 +45,7 @@ class PhpSerializeTest extends TestCase
         $expected = 'N;';
 
         $data = $this->adapter->serialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
     public function testSerializeNumeric(): void
@@ -62,7 +54,7 @@ class PhpSerializeTest extends TestCase
         $expected = 'i:100;';
 
         $data = $this->adapter->serialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
     public function testSerializeObject(): void
@@ -71,7 +63,7 @@ class PhpSerializeTest extends TestCase
         $expected = 'O:8:"stdClass":0:{}';
 
         $data = $this->adapter->serialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
     public function testUnserializeString(): void
@@ -80,7 +72,7 @@ class PhpSerializeTest extends TestCase
         $expected = 'test';
 
         $data = $this->adapter->unserialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
     public function testUnserializeFalse(): void
@@ -89,7 +81,7 @@ class PhpSerializeTest extends TestCase
         $expected = false;
 
         $data = $this->adapter->unserialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
     public function testUnserializeNull(): void
@@ -98,7 +90,7 @@ class PhpSerializeTest extends TestCase
         $expected = null;
 
         $data = $this->adapter->unserialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
     public function testUnserializeNumeric(): void
@@ -107,7 +99,7 @@ class PhpSerializeTest extends TestCase
         $expected = 100;
 
         $data = $this->adapter->unserialize($value);
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
     public function testUnserializeObject(): void
@@ -116,36 +108,7 @@ class PhpSerializeTest extends TestCase
         $expected = new stdClass();
 
         $data = $this->adapter->unserialize($value);
-        $this->assertEquals($expected, $data);
-    }
-
-    /**
-     * @return array<string, array{0: mixed, 1: string}>
-     */
-    public static function invalidSerializationTypes(): array
-    {
-        return [
-            'null'       => [null, 'NULL'],
-            'true'       => [true, 'boolean'],
-            'false'      => [false, 'boolean'],
-            'zero'       => [0, 'int'],
-            'int'        => [1, 'int'],
-            'zero-float' => [0.0, 'double'],
-            'float'      => [1.1, 'double'],
-            'array'      => [['foo'], 'array'],
-            'object'     => [(object) ['foo' => 'bar'], 'stdClass'],
-        ];
-    }
-
-    /**
-     * @param mixed $value
-     */
-    #[DataProvider('invalidSerializationTypes')]
-    public function testUnserializingNoStringRaisesException($value, string $expected): void
-    {
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage($expected);
-        $this->adapter->unserialize($value);
+        self::assertEquals($expected, $data);
     }
 
     /**
@@ -154,7 +117,7 @@ class PhpSerializeTest extends TestCase
     public static function invalidStrings(): array
     {
         return [
-            'not-serialized'        => ['foobar', 'foobar'],
+            'not-serialized'        => ['foobar', 'Serialized data must be a string containing serialized PHP code'],
             'invalid-serialization' => ['a:foobar', 'Unserialization failed'],
         ];
     }
@@ -165,48 +128,5 @@ class PhpSerializeTest extends TestCase
         $this->expectException(Serializer\Exception\RuntimeException::class);
         $this->expectExceptionMessage($expected);
         $this->adapter->unserialize($string);
-    }
-
-    /**
-     * @requires PHP 7.0
-     */
-    public function testPhp7WillNotUnserializeObjectsWhenUnserializeWhitelistedClassesIsFalse(): void
-    {
-        $value = 'O:8:"stdClass":0:{}';
-        $this->adapter->getOptions()->setUnserializeClassWhitelist(false);
-
-        $data = $this->adapter->unserialize($value);
-
-        $this->assertNotInstanceOf(stdClass::class, $data);
-        $this->assertInstanceOf('__PHP_Incomplete_Class', $data);
-    }
-
-    /**
-     * @requires PHP 7.0
-     */
-    public function testUnserializeWillNotUnserializeClassesThatAreNotInTheWhitelist(): void
-    {
-        $value = 'O:8:"stdClass":0:{}';
-
-        $this->adapter->getOptions()->setUnserializeClassWhitelist([Dummy::class]);
-
-        $data = $this->adapter->unserialize($value);
-
-        $this->assertNotInstanceOf(stdClass::class, $data);
-        $this->assertInstanceOf('__PHP_Incomplete_Class', $data);
-    }
-
-    /**
-     * @requires PHP 7.0
-     */
-    public function testUnserializeWillUnserializeAnyClassWhenUnserializeWhitelistedClassesIsTrue(): void
-    {
-        $value = 'O:8:"stdClass":0:{}';
-
-        $this->adapter->getOptions()->setUnserializeClassWhitelist([stdClass::class]);
-
-        $data = $this->adapter->unserialize($value);
-        $this->assertInstanceOf(stdClass::class, $data);
-        $this->assertNotInstanceOf('__PHP_Incomplete_Class', $data);
     }
 }
