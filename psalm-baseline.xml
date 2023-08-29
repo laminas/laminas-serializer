@@ -10,6 +10,7 @@
   </file>
   <file src="src/Adapter/JsonOptions.php">
     <PossiblyUnusedMethod>
+      <code>setCycleCheck</code>
       <code>setEnableJsonExprFinder</code>
     </PossiblyUnusedMethod>
   </file>
@@ -44,18 +45,6 @@
     <UnusedClass>
       <code>Module</code>
     </UnusedClass>
-  </file>
-  <file src="src/Serializer.php">
-    <MixedInferredReturnType>
-      <code>AdapterInterface</code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement>
-      <code><![CDATA[self::getAdapterPluginManager()->build($adapterName, $adapterOptions)]]></code>
-      <code><![CDATA[self::getAdapterPluginManager()->build($adapterName, $adapterOptions)]]></code>
-    </MixedReturnStatement>
-    <PossiblyUnusedReturnValue>
-      <code>AdapterPluginManager</code>
-    </PossiblyUnusedReturnValue>
   </file>
   <file src="test/Adapter/PhpCodeTest.php">
     <PossiblyUnusedMethod>
