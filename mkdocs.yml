@@ -2,9 +2,10 @@ docs_dir: docs/book
 site_dir: docs/html
 nav:
     - Home: index.md
-    - Introduction: intro.md
-    - Adapters: adapter.md
-    - Plugin Manager: plugin-manager.md
+    - v2:
+        - Introduction: v2/intro.md
+        - Adapters: v2/adapter.md
+        - Plugin Manager: v2/plugin-manager.md
 site_name: laminas-serializer
 site_description: "Serialize and deserialize PHP structures to a variety of representations"
 repo_url: 'https://github.com/laminas/laminas-serializer'
