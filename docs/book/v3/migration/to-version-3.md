@@ -56,7 +56,7 @@ _It is highly recommended to use dependency injection over a registry._
 In case you are using this method within a `laminas-mvc` or `mezzio` project, laminas got your back. You can now retrieve the projects default adapter by using the container: `$container->get(\Laminas\Serializer\Adapter\AdapterInterface::class);`.
 This will always provide an instance of `AdapterInterface` (`PhpSerialize` by-default unless configured otherwise) and therefore provides the same value as `Serializer#getDefaultAdapter`.
 
-Outside of laminas frameworks, you the changes are depending on how the project is interacting with the `Serializer` class.
+Outside of laminas frameworks, the changes are depending on how the project is interacting with the `Serializer` class.
 If your project does not call `Serializer#setDefaultAdapter`, code can be replaced with `new \Laminas\Serializer\Adapter\PhpSerialize()`.
 If you think that is not a good solution, feel free to implement your own registry. Refer to the section above on how to do so.
 

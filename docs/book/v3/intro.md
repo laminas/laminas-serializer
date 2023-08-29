@@ -9,15 +9,25 @@ For more information what a serializer is read the wikipedia page of
 ## Quick Start
 
 Serializing adapters can either be created from the provided
-`Laminas\Serializer\Serializer::factory` method, or by instantiating one of the
+`Laminas\Serializer\AdapterPluginManager#build` method, or by instantiating one of the
 `Laminas\Serializer\Adapter\*` classes.
 
 ```php
 use Laminas\Serializer\Adapter;
+use Laminas\Serializer\AdapterPluginManager;
 use Laminas\Serializer\Exception;
 use Laminas\Serializer\Serializer;
 
+$plugins = new AdapterPluginManager();
+
+// Via plugin manager:
+$serializer = $plugins->build(Adapter\PhpSerialize::class);
+
+// Alternately:
 $serializer = new Adapter\PhpSerialize();
+
+// Now $serializer is an instance of Laminas\Serializer\Adapter\AdapterInterface,
+// specifically Laminas\Serializer\Adapter\PhpSerialize
 
 try {
     $serialized = $serializer->serialize($data);
