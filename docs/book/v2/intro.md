@@ -87,10 +87,10 @@ Each serializer implements the interface `Laminas\Serializer\Adapter\AdapterInte
 
 This interface defines the following methods:
 
-Method signature | Description
----------------- | -----------
-`serialize(mixed $value) : string` | Generates a storable representation of a value.
-`unserialize(string $value) : mixed` | Creates a PHP value from a stored representation.
+| Method signature                     | Description                                       |
+|--------------------------------------|---------------------------------------------------|
+| `serialize(mixed $value) : string`   | Generates a storable representation of a value.   |
+| `unserialize(string $value) : mixed` | Creates a PHP value from a stored representation. |
 
 The base class `Laminas\Serializer\Serializer` is used to instantiate the
 adapters, to configure the factory, and as a proxy for serialization operations.
@@ -102,13 +102,13 @@ classes/interfaces as follows:
 - `AdapterInterface`: `Laminas\Serializer\Adapter\AdapterInterface`
 - `AdapterOptions`: `Laminas\Serializer\Adapter\AdapterOptions`
 
-Method signature | Description
----------------- | -----------
-`factory(/* ... */) : AdapterInterface` | Create a serializer adapter instance. Arguments are: `string|AdapterInterface $adapterName, AdapterOptions|array|Traversable $adapterOptions = null`.
-`setAdapterPluginManager(AdapterPluginManager $adapters) : void` | Change the adapter plugin manager.
-`getAdapterPluginManager() : AdapterPluginManager` | Get the adapter plugin manager.
-`resetAdapterPluginManager() : void` | Resets the internal adapter plugin manager.
-`setDefaultAdapter(string|AdapterInterface $adapter /* ... */) : void` | Change the default adapter. Full argument list: `string|AdapterInterface $adapter, AdapterOptions|array|Traversable $adapterOptions = null`.
-`getDefaultAdapter() : AdapterInterface` | Get the default adapter.
-`serialize(mixed $data /* ... */) : string` | Generates a storable representation of a value using the default adapter. Optionally, provide a  different adapter via the second argument. Full argument list: `mixed $value, string|AdapterInterface $adapter = null, AdapterOptions|array|Traversable $adapterOptions = null`.
-`unserialize(string $value /* ... */) : mixed` | Creates a PHP value from a stored representation using the default adapter. Optionally, provide a different adapter via the second argument. Full argument list: `string $value, string|AdapterInterface|null $adapter = null, AdapterOptions|array|Traversable $adapterOptions = null`
+| Method signature                                                 | Description                                                                                                                                                                             |
+|------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `factory(/* ... */) : AdapterInterface`                          | Create a serializer adapter instance. Arguments are: `string                                                                                                                            |AdapterInterface $adapterName, AdapterOptions|array|Traversable $adapterOptions = null`.
+| `setAdapterPluginManager(AdapterPluginManager $adapters) : void` | Change the adapter plugin manager.                                                                                                                                                      |
+| `getAdapterPluginManager() : AdapterPluginManager`               | Get the adapter plugin manager.                                                                                                                                                         |
+| `resetAdapterPluginManager() : void`                             | Resets the internal adapter plugin manager.                                                                                                                                             |
+| `setDefaultAdapter(string                                        | AdapterInterface $adapter /* ... */) : void`                                                                                                                                            | Change the default adapter. Full argument list: `string|AdapterInterface $adapter, AdapterOptions|array|Traversable $adapterOptions = null`.
+| `getDefaultAdapter() : AdapterInterface`                         | Get the default adapter.                                                                                                                                                                |
+| `serialize(mixed $data /* ... */) : string`                      | Generates a storable representation of a value using the default adapter. Optionally, provide a  different adapter via the second argument. Full argument list: `mixed $value, string   |AdapterInterface $adapter = null, AdapterOptions|array|Traversable $adapterOptions = null`.
+| `unserialize(string $value /* ... */) : mixed`                   | Creates a PHP value from a stored representation using the default adapter. Optionally, provide a different adapter via the second argument. Full argument list: `string $value, string |AdapterInterface|null $adapter = null, AdapterOptions|array|Traversable $adapterOptions = null`
