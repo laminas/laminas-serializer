@@ -12,6 +12,9 @@ use Laminas\Serializer\Adapter\AdapterInterface as Adapter;
 use Laminas\ServiceManager\ServiceManager;
 use Traversable;
 
+/**
+ * @deprecated This class will be removed with v3.0.0. Please migrate your code according to the migration guide.
+ */
 // phpcs:ignore
 abstract class Serializer
 {

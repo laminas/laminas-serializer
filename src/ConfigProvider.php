@@ -8,6 +8,9 @@ declare(strict_types=1);
 
 namespace Laminas\Serializer;
 
+use Laminas\Serializer\Adapter\AdapterInterface;
+use Laminas\Serializer\Adapter\PhpSerialize;
+
 class ConfigProvider
 {
     /**
@@ -34,6 +37,7 @@ class ConfigProvider
             'aliases'   => [],
             'factories' => [
                 'SerializerAdapterManager' => AdapterPluginManagerFactory::class,
+                AdapterInterface::class    => new GenericSerializerFactory(PhpSerialize::class),
             ],
         ];
     }
