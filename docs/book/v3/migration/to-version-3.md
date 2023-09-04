@@ -2,6 +2,7 @@
 
 Upgrading `laminas-serializer` will require some code changes, depending on how the serializers were used.
 
+## Breaking Changes
 
 ### Static Methods in `Serializer` Implementation
 
@@ -135,8 +136,20 @@ function myfunction(string|AdapterInterface $adapterAliasOrClassStringOrInstance
 }
 ```
 
+### Niche Serializer Implementations
+
+With v3, some of the more niche serializer implementations were removed.
+
+- MsgPack
+- PythonPickle
+- Wddx
+
+All of these serializers were already deprecated in v2.15.0. For a more detailed reasoning on why these were removed please refer to the [RFC](https://github.com/laminas/laminas-serializer/issues/21).
+In case your project is still depending on these implementations, feel free to copy the adapter source from latest 2.x and adapt the required type-additions to comply with v3.0+.
+
 ## Checklist
 
 1. `laminas-serializer` is updated to the latest version from within `2.x`
 2. Search your code for the usage of `Laminas\Serializer\Serializer`, if this class is in-use, please refer to its [dedicated migration section](#static-methods-in-serializer-implementation)
 3. If your project provides an implementation of `AdapterInterface` or `AbstractAdapter`, please migrate your code to comply with the latest type-additions
+4. Check if your project is using one of the [niche serializer implementations](#niche-serializer-implementations) which were removed with this release
