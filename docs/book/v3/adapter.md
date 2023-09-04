@@ -18,9 +18,9 @@ functions, and is a good default adapter choice.
 
 Available options include:
 
-Option                      | Data Type         | Default Value | Description
---------------------------- | ----------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------
-unserialize_class_whitelist | `array` or `bool` | `true`        | The allowed classes for unserialize(), see [unserialize()](http://php.net/unserialize) for more information. Only available on PHP 7.0 or higher.
+| Option                      | Data Type         | Default Value | Description                                                                                                                                       |
+|-----------------------------|-------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| unserialize_class_whitelist | `array` or `bool` | `true`        | The allowed classes for unserialize(), see [unserialize()](http://php.net/unserialize) for more information. Only available on PHP 7.0 or higher. |
 
 ## The IgBinary Adapter
 
@@ -43,11 +43,11 @@ The [JSON](http://wikipedia.org/wiki/JavaScript_Object_Notation) adapter provide
 
 Available options include:
 
-Option                    | Data Type                | Default Value
-------------------------- | ------------------------ | -------------
-`cycle_check`             | `boolean`                | `false`
-`object_decode_type`      | `Laminas\Json\Json::TYPE_*` | `Laminas\Json\Json::TYPE_ARRAY`
-`enable_json_expr_finder` | `boolean`                | `false`
+| Option                    | Data Type                   | Default Value                   |
+|---------------------------|-----------------------------|---------------------------------|
+| `cycle_check`             | `boolean`                   | `false`                         |
+| `object_decode_type`      | `Laminas\Json\Json::TYPE_*` | `Laminas\Json\Json::TYPE_ARRAY` |
+| `enable_json_expr_finder` | `boolean`                   | `false`                         |
 
 ## The PhpCode Adapter
 
