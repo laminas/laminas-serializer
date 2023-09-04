@@ -13,10 +13,10 @@
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-serializer">
 
-    
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-serializer/v3/plugin-manager/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>laminas-serializer - Laminas Docs</title>
+    <title>Plugin Manager - laminas-serializer - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -122,7 +122,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../.">laminas-serializer</a>
+            <a href="../..">laminas-serializer</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -142,19 +142,19 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v3/intro/" class="subnavigation__link">Introduction</a>
+        <a href="../intro/" class="subnavigation__link">Introduction</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v3/adapter/" class="subnavigation__link">Adapters</a>
+        <a href="../adapter/" class="subnavigation__link">Adapters</a>
     </li>
 
                                     
                                         
-    <li class="subnavigation__list-item ">
-        <a href="../v3/plugin-manager/" class="subnavigation__link">Plugin Manager</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Plugin Manager</a>
     </li>
 
                                     
@@ -165,7 +165,7 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../v3/migration/to-version-3/" class="subnavigation__link">Migration to Version 3.0</a>
+        <a href="../migration/to-version-3/" class="subnavigation__link">Migration to Version 3.0</a>
     </li>
 
             
@@ -192,19 +192,19 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v2/intro/" class="subnavigation__link">Introduction</a>
+        <a href="../../v2/intro/" class="subnavigation__link">Introduction</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v2/adapter/" class="subnavigation__link">Adapters</a>
+        <a href="../../v2/adapter/" class="subnavigation__link">Adapters</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v2/plugin-manager/" class="subnavigation__link">Plugin Manager</a>
+        <a href="../../v2/plugin-manager/" class="subnavigation__link">Plugin Manager</a>
     </li>
 
                                     
@@ -275,21 +275,115 @@
                 
                 
                     
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#factory" class="toc__link nav-link">Factory</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
                 
 
                 
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/">Overview</a></li>
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
 
-<h1 class="content__title">404</h1>
-<blockquote>
-    <h3>Something went wrong!</h3>
-    <p>
-        We're sorry, but the page you are looking for does not exist.
-    </p>
-</blockquote>
+            
+                <li class="breadcrumb-item"><a href="../..">laminas-serializer</a></li>
 
-<a href="../." class="btn btn-default" role="button">Go to homepage</a>
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">v3</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Plugin Manager</li>
+            
+        
+    </ol>
+</nav>
 
 
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">v3</h2>
+    
+
+    <h1 id="plugin-manager">Plugin Manager</h1>
+<p>The <code>AdapterPluginManager</code> extends the laminas-servicemanager <code>AbstractPluginManager</code>, and has the following behaviors:</p>
+<ul>
+<li>It will only return <code>Laminas\Serializer\Adapter\AdapterInterface</code> instances.</li>
+<li><strong>Since 2.10.0</strong>: It defines short-name aliases for all shipped serializers (the class name minus the namespace), in a variety of casing combinations.</li>
+<li>All services are shared by default; a new instance will only be created once and shared each time you call <code>get()</code>.</li>
+</ul>
+<h2 id="factory">Factory</h2>
+<p><code>Laminas\Serializer\AdapterPluginManager</code> is mapped to the factory.
+<code>Laminas\Serializer\AdapterPluginManagerFactory</code> when wired to the dependency injection container.</p>
+<p>The factory will be automatically registered when loading/installing the <code>Laminas\Serializer</code> module in <code>laminas-mvc</code> and/or loading/installing the <code>ConfigProvider</code> into a Mezzio application.</p>
+<p>Since version 2.10.0, the factory will look for the <code>config</code> service, and use the <code>serializers</code> configuration key to seed it with additional services.
+This configuration key should map to an array that follows <a href="https://docs.laminas.dev/laminas-servicemanager/configuring-the-service-manager/">standard laminas-servicemanager configuration</a>.</p>
+<p>To add your own serializer you can add the following configuration:</p>
+<pre class="highlight"><code class="language-php">// config/autoload/serializers.global.php
+return [
+    'serializers' =&gt; [
+        'factories' =&gt; [
+            \App\MyCustomSerializer::class =&gt; \App\Container\MyCustomSerializerFactory::class,
+        ],
+    ],
+];</code></pre>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../adapter/">
+                    <small class="page-nav__label">Previous</small>
+                    <i class="fa fa-chevron-left"></i>
+                    Adapters
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../migration/to-version-3/">
+                    <small class="page-nav__label">Next</small>
+                    Migration to Version 3.0
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+                
             </div>
             <div class="col-md-3 col-sm-12 sidebar">
                 <div class="donation-banner">
@@ -312,7 +406,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../.">laminas-serializer</a>
+            <a href="../..">laminas-serializer</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -332,19 +426,19 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v3/intro/" class="subnavigation__link">Introduction</a>
+        <a href="../intro/" class="subnavigation__link">Introduction</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v3/adapter/" class="subnavigation__link">Adapters</a>
+        <a href="../adapter/" class="subnavigation__link">Adapters</a>
     </li>
 
                                     
                                         
-    <li class="subnavigation__list-item ">
-        <a href="../v3/plugin-manager/" class="subnavigation__link">Plugin Manager</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Plugin Manager</a>
     </li>
 
                                     
@@ -355,7 +449,7 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../v3/migration/to-version-3/" class="subnavigation__link">Migration to Version 3.0</a>
+        <a href="../migration/to-version-3/" class="subnavigation__link">Migration to Version 3.0</a>
     </li>
 
             
@@ -382,19 +476,19 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v2/intro/" class="subnavigation__link">Introduction</a>
+        <a href="../../v2/intro/" class="subnavigation__link">Introduction</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v2/adapter/" class="subnavigation__link">Adapters</a>
+        <a href="../../v2/adapter/" class="subnavigation__link">Adapters</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v2/plugin-manager/" class="subnavigation__link">Plugin Manager</a>
+        <a href="../../v2/plugin-manager/" class="subnavigation__link">Plugin Manager</a>
     </li>
 
                                     
@@ -490,13 +584,13 @@
 </footer>
 
     <script>
-        let base_url = '..',
+        let base_url = '../..',
             project  = "components",
             siteName = 'laminas-serializer';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="../search/main.js"></script>
+        <script src="../../search/main.js"></script>
     
 
     

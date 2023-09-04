@@ -13,10 +13,10 @@
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-serializer">
 
-    
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-serializer/v3/adapter/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>laminas-serializer - Laminas Docs</title>
+    <title>Adapters - laminas-serializer - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -122,7 +122,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../.">laminas-serializer</a>
+            <a href="../..">laminas-serializer</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -142,19 +142,19 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v3/intro/" class="subnavigation__link">Introduction</a>
+        <a href="../intro/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Adapters</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v3/adapter/" class="subnavigation__link">Adapters</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../v3/plugin-manager/" class="subnavigation__link">Plugin Manager</a>
+        <a href="../plugin-manager/" class="subnavigation__link">Plugin Manager</a>
     </li>
 
                                     
@@ -165,7 +165,7 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../v3/migration/to-version-3/" class="subnavigation__link">Migration to Version 3.0</a>
+        <a href="../migration/to-version-3/" class="subnavigation__link">Migration to Version 3.0</a>
     </li>
 
             
@@ -192,19 +192,19 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v2/intro/" class="subnavigation__link">Introduction</a>
+        <a href="../../v2/intro/" class="subnavigation__link">Introduction</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v2/adapter/" class="subnavigation__link">Adapters</a>
+        <a href="../../v2/adapter/" class="subnavigation__link">Adapters</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v2/plugin-manager/" class="subnavigation__link">Plugin Manager</a>
+        <a href="../../v2/plugin-manager/" class="subnavigation__link">Plugin Manager</a>
     </li>
 
                                     
@@ -275,21 +275,193 @@
                 
                 
                     
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
                 
+                    <li class="toc__entry">
+                        <a href="#the-phpserialize-adapter" class="toc__link nav-link">The PhpSerialize Adapter</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#the-igbinary-adapter" class="toc__link nav-link">The IgBinary Adapter</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#the-json-adapter" class="toc__link nav-link">The Json Adapter</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#the-phpcode-adapter" class="toc__link nav-link">The PhpCode Adapter</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
 
                 
 
-<h1 class="content__title">404</h1>
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/">Overview</a></li>
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="../..">laminas-serializer</a></li>
+
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">v3</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Adapters</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">v3</h2>
+    
+
+    <h1 id="adapters">Adapters</h1>
+<p>laminas-serializer adapters handle serialization to and deserialization from
+specific representations.</p>
+<p>Each adapter has its own strengths. In some cases, not every PHP datatype (e.g.,
+objects) can be converted to a string representation. In most such cases, the
+type will be converted to a similar type that is serializable.</p>
+<p>As an example, PHP objects will often be cast to arrays. If this fails, a
+<code>Laminas\Serializer\Exception\ExceptionInterface</code> will be thrown.</p>
+<h2 id="the-phpserialize-adapter">The PhpSerialize Adapter</h2>
+<p>The <code>Laminas\Serializer\Adapter\PhpSerialize</code> adapter uses the built-in
+<a href="http://php.net/serialize">serialize()</a>/<a href="http://php.net/unserialize">unserialize()</a>
+functions, and is a good default adapter choice.</p>
+<p>Available options include:</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unserialize_class_whitelist</td>
+<td><code>array</code> or <code>bool</code></td>
+<td><code>true</code></td>
+<td>The allowed classes for unserialize(), see <a href="http://php.net/unserialize">unserialize()</a> for more information. Only available on PHP 7.0 or higher.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="the-igbinary-adapter">The IgBinary Adapter</h2>
+<p><a href="http://pecl.php.net/package/igbinary">Igbinary</a> was originally released by
+Sulake Dynamoid Oy and since 2011-03-14 moved to <a href="http://pecl.php.net">PECL</a> and
+maintained by Pierre Joye. It's a drop-in replacement for the standard PHP
+serializer. Instead of using a costly textual representation, igbinary stores
+PHP data structures in a compact binary form. Savings are significant when using
+memcached or similar memory based storages for serialized data.</p>
+<p>You need the igbinary PHP extension installed on your system in order to use
+this adapter.</p>
+<p>There are no configurable options for this adapter.</p>
+<h2 id="the-json-adapter">The Json Adapter</h2>
+<p>The <a href="http://wikipedia.org/wiki/JavaScript_Object_Notation">JSON</a> adapter provides a bridge to the
+<a href="https://docs.laminas.dev/laminas-json">laminas-json</a> component.</p>
+<p>Available options include:</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Data Type</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cycle_check</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>object_decode_type</code></td>
+<td><code>Laminas\Json\Json::TYPE_*</code></td>
+<td><code>Laminas\Json\Json::TYPE_ARRAY</code></td>
+</tr>
+<tr>
+<td><code>enable_json_expr_finder</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="the-phpcode-adapter">The PhpCode Adapter</h2>
+<p>The <code>Laminas\Serializer\Adapter\PhpCode</code> adapter generates a parsable PHP code
+representation using <a href="http://php.net/var_export">var_export()</a>. To restore,
+the data will be executed using <a href="http://php.net/eval">eval</a>.</p>
+<p>There are no configuration options for this adapter.</p>
 <blockquote>
-    <h3>Something went wrong!</h3>
-    <p>
-        We're sorry, but the page you are looking for does not exist.
-    </p>
+<h3 id="warning-unserializing-objects">Warning: Unserializing objects</h3>
+<p>Objects will be serialized using the
+<a href="http://php.net/language.oop5.magic#language.oop5.magic.set-state">__set_state</a> magic
+method. If the class doesn't implement this method, a fatal error will occur
+during execution.</p>
+<h3 id="warning-uses-eval">Warning: Uses eval()</h3>
+<p>The <code>PhpCode</code> adapter utilizes <code>eval()</code> to unserialize. This introduces both a
+performance and potential security issue as a new process will be executed.
+Typically, you should use the <code>PhpSerialize</code> adapter unless you require
+human-readability of the serialized data.</p>
 </blockquote>
 
-<a href="../." class="btn btn-default" role="button">Go to homepage</a>
 
 
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../intro/">
+                    <small class="page-nav__label">Previous</small>
+                    <i class="fa fa-chevron-left"></i>
+                    Introduction
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../plugin-manager/">
+                    <small class="page-nav__label">Next</small>
+                    Plugin Manager
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+                
             </div>
             <div class="col-md-3 col-sm-12 sidebar">
                 <div class="donation-banner">
@@ -312,7 +484,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../.">laminas-serializer</a>
+            <a href="../..">laminas-serializer</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -332,19 +504,19 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v3/intro/" class="subnavigation__link">Introduction</a>
+        <a href="../intro/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Adapters</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v3/adapter/" class="subnavigation__link">Adapters</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../v3/plugin-manager/" class="subnavigation__link">Plugin Manager</a>
+        <a href="../plugin-manager/" class="subnavigation__link">Plugin Manager</a>
     </li>
 
                                     
@@ -355,7 +527,7 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../v3/migration/to-version-3/" class="subnavigation__link">Migration to Version 3.0</a>
+        <a href="../migration/to-version-3/" class="subnavigation__link">Migration to Version 3.0</a>
     </li>
 
             
@@ -382,19 +554,19 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v2/intro/" class="subnavigation__link">Introduction</a>
+        <a href="../../v2/intro/" class="subnavigation__link">Introduction</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v2/adapter/" class="subnavigation__link">Adapters</a>
+        <a href="../../v2/adapter/" class="subnavigation__link">Adapters</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../v2/plugin-manager/" class="subnavigation__link">Plugin Manager</a>
+        <a href="../../v2/plugin-manager/" class="subnavigation__link">Plugin Manager</a>
     </li>
 
                                     
@@ -490,13 +662,13 @@
 </footer>
 
     <script>
-        let base_url = '..',
+        let base_url = '../..',
             project  = "components",
             siteName = 'laminas-serializer';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="../search/main.js"></script>
+        <script src="../../search/main.js"></script>
     
 
     
