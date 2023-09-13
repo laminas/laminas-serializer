@@ -18,7 +18,7 @@ final class ConfigProviderTest extends TestCase
     public function testHasExpectedServiceNames(string $serviceName): void
     {
         $dependencies = (new ConfigProvider())->getDependencyConfig();
-        self::assertArrayHasKey($serviceName, $dependencies['factories']);
+        self::assertArrayHasKey($serviceName, $dependencies['factories'] ?? []);
     }
 
     /**
