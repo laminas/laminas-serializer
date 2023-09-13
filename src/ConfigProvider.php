@@ -34,8 +34,9 @@ class ConfigProvider
     {
         return [
             'factories' => [
-                'SerializerAdapterManager' => AdapterPluginManagerFactory::class,
-                AdapterInterface::class    => new GenericSerializerFactory(PhpSerialize::class),
+                'SerializerAdapterManager'  => AdapterPluginManagerFactory::class,
+                AdapterPluginManager::class => AdapterPluginManagerFactory::class,
+                AdapterInterface::class     => new GenericSerializerFactory(PhpSerialize::class),
             ],
         ];
     }
