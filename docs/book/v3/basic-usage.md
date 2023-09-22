@@ -1,4 +1,4 @@
-## Quick Start
+# Basic Usage
 
 Serializing adapters can either be created from the provided
 `Laminas\Serializer\AdapterPluginManager#build` method, or by instantiating one of the
@@ -38,7 +38,7 @@ serialized data, call the method `AdapterInterface#unserialize`.
 Any time an error is encountered serializing or unserializing, the adapter will
 throw a `Laminas\Serializer\Exception\ExceptionInterface`.
 
-## Basic Configuration Options
+## Configuration Options
 
 To configure a serializer adapter, you can optionally use an instance of
 `Laminas\Serializer\Adapter\AdapterOptions`, an instance of one of the adapter

@@ -5,7 +5,7 @@ nav:
     - v3:
       - Introduction: v3/intro.md
       - Installation: v3/installation.md
-      - "Quick Start": v3/quick-start.md
+      - "Basic Usage": v3/basic-usage.md
       - Adapters: v3/adapter.md
       - "Plugin Manager": v3/plugin-manager.md
       - "Migration Guide":
