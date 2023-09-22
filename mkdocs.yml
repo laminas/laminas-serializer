@@ -26,3 +26,9 @@ extra:
     installation:
       config_provider_class: 'Laminas\Serializer\ConfigProvider'
       module_class: 'Laminas\Serializer\Module'
+plugins:
+  - redirects:
+        redirect_maps:
+            intro.md: v3/intro.md
+            adapter.md: v3/adapter.md
+            plugin-manager.md: v3/plugin-manager.md
