@@ -13,19 +13,19 @@ As an example, PHP objects will often be cast to arrays. If this fails, a
 ## The PhpSerialize Adapter
 
 The `Laminas\Serializer\Adapter\PhpSerialize` adapter uses the built-in
-[serialize()](http://php.net/serialize)/[unserialize()](http://php.net/unserialize)
+[serialize()](https://php.net/serialize)/[unserialize()](https://php.net/unserialize)
 functions, and is a good default adapter choice.
 
 Available options include:
 
-| Option                      | Data Type         | Default Value | Description                                                                                                                                       |
-|-----------------------------|-------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| unserialize_class_whitelist | `array` or `bool` | `true`        | The allowed classes for unserialize(), see [unserialize()](http://php.net/unserialize) for more information. Only available on PHP 7.0 or higher. |
+| Option                      | Data Type         | Default Value | Description                                                                                                                                        |
+|-----------------------------|-------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| unserialize_class_whitelist | `array` or `bool` | `true`        | The allowed classes for unserialize(), see [unserialize()](https://php.net/unserialize) for more information. Only available on PHP 7.0 or higher. |
 
 ## The IgBinary Adapter
 
-[Igbinary](http://pecl.php.net/package/igbinary) was originally released by
-Sulake Dynamoid Oy and since 2011-03-14 moved to [PECL](http://pecl.php.net) and
+[Igbinary](htts://pecl.php.net/package/igbinary) was originally released by
+Sulake Dynamoid Oy and since 2011-03-14 moved to [PECL](https://pecl.php.net) and
 maintained by Pierre Joye. It's a drop-in replacement for the standard PHP
 serializer. Instead of using a costly textual representation, igbinary stores
 PHP data structures in a compact binary form. Savings are significant when using
@@ -38,7 +38,7 @@ There are no configurable options for this adapter.
 
 ## The Json Adapter
 
-The [JSON](http://wikipedia.org/wiki/JavaScript_Object_Notation) adapter provides a bridge to the
+The [JSON](https://wikipedia.org/wiki/JavaScript_Object_Notation) adapter provides a bridge to the
 [laminas-json](https://docs.laminas.dev/laminas-json) component.
 
 Available options include:
@@ -52,13 +52,13 @@ Available options include:
 ## The PhpCode Adapter
 
 The `Laminas\Serializer\Adapter\PhpCode` adapter generates a parsable PHP code
-representation using [var_export()](http://php.net/var_export). To restore,
-the data will be executed using [eval](http://php.net/eval).
+representation using [var_export()](https://php.net/var_export). To restore,
+the data will be executed using [eval](https://php.net/eval).
 
 There are no configuration options for this adapter.
 
 WARNING: **Unserializing Objects**
-Objects will be serialized using the [__set_state](http://php.net/language.oop5.magic#language.oop5.magic.set-state) magic method.
+Objects will be serialized using the [__set_state](https://php.net/language.oop5.magic#language.oop5.magic.set-state) magic method.
 If the class doesn't implement this method, a fatal error will occur during execution.
 
 WARNING: **Uses `eval()`**
