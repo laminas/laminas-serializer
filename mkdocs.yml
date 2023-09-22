@@ -19,7 +19,10 @@ site_description: "Serialize and deserialize PHP structures to a variety of repr
 repo_url: 'https://github.com/laminas/laminas-serializer'
 extra:
     project: Components
-
+    current_version: v3
+    versions:
+      - v3
+      - v2
     installation:
       config_provider_class: 'Laminas\Serializer\ConfigProvider'
       module_class: 'Laminas\Serializer\Module'
