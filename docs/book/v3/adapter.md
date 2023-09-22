@@ -57,16 +57,10 @@ the data will be executed using [eval](http://php.net/eval).
 
 There are no configuration options for this adapter.
 
-> ### Warning: Unserializing objects
->
-> Objects will be serialized using the
-> [__set_state](http://php.net/language.oop5.magic#language.oop5.magic.set-state) magic
-> method. If the class doesn't implement this method, a fatal error will occur
-> during execution.
+WARNING: **Unserializing Objects**
+Objects will be serialized using the [__set_state](http://php.net/language.oop5.magic#language.oop5.magic.set-state) magic method.
+If the class doesn't implement this method, a fatal error will occur during execution.
 
-> ### Warning: Uses eval()
->
-> The `PhpCode` adapter utilizes `eval()` to unserialize. This introduces both a
-> performance and potential security issue as a new process will be executed.
-> Typically, you should use the `PhpSerialize` adapter unless you require
-> human-readability of the serialized data.
+WARNING: **Uses `eval()`**
+The `PhpCode` adapter utilizes `eval()` to unserialize. This introduces both a performance and potential security issue as a new process will be executed.
+Typically, you should use the `PhpSerialize` adapter unless you require human-readability of the serialized data.
