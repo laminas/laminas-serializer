@@ -24,7 +24,7 @@ Available options include:
 
 ## The IgBinary Adapter
 
-[Igbinary](htts://pecl.php.net/package/igbinary) was originally released by
+[Igbinary](https://pecl.php.net/package/igbinary) was originally released by
 Sulake Dynamoid Oy and since 2011-03-14 moved to [PECL](https://pecl.php.net) and
 maintained by Pierre Joye. It's a drop-in replacement for the standard PHP
 serializer. Instead of using a costly textual representation, igbinary stores
