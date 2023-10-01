@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Laminas\Serializer\Adapter;
 
-use ErrorException;
 use Laminas\Serializer\Exception;
 use Laminas\Stdlib\ErrorHandler;
 
-use function assert;
 use function error_get_last;
 use function var_export;
 
@@ -39,7 +37,6 @@ final class PhpCode extends AbstractAdapter
         // catch syntax errors, and is intentionally left in place.
         $eval = @eval('$ret=' . $serialized . ';');
         $err  = ErrorHandler::stop();
-        assert($err === null || $err instanceof ErrorException);
 
         if ($eval === false || $err) {
             $msg = 'eval failed';

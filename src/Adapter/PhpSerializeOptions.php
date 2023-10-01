@@ -15,12 +15,12 @@ final class PhpSerializeOptions extends AdapterOptions
      * - `true` if all classes should be allowed (behavior pre-PHP 7.0)
      * - `false` if no classes should be allowed
      *
-     * @var string[]|bool
+     * @var class-string[]|bool
      */
     protected bool|array $unserializeClassWhitelist = true;
 
     /**
-     * @param string[]|bool $unserializeClassWhitelist
+     * @param class-string[]|bool $unserializeClassWhitelist
      */
     public function setUnserializeClassWhitelist(bool|array $unserializeClassWhitelist): void
     {
@@ -28,7 +28,7 @@ final class PhpSerializeOptions extends AdapterOptions
     }
 
     /**
-     * @return string[]|bool
+     * @return class-string[]|bool
      */
     public function getUnserializeClassWhitelist(): bool|array
     {
