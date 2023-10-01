@@ -21,7 +21,9 @@ use function sprintf;
 use function unserialize;
 
 use const E_NOTICE;
+use const E_WARNING;
 use const PHP_MAJOR_VERSION;
+use const PHP_VERSION_ID;
 
 class PhpSerialize extends AbstractAdapter
 {
@@ -130,7 +132,12 @@ class PhpSerialize extends AbstractAdapter
             return false;
         }
 
-        ErrorHandler::start(E_NOTICE);
+        $errorLevel = E_NOTICE;
+        if (PHP_VERSION_ID >= 80300) {
+            $errorLevel = E_WARNING;
+        }
+
+        ErrorHandler::start($errorLevel);
 
         // The second parameter to unserialize() is only available on PHP 7.0 or higher
         $ret = PHP_MAJOR_VERSION >= 7
