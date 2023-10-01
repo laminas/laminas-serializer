@@ -12,6 +12,8 @@ use function serialize;
 use function unserialize;
 
 use const E_NOTICE;
+use const E_WARNING;
+use const PHP_VERSION_ID;
 
 final class PhpSerialize extends AbstractAdapter
 {
@@ -98,7 +100,12 @@ final class PhpSerialize extends AbstractAdapter
             return false;
         }
 
-        ErrorHandler::start(E_NOTICE);
+        $errorLevel = E_NOTICE;
+        if (PHP_VERSION_ID >= 80300) {
+            $errorLevel = E_WARNING;
+        }
+
+        ErrorHandler::start($errorLevel);
         // The second parameter to unserialize() is only available on PHP 7.0 or higher
         $ret = unserialize($serialized, ['allowed_classes' => $this->getOptions()->getUnserializeClassWhitelist()]);
         $err = ErrorHandler::stop();
