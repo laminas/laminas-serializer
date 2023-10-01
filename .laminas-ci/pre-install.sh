@@ -8,7 +8,6 @@ fi
 
 set -e -o pipefail
 
-pecl install igbinary msgpack
+pecl install igbinary
 
 echo "extension = igbinary.so" > /etc/php/${PHP_VERSION}/mods-available/igbinary.ini
-echo "extension = msgpack.so" > /etc/php/${PHP_VERSION}/mods-available/msgpack.ini
