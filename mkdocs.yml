@@ -4,6 +4,8 @@ nav:
     - Home: index.md
     - v3:
       - Introduction: v3/intro.md
+      - Installation: v3/installation.md
+      - "Basic Usage": v3/basic-usage.md
       - Adapters: v3/adapter.md
       - "Plugin Manager": v3/plugin-manager.md
       - "Migration Guide":
@@ -17,3 +19,16 @@ site_description: "Serialize and deserialize PHP structures to a variety of repr
 repo_url: 'https://github.com/laminas/laminas-serializer'
 extra:
     project: Components
+    current_version: v3
+    versions:
+      - v3
+      - v2
+    installation:
+      config_provider_class: 'Laminas\Serializer\ConfigProvider'
+      module_class: 'Laminas\Serializer\Module'
+plugins:
+  - redirects:
+        redirect_maps:
+            intro.md: v3/intro.md
+            adapter.md: v3/adapter.md
+            plugin-manager.md: v3/plugin-manager.md
