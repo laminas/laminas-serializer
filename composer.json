@@ -40,7 +40,7 @@
         "laminas/laminas-coding-standard": "~2.5.0",
         "lctrs/psalm-psr-container-plugin": "^1.9",
         "phpunit/phpunit": "^10.2.6",
-        "psalm/plugin-phpunit": "^0.18.4",
+        "psalm/plugin-phpunit": "^0.19.0",
         "vimeo/psalm": "^5.21"
     },
     "autoload": {
