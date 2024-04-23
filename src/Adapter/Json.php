@@ -16,7 +16,7 @@ final class Json extends AbstractAdapter
     /**
      * Set options
      *
-     * @param iterable|JsonOptions $options
+     * @param iterable<string,mixed>|JsonOptions $options
      */
     public function setOptions(iterable|AdapterOptions $options): void
     {

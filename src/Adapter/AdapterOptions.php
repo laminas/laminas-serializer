@@ -6,6 +6,9 @@ namespace Laminas\Serializer\Adapter;
 
 use Laminas\Stdlib\AbstractOptions;
 
+/**
+ * @template-extends AbstractOptions<mixed>
+ */
 class AdapterOptions extends AbstractOptions
 {
 }
