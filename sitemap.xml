@@ -2,42 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/</loc>
-         <lastmod>2023-09-04</lastmod>
+         <lastmod>2024-04-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v2/adapter/</loc>
-         <lastmod>2023-09-04</lastmod>
+         <lastmod>2024-04-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v2/intro/</loc>
-         <lastmod>2023-09-04</lastmod>
+         <lastmod>2024-04-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v2/plugin-manager/</loc>
-         <lastmod>2023-09-04</lastmod>
+         <lastmod>2024-04-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v3/adapter/</loc>
-         <lastmod>2023-09-04</lastmod>
+         <lastmod>2024-04-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-serializer/v3/basic-usage/</loc>
+         <lastmod>2024-04-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-serializer/v3/installation/</loc>
+         <lastmod>2024-04-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v3/intro/</loc>
-         <lastmod>2023-09-04</lastmod>
+         <lastmod>2024-04-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v3/plugin-manager/</loc>
-         <lastmod>2023-09-04</lastmod>
+         <lastmod>2024-04-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v3/migration/to-version-3/</loc>
-         <lastmod>2023-09-04</lastmod>
+         <lastmod>2024-04-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

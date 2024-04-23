@@ -9,7 +9,9 @@
 
     
     
-    <meta name="docsearch:version" content="latest">
+        
+    
+    <meta name="docsearch:version" content="3.0.0,latest">
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-serializer">
 
@@ -132,33 +134,38 @@
 
                 
                 
-
-                    
                     
                         
-                            <li class="subnavigation__list-item">
-                                <span class="subnavigation__headline">v3</span>
-                                <ul class="subnavigation__list">
-                                    
-                                        
     <li class="subnavigation__list-item ">
         <a href="../intro/" class="subnavigation__link">Introduction</a>
     </li>
 
-                                    
-                                        
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../basic-usage/" class="subnavigation__link">Basic Usage</a>
+    </li>
+
+                    
+                        
     <li class="subnavigation__list-item ">
         <a href="../adapter/" class="subnavigation__link">Adapters</a>
     </li>
 
-                                    
-                                        
+                    
+                        
     <li class="subnavigation__list-item subnavigation__list-item--active">
         <a href="./" class="subnavigation__link">Plugin Manager</a>
     </li>
 
-                                    
-                                        
+                    
+                        
     <li class="subnavigation__list-item">
         <span class="subnavigation__headline">Migration Guide</span>
         <ul class="subnavigation__list">
@@ -172,10 +179,6 @@
         </ul>
     </li>
 
-                                    
-                                </ul>
-                            </li>
-                        
                     
                 
             
@@ -184,33 +187,6 @@
                 
 
                     
-                    
-                        
-                            <li class="subnavigation__list-item">
-                                <span class="subnavigation__headline">v2</span>
-                                <ul class="subnavigation__list">
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../v2/intro/" class="subnavigation__link">Introduction</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../v2/adapter/" class="subnavigation__link">Adapters</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../v2/plugin-manager/" class="subnavigation__link">Plugin Manager</a>
-    </li>
-
-                                    
-                                </ul>
-                            </li>
-                        
                     
                 
             
@@ -255,12 +231,41 @@
             <div class="col-4 text-right">
                 
                     
+<div class="version-selector">
+    <div class="btn-group">
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" id="version-selector-dropdown">
+            
+                v3
+            
+        </button>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
+            
+                
+                    <a href="../intro/" class="dropdown-item active">
+                        
+                            v3 (latest)
+                        
+                    </a>
+                
+            
+                
+                    <a href="../../v2/intro/" class="dropdown-item">
+                        
+                            v2
+                        
+                    </a>
+                
+            
+        </div>
+    </div>
+</div>
+
 
                     <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
                         <i class="fa fa-search"></i> Search
                     </a>
                     <a href="https://github.com/laminas/laminas-serializer" class="header__link header__link--github" title="Go to repository of laminas-serializer">
-                        <i class="fa fa-github"></i> GitHub
+                        <i class="fab fa-github"></i> GitHub
                     </a>
                 
             </div>
@@ -307,8 +312,6 @@
                     
                         
                         
-                            <li class="breadcrumb-item">v3</li>
-                        
                     
                 
 
@@ -325,21 +328,19 @@
 
     
     
-        <h2 class="chapter__headline">v3</h2>
-    
 
     <h1 id="plugin-manager">Plugin Manager</h1>
 <p>The <code>AdapterPluginManager</code> extends the laminas-servicemanager <code>AbstractPluginManager</code>, and has the following behaviors:</p>
 <ul>
 <li>It will only return <code>Laminas\Serializer\Adapter\AdapterInterface</code> instances.</li>
-<li><strong>Since 2.10.0</strong>: It defines short-name aliases for all shipped serializers (the class name minus the namespace), in a variety of casing combinations.</li>
+<li>It defines short-name aliases for all shipped serializers (the class name minus the namespace), in a variety of casing combinations.</li>
 <li>All services are shared by default; a new instance will only be created once and shared each time you call <code>get()</code>.</li>
 </ul>
 <h2 id="factory">Factory</h2>
 <p><code>Laminas\Serializer\AdapterPluginManager</code> is mapped to the factory.
 <code>Laminas\Serializer\AdapterPluginManagerFactory</code> when wired to the dependency injection container.</p>
 <p>The factory will be automatically registered when loading/installing the <code>Laminas\Serializer</code> module in <code>laminas-mvc</code> and/or loading/installing the <code>ConfigProvider</code> into a Mezzio application.</p>
-<p>Since version 2.10.0, the factory will look for the <code>config</code> service, and use the <code>serializers</code> configuration key to seed it with additional services.
+<p>The factory will look for the <code>config</code> service, and use the <code>serializers</code> configuration key to seed it with additional services.
 This configuration key should map to an array that follows <a href="https://docs.laminas.dev/laminas-servicemanager/configuring-the-service-manager/">standard laminas-servicemanager configuration</a>.</p>
 <p>To add your own serializer you can add the following configuration:</p>
 <pre class="highlight"><code class="language-php">// config/autoload/serializers.global.php
@@ -416,33 +417,38 @@ return [
 
                 
                 
-
-                    
                     
                         
-                            <li class="subnavigation__list-item">
-                                <span class="subnavigation__headline">v3</span>
-                                <ul class="subnavigation__list">
-                                    
-                                        
     <li class="subnavigation__list-item ">
         <a href="../intro/" class="subnavigation__link">Introduction</a>
     </li>
 
-                                    
-                                        
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../basic-usage/" class="subnavigation__link">Basic Usage</a>
+    </li>
+
+                    
+                        
     <li class="subnavigation__list-item ">
         <a href="../adapter/" class="subnavigation__link">Adapters</a>
     </li>
 
-                                    
-                                        
+                    
+                        
     <li class="subnavigation__list-item subnavigation__list-item--active">
         <a href="./" class="subnavigation__link">Plugin Manager</a>
     </li>
 
-                                    
-                                        
+                    
+                        
     <li class="subnavigation__list-item">
         <span class="subnavigation__headline">Migration Guide</span>
         <ul class="subnavigation__list">
@@ -456,10 +462,6 @@ return [
         </ul>
     </li>
 
-                                    
-                                </ul>
-                            </li>
-                        
                     
                 
             
@@ -468,33 +470,6 @@ return [
                 
 
                     
-                    
-                        
-                            <li class="subnavigation__list-item">
-                                <span class="subnavigation__headline">v2</span>
-                                <ul class="subnavigation__list">
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../v2/intro/" class="subnavigation__link">Introduction</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../v2/adapter/" class="subnavigation__link">Adapters</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../v2/plugin-manager/" class="subnavigation__link">Plugin Manager</a>
-    </li>
-
-                                    
-                                </ul>
-                            </li>
-                        
                     
                 
             
@@ -542,13 +517,13 @@ return [
                                 <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                             </li>
                             <li class="support__list-item">
-                                <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                                <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fab fa-slack"></i></a>
                             </li>
                             <li class="support__list-item">
-                                <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                                <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fab fa-github"></i></a>
                             </li>
                             <li class="support__list-item">
-                                <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="https://phpc.social/@getlaminas" class="support__link" title="Mastodon"><i class="fab fa-mastodon"></i></a>
                             </li>
                             <li class="support__list-item">
                                 <a href="https://getlaminas.org/blog/rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
@@ -574,7 +549,7 @@ return [
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-serializer/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2023 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2024 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>

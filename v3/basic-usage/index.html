@@ -15,10 +15,10 @@
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-serializer">
 
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-serializer/v3/intro/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-serializer/v3/basic-usage/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Introduction - laminas-serializer - Laminas Docs</title>
+    <title>Basic Usage - laminas-serializer - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -136,8 +136,8 @@
                 
                     
                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Introduction</a>
+    <li class="subnavigation__list-item ">
+        <a href="../intro/" class="subnavigation__link">Introduction</a>
     </li>
 
                     
@@ -148,8 +148,8 @@
 
                     
                         
-    <li class="subnavigation__list-item ">
-        <a href="../basic-usage/" class="subnavigation__link">Basic Usage</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Basic Usage</a>
     </li>
 
                     
@@ -241,7 +241,7 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
-                    <a href="./" class="dropdown-item active">
+                    <a href="../intro/" class="dropdown-item active">
                         
                             v3 (latest)
                         
@@ -284,6 +284,25 @@
 
     
     
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#configuration-options" class="toc__link nav-link">Configuration Options</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#available-methods" class="toc__link nav-link">Available Methods</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#project-defaults" class="toc__link nav-link">Project Defaults</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
 
                 
 
@@ -304,7 +323,7 @@
                     
                 
 
-                <li class="breadcrumb-item active" aria-current="page">Introduction</li>
+                <li class="breadcrumb-item active" aria-current="page">Basic Usage</li>
             
         
     </ol>
@@ -318,11 +337,98 @@
     
     
 
-    <h1 id="introduction">Introduction</h1>
-<p>laminas-serialzier provides an adapter-based interface for serializing and
-deserializing PHP types to and from different representations.</p>
-<p>For more information what a serializer is read the wikipedia page of
-<a href="https://wikipedia.org/wiki/Serialization">Serialization</a>.</p>
+    <h1 id="basic-usage">Basic Usage</h1>
+<p>Serializing adapters can either be created from the provided
+<code>Laminas\Serializer\AdapterPluginManager#build</code> method, or by instantiating one of the
+<code>Laminas\Serializer\Adapter\*</code> classes.</p>
+<pre class="highlight"><code class="language-php">use Laminas\Serializer\Adapter;
+use Laminas\Serializer\AdapterPluginManager;
+use Laminas\Serializer\Exception;
+use Laminas\Serializer\Serializer;
+
+$plugins = new AdapterPluginManager();
+
+// Via plugin manager:
+$serializer = $plugins-&gt;build(Adapter\PhpSerialize::class);
+
+// Alternately:
+$serializer = new Adapter\PhpSerialize();
+
+// Now $serializer is an instance of Laminas\Serializer\Adapter\AdapterInterface,
+// specifically Laminas\Serializer\Adapter\PhpSerialize
+
+try {
+    $serialized = $serializer-&gt;serialize($data);
+    // now $serialized is a string
+
+    $unserialized = $serializer-&gt;unserialize($serialized);
+    // now $data == $unserialized
+} catch (Exception\ExceptionInterface $e) {
+    echo $e;
+}</code></pre>
+<p>The method <code>AdapterInterface#serialize</code> generates a storable string. To regenerate this
+serialized data, call the method <code>AdapterInterface#unserialize</code>.</p>
+<p>Any time an error is encountered serializing or unserializing, the adapter will
+throw a <code>Laminas\Serializer\Exception\ExceptionInterface</code>.</p>
+<h2 id="configuration-options">Configuration Options</h2>
+<p>To configure a serializer adapter, you can optionally use an instance of
+<code>Laminas\Serializer\Adapter\AdapterOptions</code>, an instance of one of the adapter
+specific options class, an <code>array</code>, or a <code>Traversable</code> object. The adapter
+will convert it into the adapter specific options class instance (if present) or
+into the basic <code>Laminas\Serializer\Adapter\AdapterOptions</code> class instance.</p>
+<p>Options can be passed as the second argument to the provided via the
+adapter's <code>setOptions</code> method, or as constructor arguments when directly
+instantiating an adapter.</p>
+<h2 id="available-methods">Available Methods</h2>
+<p>Each serializer implements the interface <code>Laminas\Serializer\Adapter\AdapterInterface</code>.</p>
+<p>This interface defines the following methods:</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>Method signature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>serialize(mixed $value) : string</code></td>
+<td>Generates a storable representation of a value.</td>
+</tr>
+<tr>
+<td><code>unserialize(string $value) : mixed</code></td>
+<td>Creates a PHP value from a stored representation.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="project-defaults">Project Defaults</h2>
+<p>To configure a default serializer (other than <code>PhpSerializer</code>, which is already pre-configured), you can override the
+dependency configuration in your project by implementing the following file <code>config/autoload/laminas-serializer.global.php</code>:</p>
+<pre class="highlight"><code class="language-php">use Laminas\Serializer\Adapter\AdapterInterface;
+use Laminas\Serializer\Adapter\Json;
+use Laminas\Serializer\GenericSerializerFactory;
+
+// Adapter options can hold adapter specific options, please refer to the adapter configuration documentation section 
+$adapterOptions = ['cycle_check' =&gt; true];
+
+return [
+    // mezzio projects
+    'dependencies' =&gt; [
+        'factories' =&gt; [
+            AdapterInterface::class =&gt; new GenericSerializerFactory(Json::class, $adapterOptions),                
+        ],
+    ],
+    // laminas-mvc projects
+    'service_manager' =&gt; [
+        'factories' =&gt; [
+            AdapterInterface::class =&gt; new GenericSerializerFactory(Json::class, $adapterOptions),
+        ],
+    ],
+];</code></pre>
+<div class="admonition info">
+<p class="admonition-title">Defaults for PHP Serializer</p>
+<p>
+The PHP serializer does not have any defaults configured. If you want to modify the options of the <code>PhpSerializer</code> default, you will have to provide the config as shown above but with the <code>PhpSerializer</code> class and the options you want to use.</p>
+</div>
 
 
 
@@ -333,10 +439,10 @@ deserializing PHP types to and from different representations.</p>
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../..">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../installation/">
                     <small class="page-nav__label">Previous</small>
                     <i class="fa fa-chevron-left"></i>
-                    Home
+                    Installation
                 </a>
             
         </li>
@@ -344,9 +450,9 @@ deserializing PHP types to and from different representations.</p>
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../installation/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../adapter/">
                     <small class="page-nav__label">Next</small>
-                    Installation
+                    Adapters
                     <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -391,8 +497,8 @@ deserializing PHP types to and from different representations.</p>
                 
                     
                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Introduction</a>
+    <li class="subnavigation__list-item ">
+        <a href="../intro/" class="subnavigation__link">Introduction</a>
     </li>
 
                     
@@ -403,8 +509,8 @@ deserializing PHP types to and from different representations.</p>
 
                     
                         
-    <li class="subnavigation__list-item ">
-        <a href="../basic-usage/" class="subnavigation__link">Basic Usage</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Basic Usage</a>
     </li>
 
                     
