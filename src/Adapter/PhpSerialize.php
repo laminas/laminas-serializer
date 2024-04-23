@@ -25,6 +25,9 @@ final class PhpSerialize extends AbstractAdapter
     /** @var PhpSerializeOptions|null */
     protected AdapterOptions|null $options = null;
 
+    /**
+     * @param iterable<string,mixed>|PhpSerializeOptions|null $options
+     */
     public function __construct(iterable|PhpSerializeOptions|null $options = null)
     {
         // needed to check if a returned false is based on a serialize false
@@ -39,7 +42,7 @@ final class PhpSerialize extends AbstractAdapter
     /**
      * Set options
      *
-     * @param iterable|PhpSerializeOptions $options
+     * @param iterable<string,mixed>|PhpSerializeOptions $options
      */
     public function setOptions(iterable|AdapterOptions $options): void
     {

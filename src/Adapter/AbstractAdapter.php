@@ -8,6 +8,9 @@ abstract class AbstractAdapter implements AdapterInterface
 {
     protected AdapterOptions|null $options = null;
 
+    /**
+     * @param iterable<string,mixed>|AdapterOptions|null $options
+     */
     public function __construct(iterable|AdapterOptions|null $options = null)
     {
         if ($options !== null) {
@@ -17,6 +20,8 @@ abstract class AbstractAdapter implements AdapterInterface
 
     /**
      * Set adapter options
+     *
+     * @param iterable<string,mixed>|AdapterOptions $options
      */
     public function setOptions(iterable|AdapterOptions $options): void
     {
