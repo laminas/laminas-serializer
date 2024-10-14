@@ -16,7 +16,7 @@ class ConfigProvider
     /**
      * Return configuration for this component.
      *
-     * @return array
+     * @return array{dependencies: ServiceManagerConfiguration}
      */
     public function __invoke(): array
     {
