@@ -10,9 +10,10 @@ The biggest breaking change in v3 relates to the `Laminas\Serializer\Serializer`
 its potential side-effects and for not following the [`S`](https://en.wikipedia.org/wiki/Single-responsibility_principle) within [`SOLID`](https://en.wikipedia.org/wiki/SOLID).
 
 This class was:
- - a registry (by providing a method to both persist and provide a "default" serializer instance)
- - a factory (by providing methods to create objects based on arguments passed to methods)
- - a serializer (by providing `serialize` and `unserialize` which then called magically an `AdapterInterface` implementation)
+
+- a registry (by providing a method to both persist and provide a "default" serializer instance)
+- a factory (by providing methods to create objects based on arguments passed to methods)
+- a serializer (by providing `serialize` and `unserialize` which then called magically an `AdapterInterface` implementation)
 
 To enable projects and 3rd-party libraries to provide their own serializer implementations (which are also available via the `AdapterPluginManager`), this class was removed in favor of dependency injection.
 
@@ -22,7 +23,7 @@ used in projects.
 #### Projects Making Use of `Serializer#setDefaultAdapter`
 
 In case you are using this method within a `laminas-mvc` or `mezzio` project, laminas got your back. You can now configure the projects default adapter by using the [dependency configuration](../intro.md#project-defaults).
-If your project uses `Serializer#setDefaultAdapter` outside of `laminas-mvc` or `mezzio` projects, you have to provide your own registry. 
+If your project uses `Serializer#setDefaultAdapter` outside of `laminas-mvc` or `mezzio` projects, you have to provide your own registry.
 You can either copy the current implementation into your project or implement an own minimal implementation such as:
 
 ```php
@@ -68,7 +69,6 @@ There are no replacements for these methods. You can either instantiate `PhpSeri
 #### Projects Making Use of `Serializer#factory`
 
 This method has multiple ways to get called:
-
 
 ##### Passing an Instance of `AdapterInterface`
 
