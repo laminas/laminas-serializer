@@ -84,17 +84,6 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="https://api-tools.getlaminas.org/documentation" class="dropdown-item">
-                                <div class="row align-items-center">
-                                    <div class="col-md-4 col-sm-12">
-                                        <img src="https://docs.laminas.dev/img/laminas-api-tools-rgb.svg">
-                                    </div>
-                                    <div class="col-md-8 col-sm-12">
-                                        <strong>API Tools</strong><br>
-                                        Build RESTful APIs in Minutes
-                                    </div>
-                                </div>
-                            </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item dropdown-item--secondardy" href="https://docs.laminas.dev/migration/">
                                 <div class="row align-items-center">
@@ -348,16 +337,18 @@
 <h3 id="static-methods-in-serializer-implementation">Static Methods in <code>Serializer</code> Implementation</h3>
 <p>The biggest breaking change in v3 relates to the <code>Laminas\Serializer\Serializer</code>. This class has been removed due to
 its potential side-effects and for not following the <a href="https://en.wikipedia.org/wiki/Single-responsibility_principle"><code>S</code></a> within <a href="https://en.wikipedia.org/wiki/SOLID"><code>SOLID</code></a>.</p>
-<p>This class was:
- - a registry (by providing a method to both persist and provide a "default" serializer instance)
- - a factory (by providing methods to create objects based on arguments passed to methods)
- - a serializer (by providing <code>serialize</code> and <code>unserialize</code> which then called magically an <code>AdapterInterface</code> implementation)</p>
+<p>This class was:</p>
+<ul>
+<li>a registry (by providing a method to both persist and provide a "default" serializer instance)</li>
+<li>a factory (by providing methods to create objects based on arguments passed to methods)</li>
+<li>a serializer (by providing <code>serialize</code> and <code>unserialize</code> which then called magically an <code>AdapterInterface</code> implementation)</li>
+</ul>
 <p>To enable projects and 3rd-party libraries to provide their own serializer implementations (which are also available via the <code>AdapterPluginManager</code>), this class was removed in favor of dependency injection.</p>
 <p>The amount of work to migrate projects consuming the <code>Laminas\Serializer\Serializer</code> class depends on the way how it was
 used in projects.</p>
 <h4 id="projects-making-use-of-serializersetdefaultadapter">Projects Making Use of <code>Serializer#setDefaultAdapter</code></h4>
 <p>In case you are using this method within a <code>laminas-mvc</code> or <code>mezzio</code> project, laminas got your back. You can now configure the projects default adapter by using the <a href="../../intro/#project-defaults">dependency configuration</a>.
-If your project uses <code>Serializer#setDefaultAdapter</code> outside of <code>laminas-mvc</code> or <code>mezzio</code> projects, you have to provide your own registry. 
+If your project uses <code>Serializer#setDefaultAdapter</code> outside of <code>laminas-mvc</code> or <code>mezzio</code> projects, you have to provide your own registry.
 You can either copy the current implementation into your project or implement an own minimal implementation such as:</p>
 <pre class="highlight"><code class="language-php">namespace MyNamespace;
 
@@ -600,7 +591,7 @@ In case your project is still depending on these implementations, feel free to c
                     <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
                     <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
                     <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
-                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Maintenance Overview <a href="https://getlaminas.org/packages-maintenance-status/">Current maintenance status of Laminas &amp; Mezzio packages</a></li>
                 </ul>
             </div>
         </div>
