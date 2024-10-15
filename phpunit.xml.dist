@@ -2,6 +2,17 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
+         displayDetailsOnPhpunitDeprecations="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnSkippedTests="true"
+         displayDetailsOnIncompleteTests="true"
+         failOnPhpunitDeprecation="true"
+         failOnDeprecation="true"
+         failOnNotice="true"
+         failOnWarning="true"
          colors="true">
     <testsuites>
         <testsuite name="laminas-serializer Test Suite">
