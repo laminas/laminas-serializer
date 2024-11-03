@@ -27,7 +27,7 @@ class IgBinaryTest extends TestCase
                 $this->fail(
                     "Laminas\\Serializer\\Adapter\\IgBinary needs missing ext/igbinary but did't throw exception"
                 );
-            } catch (ExtensionNotLoadedException $e) {
+            } catch (ExtensionNotLoadedException) {
             }
             $this->markTestSkipped('Laminas\\Serializer\\Adapter\\IgBinary needs ext/igbinary');
         }
