@@ -166,8 +166,8 @@
             "type": "library",
             "extra": {
                 "laminas": {
-                    "config-provider": "Laminas\\ServiceManager\\ConfigProvider",
-                    "module": "Laminas\\ServiceManager"
+                    "module": "Laminas\\ServiceManager",
+                    "config-provider": "Laminas\\ServiceManager\\ConfigProvider"
                 }
             },
             "autoload": {
