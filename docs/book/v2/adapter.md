@@ -41,6 +41,13 @@ There are no configurable options for this adapter.
 The [JSON](http://wikipedia.org/wiki/JavaScript_Object_Notation) adapter provides a bridge to the
 [laminas-json](https://docs.laminas.dev/laminas-json) component.
 
+<!-- markdownlint-disable-next-line heading-increment -->
+> ### Deprecated
+>
+> Starting in version 2.18.0 and 3.2.0, the Json Adapter is deprecated, as the laminas-json
+> packages has been abandoned. While the Json Adapter is still available in the 3.x series,
+> it will be removed in 4.0.0.
+
 Available options include:
 
 | Option                    | Data Type                   | Default Value                   |
