@@ -13,6 +13,9 @@ use Laminas\Json\Json as LaminasJson;
 use Laminas\Serializer\Exception;
 use Traversable;
 
+/**
+ * @deprecated This serializer will get removed in v4.0.0. Use PhpSerialize as a replacement.
+ */
 class Json extends AbstractAdapter
 {
     /** @var JsonOptions */
