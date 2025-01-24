@@ -44,7 +44,7 @@ The [JSON](https://wikipedia.org/wiki/JavaScript_Object_Notation) adapter provid
 <!-- markdownlint-disable-next-line heading-increment -->
 > ### Deprecated
 >
-> Starting in version 3.3.0, the Json Adapter is deprecated, as the laminas-json
+> Starting in version 3.2.0, the Json Adapter is deprecated, as the laminas-json
 > packages has been abandoned and will be removed in 4.0.0.
 
 Available options include:

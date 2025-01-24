@@ -84,6 +84,12 @@ This adapter converts PHP types to a [Python Pickle](http://docs.python.org/libr
 string representation. With it, you can read the serialized data with Python and
 read Pickled data from Python with PHP.
 
+<!-- markdownlint-disable-next-line heading-increment -->
+> ### Deprecated
+>
+> Starting in version 2.15.0 this adapter has been deprecated. It will be removed
+> in 3.0.0 without any replacement.
+
 This adapter requires the [laminas-math](https://docs.laminas.dev/laminas-math/) component:
 
 ```bash
@@ -132,6 +138,12 @@ Available options include:
 programming-language-, platform-, and transport-neutral data interchange
 mechanism for passing data between different environments and different
 computers.
+
+<!-- markdownlint-disable-next-line heading-increment -->
+> ### Deprecated
+>
+> Starting in version 2.15.0 this adapter has been deprecated. It will be removed
+> in 3.0.0 without any replacement.
 
 The adapter uses the [wddx](http://php.net/wddx) PHP functions. Please read the
 PHP manual to determine how you may enable them in your installation.
