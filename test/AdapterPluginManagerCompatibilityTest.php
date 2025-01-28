@@ -23,7 +23,7 @@ class AdapterPluginManagerCompatibilityTest extends TestCase
 {
     use CommonPluginManagerTrait;
 
-    protected function getPluginManager(): AdapterPluginManager
+    protected static function getPluginManager(): AdapterPluginManager
     {
         return new AdapterPluginManager(new ServiceManager());
     }
