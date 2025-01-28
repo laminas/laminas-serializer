@@ -11,6 +11,9 @@ namespace Laminas\Serializer\Adapter;
 use Laminas\Json\Json as LaminasJson;
 use Laminas\Serializer\Exception;
 
+/**
+ * @deprecated This serializer will get removed in v4.0.0. Use PhpSerialize as a replacement.
+ */
 class JsonOptions extends AdapterOptions
 {
     /** @var bool */
