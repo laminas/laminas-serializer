@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace LaminasTest\Serializer\Adapter;
 
-use Laminas\Json\Json as LaminasJson;
 use Laminas\Serializer\Adapter\Json;
 use Laminas\Serializer\Adapter\JsonOptions;
 use Laminas\Serializer\Exception\RuntimeException;
@@ -28,13 +27,13 @@ final class JsonTest extends TestCase
         $options = new JsonOptions([
             'cycle_check'             => true,
             'enable_json_expr_finder' => true,
-            'object_decode_type'      => 1,
+            'assoc_array'             => true,
         ]);
         $adapter->setOptions($options);
 
         self::assertEquals(true, $adapter->getOptions()->getCycleCheck());
         self::assertEquals(true, $adapter->getOptions()->getEnableJsonExprFinder());
-        self::assertEquals(1, $adapter->getOptions()->getObjectDecodeType());
+        self::assertTrue($adapter->getOptions()->isAssocArray());
     }
 
     public function testSerializeString(): void
@@ -134,7 +133,7 @@ final class JsonTest extends TestCase
         $expected       = new stdClass();
         $expected->test = 'test';
 
-        $this->adapter->getOptions()->setObjectDecodeType(LaminasJson::TYPE_OBJECT);
+        $this->adapter->getOptions()->setAssocArray(false);
 
         $data = $this->adapter->unserialize($value);
         self::assertEquals($expected, $data);
@@ -144,7 +143,7 @@ final class JsonTest extends TestCase
     {
         $value = 'not a serialized string';
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Unserialization failed: Decoding failed: Syntax error');
+        $this->expectExceptionMessage('Unserialization failed: Syntax error');
         $this->adapter->unserialize($value);
     }
 }
