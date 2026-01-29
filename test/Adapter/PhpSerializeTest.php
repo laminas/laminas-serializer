@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 use stdClass;
 
 #[CoversClass(PhpSerialize::class)]
-class PhpSerializeTest extends TestCase
+final class PhpSerializeTest extends TestCase
 {
     private PhpSerialize $adapter;
 

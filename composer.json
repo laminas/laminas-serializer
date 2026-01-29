@@ -21,7 +21,7 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "platform": {
-            "php": "8.1.99"
+            "php": "8.2.99"
         }
     },
     "extra": {
@@ -31,17 +31,16 @@
         }
     },
     "require": {
-        "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
+        "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
         "laminas/laminas-json": "^3.1",
-        "laminas/laminas-servicemanager": "^4.1",
+        "laminas/laminas-servicemanager": "^4.5",
         "laminas/laminas-stdlib": "^3.19"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~3.1.0",
-        "lctrs/psalm-psr-container-plugin": "^1.10",
-        "phpunit/phpunit": "^10.5.36",
+        "phpunit/phpunit": "^11.5.37",
         "psalm/plugin-phpunit": "^0.19.0",
-        "vimeo/psalm": "^5.26.1"
+        "vimeo/psalm": "^6"
     },
     "autoload": {
         "psr-4": {

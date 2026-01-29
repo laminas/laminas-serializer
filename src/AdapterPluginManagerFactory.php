@@ -9,6 +9,7 @@ use Psr\Container\ContainerInterface;
 
 use function is_array;
 
+/** @final */
 class AdapterPluginManagerFactory implements FactoryInterface
 {
     /**

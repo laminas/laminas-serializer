@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
 
-class AdapterPluginManagerFactoryTest extends TestCase
+final class AdapterPluginManagerFactoryTest extends TestCase
 {
     public function testFactoryReturnsPluginManager(): void
     {
