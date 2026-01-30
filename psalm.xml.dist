@@ -11,6 +11,7 @@
     ignoreInternalFunctionNullReturn="false"
     ensureArrayStringOffsetsExist="true"
     ensureArrayIntOffsetsExist="true"
+    ensureOverrideAttribute="false"
     errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>
@@ -29,6 +30,5 @@
 
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
-        <pluginClass class="Lctrs\PsalmPsrContainerPlugin\Plugin"/>
     </plugins>
 </psalm>

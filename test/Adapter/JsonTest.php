@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 use stdClass;
 
 #[CoversClass(Json::class)]
-class JsonTest extends TestCase
+final class JsonTest extends TestCase
 {
     private Json $adapter;
 

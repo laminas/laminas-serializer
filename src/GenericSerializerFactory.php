@@ -7,6 +7,8 @@ namespace Laminas\Serializer;
 use Laminas\Serializer\Adapter\AdapterInterface;
 use Psr\Container\ContainerInterface;
 
+use function assert;
+
 final class GenericSerializerFactory
 {
     /**
@@ -20,6 +22,7 @@ final class GenericSerializerFactory
     public function __invoke(ContainerInterface $container): AdapterInterface
     {
         $plugins = $container->get(AdapterPluginManager::class);
+        assert($plugins instanceof AdapterPluginManager);
 
         return $plugins->build($this->serializerName, $this->options);
     }

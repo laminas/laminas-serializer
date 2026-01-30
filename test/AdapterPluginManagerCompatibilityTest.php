@@ -11,7 +11,7 @@ use Laminas\ServiceManager\ServiceManager;
 use Laminas\ServiceManager\Test\CommonPluginManagerTrait;
 use PHPUnit\Framework\TestCase;
 
-class AdapterPluginManagerCompatibilityTest extends TestCase
+final class AdapterPluginManagerCompatibilityTest extends TestCase
 {
     use CommonPluginManagerTrait;
 

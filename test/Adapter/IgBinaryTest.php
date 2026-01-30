@@ -15,7 +15,7 @@ use function extension_loaded;
 use function igbinary_serialize;
 
 #[CoversClass(IgBinary::class)]
-class IgBinaryTest extends TestCase
+final class IgBinaryTest extends TestCase
 {
     private IgBinary $adapter;
 

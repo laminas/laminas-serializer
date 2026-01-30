@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 use function var_export;
 
 #[CoversClass(PhpCode::class)]
-class PhpCodeTest extends TestCase
+final class PhpCodeTest extends TestCase
 {
     /** @var Serializer\Adapter\PhpCode */
     private $adapter;

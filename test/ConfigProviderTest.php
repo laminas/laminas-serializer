@@ -7,6 +7,7 @@ namespace LaminasTest\Serializer;
 use Laminas\Serializer\Adapter\AdapterInterface;
 use Laminas\Serializer\AdapterPluginManager;
 use Laminas\Serializer\ConfigProvider;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class ConfigProviderTest extends TestCase
@@ -21,8 +22,8 @@ final class ConfigProviderTest extends TestCase
 
     /**
      * @param non-empty-string $serviceName
-     * @dataProvider factoryServiceNames
      */
+    #[DataProvider('factoryServiceNames')]
     public function testHasExpectedServiceNames(string $serviceName): void
     {
         $dependencies = $this->provider->getDependencyConfig();

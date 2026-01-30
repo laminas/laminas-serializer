@@ -6,6 +6,7 @@ namespace Laminas\Serializer;
 
 use Laminas\ModuleManager\ModuleManager;
 
+/** @final */
 class Module
 {
     /**
