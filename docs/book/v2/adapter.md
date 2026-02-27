@@ -41,6 +41,13 @@ There are no configurable options for this adapter.
 The [JSON](http://wikipedia.org/wiki/JavaScript_Object_Notation) adapter provides a bridge to the
 [laminas-json](https://docs.laminas.dev/laminas-json) component.
 
+<!-- markdownlint-disable-next-line heading-increment -->
+> ### Deprecated
+>
+> Starting in version 2.18.0 and 3.2.0, the Json Adapter is deprecated, as the laminas-json
+> packages has been abandoned. While the Json Adapter is still available in the 3.x series,
+> it will be removed in 4.0.0.
+
 Available options include:
 
 | Option                    | Data Type                   | Default Value                   |
@@ -76,6 +83,12 @@ There are no configuration options for this adapter.
 This adapter converts PHP types to a [Python Pickle](http://docs.python.org/library/pickle.html)
 string representation. With it, you can read the serialized data with Python and
 read Pickled data from Python with PHP.
+
+<!-- markdownlint-disable-next-line heading-increment -->
+> ### Deprecated
+>
+> Starting in version 2.15.0 this adapter has been deprecated. It will be removed
+> in 3.0.0 without any replacement.
 
 This adapter requires the [laminas-math](https://docs.laminas.dev/laminas-math/) component:
 
@@ -125,6 +138,12 @@ Available options include:
 programming-language-, platform-, and transport-neutral data interchange
 mechanism for passing data between different environments and different
 computers.
+
+<!-- markdownlint-disable-next-line heading-increment -->
+> ### Deprecated
+>
+> Starting in version 2.15.0 this adapter has been deprecated. It will be removed
+> in 3.0.0 without any replacement.
 
 The adapter uses the [wddx](http://php.net/wddx) PHP functions. Please read the
 PHP manual to determine how you may enable them in your installation.
