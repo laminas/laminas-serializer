@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace LaminasTest\Serializer\TestAsset;
 
-class Dummy
+final class Dummy
 {
 }
