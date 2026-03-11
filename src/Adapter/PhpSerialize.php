@@ -44,7 +44,7 @@ final class PhpSerialize implements AdapterInterface
      *
      * @param iterable<string,mixed>|PhpSerializeOptions $options
      */
-    public function setOptions(iterable|AdapterOptions $options): void
+    public function setOptions(iterable|PhpSerializeOptions $options): void
     {
         if (! $options instanceof PhpSerializeOptions) {
             $options = new PhpSerializeOptions($options);

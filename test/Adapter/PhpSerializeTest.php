@@ -161,7 +161,7 @@ final class PhpSerializeTest extends TestCase
         self::assertSame('hello', $props['myProps'] ?? null);
     }
 
-    public function testWhileListIsContainsClass(): void
+    public function testWhileListContainsClass(): void
     {
         $expected          = new stdClass();
         $expected->myProps = 'hello';
