@@ -8,14 +8,12 @@ use InvalidArgumentException;
 use JsonException;
 use Laminas\Serializer\Exception;
 
-use function in_array;
-use function is_array;
-use function is_int;
-use function is_object;
 use function json_decode;
 use function json_encode;
 
 use const JSON_THROW_ON_ERROR;
+use const JSON_UNESCAPED_SLASHES;
+use const JSON_UNESCAPED_UNICODE;
 
 final class Json extends AbstractAdapter
 {
@@ -56,15 +54,8 @@ final class Json extends AbstractAdapter
      */
     public function serialize(mixed $value): string
     {
-        $options    = $this->getOptions();
-        $cycleCheck = $options->getCycleCheck();
-        $opts       = [
-            'enableJsonExprFinder' => $options->getEnableJsonExprFinder(),
-            'objectDecodeType'     => $options->isAssocArray(),
-        ];
-
         try {
-            return $this->encode($value, $cycleCheck, $opts);
+            return $this->encode($value);
         } catch (InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException('Serialization failed: ' . $e->getMessage(), 0, $e);
         } catch (JsonException $e) {
@@ -89,37 +80,12 @@ final class Json extends AbstractAdapter
         return $ret;
     }
 
-    /**
-     * @param mixed[] $options
-     */
-    private function encode(mixed $value, bool $cycleCheck, array $options): string
+    private function encode(mixed $value): string
     {
-        if ($cycleCheck) {
-            $seen         = [];
-            $detectCycles = function (mixed &$val) use (&$seen, &$detectCycles): void {
-                if (is_array($val) || is_object($val)) {
-                    if (in_array($val, $seen, true)) {
-                        throw new InvalidArgumentException("Cycle detected in value to be JSON encoded");
-                    }
-                    $seen[] = $val;
-                    foreach ($val as &$item) {
-                        $detectCycles($item);
-                    }
-                }
-            };
-            $detectCycles($value);
-        }
-
-        $jsonOptions = isset($options['json_encode_options']) && is_int($options['json_encode_options'])
-            ? $options['json_encode_options']
-            : 0;
-
-        $encoded = json_encode($value, $jsonOptions | JSON_THROW_ON_ERROR);
-        if ($encoded === false) {
-            throw new JsonException('Syntax error');
-        }
-
-        return $encoded;
+        return json_encode(
+            $value,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR
+        );
     }
 
     private function decode(string $value, bool $assoc): mixed
@@ -127,7 +93,7 @@ final class Json extends AbstractAdapter
         return json_decode(
             $value,
             $assoc,
-            512, // depth
+            512,
             JSON_THROW_ON_ERROR
         );
     }
