@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="6.14.3@d0b040a91f280f071c1abcb1b77ce3822058725a">
   <file src="src/Adapter/Json.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getCycleCheck]]></code>
+      <code><![CDATA[getEnableJsonExprFinder]]></code>
+      <code><![CDATA[getObjectDecodeType]]></code>
+      <code><![CDATA[getObjectDecodeType]]></code>
+    </DeprecatedMethod>
     <MoreSpecificImplementedParamType>
       <code><![CDATA[$options]]></code>
     </MoreSpecificImplementedParamType>
@@ -9,10 +15,30 @@
     </NonInvariantDocblockPropertyType>
   </file>
   <file src="src/Adapter/JsonOptions.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getObjectDecodeType]]></code>
+      <code><![CDATA[setObjectDecodeType]]></code>
+    </DeprecatedMethod>
     <PossiblyUnusedMethod>
+      <code><![CDATA[isAssocArray]]></code>
+      <code><![CDATA[setAssocArray]]></code>
       <code><![CDATA[setCycleCheck]]></code>
       <code><![CDATA[setEnableJsonExprFinder]]></code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Adapter/JsonTest.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getCycleCheck]]></code>
+      <code><![CDATA[getEnableJsonExprFinder]]></code>
+      <code><![CDATA[getObjectDecodeType]]></code>
+      <code><![CDATA[setObjectDecodeType]]></code>
+    </DeprecatedMethod>
+  </file>
+  <file src="test/GenericSerializerFactoryTest.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getCycleCheck]]></code>
+      <code><![CDATA[getCycleCheck]]></code>
+    </DeprecatedMethod>
   </file>
   <file src="src/Adapter/PhpSerialize.php">
     <MoreSpecificImplementedParamType>
