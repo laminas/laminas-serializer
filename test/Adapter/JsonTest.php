@@ -35,6 +35,7 @@ final class JsonTest extends TestCase
         self::assertEquals(true, $adapter->getOptions()->getCycleCheck());
         self::assertEquals(true, $adapter->getOptions()->getEnableJsonExprFinder());
         self::assertEquals(1, $adapter->getOptions()->getObjectDecodeType());
+        self::assertEquals(true, $adapter->getOptions()->isAssocArray());
     }
 
     public function testSerializeString(): void

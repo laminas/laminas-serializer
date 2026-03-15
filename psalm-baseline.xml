@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.14.3@d0b040a91f280f071c1abcb1b77ce3822058725a">
+<files psalm-version="6.15.1@28dc127af1b5aecd52314f6f645bafc10d0e11f9">
   <file src="src/Adapter/Json.php">
     <DeprecatedMethod>
       <code><![CDATA[getCycleCheck]]></code>
@@ -20,7 +20,6 @@
       <code><![CDATA[setObjectDecodeType]]></code>
     </DeprecatedMethod>
     <PossiblyUnusedMethod>
-      <code><![CDATA[isAssocArray]]></code>
       <code><![CDATA[setAssocArray]]></code>
       <code><![CDATA[setCycleCheck]]></code>
       <code><![CDATA[setEnableJsonExprFinder]]></code>
