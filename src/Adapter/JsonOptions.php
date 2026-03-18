@@ -27,7 +27,7 @@ final class JsonOptions extends AdapterOptions
     }
 
     /**
-     * @deprecated
+     * @deprecated Since 3.3.0 - This method will be removed in version 4.0 without replacement.
      */
     public function setCycleCheck(bool $flag): void
     {
@@ -35,7 +35,7 @@ final class JsonOptions extends AdapterOptions
     }
 
     /**
-     * @deprecated
+     * @deprecated Since 3.3.0 - This method will be removed in version 4.0 without replacement.
      */
     public function getCycleCheck(): bool
     {
@@ -43,7 +43,7 @@ final class JsonOptions extends AdapterOptions
     }
 
     /**
-     * @deprecated
+     * @deprecated Since 3.3.0 - This method will be removed in version 4.0 without replacement.
      */
     public function setEnableJsonExprFinder(bool $flag): void
     {
@@ -51,7 +51,7 @@ final class JsonOptions extends AdapterOptions
     }
 
     /**
-     * @deprecated
+     * @deprecated Since 3.3.0 - This method will be removed in version 4.0 without replacement.
      */
     public function getEnableJsonExprFinder(): bool
     {
