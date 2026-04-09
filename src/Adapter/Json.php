@@ -5,8 +5,15 @@ declare(strict_types=1);
 namespace Laminas\Serializer\Adapter;
 
 use InvalidArgumentException;
-use Laminas\Json\Json as LaminasJson;
+use JsonException;
 use Laminas\Serializer\Exception;
+
+use function json_decode;
+use function json_encode;
+
+use const JSON_THROW_ON_ERROR;
+use const JSON_UNESCAPED_SLASHES;
+use const JSON_UNESCAPED_UNICODE;
 
 final class Json extends AbstractAdapter
 {
@@ -47,18 +54,11 @@ final class Json extends AbstractAdapter
      */
     public function serialize(mixed $value): string
     {
-        $options    = $this->getOptions();
-        $cycleCheck = $options->getCycleCheck();
-        $opts       = [
-            'enableJsonExprFinder' => $options->getEnableJsonExprFinder(),
-            'objectDecodeType'     => $options->getObjectDecodeType(),
-        ];
-
         try {
-            return LaminasJson::encode($value, $cycleCheck, $opts);
+            return $this->encode($value);
         } catch (InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException('Serialization failed: ' . $e->getMessage(), 0, $e);
-        } catch (\Exception $e) {
+        } catch (JsonException $e) {
             throw new Exception\RuntimeException('Serialization failed: ' . $e->getMessage(), 0, $e);
         }
     }
@@ -72,13 +72,29 @@ final class Json extends AbstractAdapter
     public function unserialize(string $serialized): mixed
     {
         try {
-            $ret = LaminasJson::decode($serialized, $this->getOptions()->getObjectDecodeType());
-        } catch (InvalidArgumentException $e) {
-            throw new Exception\InvalidArgumentException('Unserialization failed: ' . $e->getMessage(), 0, $e);
-        } catch (\Exception $e) {
+            $ret = $this->decode($serialized, $this->getOptions()->isAssocArray());
+        } catch (JsonException $e) {
             throw new Exception\RuntimeException('Unserialization failed: ' . $e->getMessage(), 0, $e);
         }
 
         return $ret;
+    }
+
+    private function encode(mixed $value): string
+    {
+        return json_encode(
+            $value,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR
+        );
+    }
+
+    private function decode(string $value, bool $assoc): mixed
+    {
+        return json_decode(
+            $value,
+            $assoc,
+            512,
+            JSON_THROW_ON_ERROR
+        );
     }
 }
