@@ -32,7 +32,6 @@
     },
     "require": {
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
-        "laminas/laminas-json": "^3.1",
         "laminas/laminas-servicemanager": "^4.5",
         "laminas/laminas-stdlib": "^3.19"
     },
@@ -59,6 +58,9 @@
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
+        "static-analysis": "psalm --shepherd --stats",
+        "static-analysis:b": "psalm --update-baseline",
+        "static-analysis:clear": "psalm --clear-cache",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
