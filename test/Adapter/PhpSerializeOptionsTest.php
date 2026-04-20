@@ -20,14 +20,4 @@ final class PhpSerializeOptionsTest extends TestCase
         $options->setAllowedClasses(true);
         self::assertTrue($options->getAllowedClasses());
     }
-
-    public function testLegacyOptionIsAvailableUnderNewName(): void
-    {
-        $options = new PhpSerializeOptions([
-            'unserialize_class_whitelist' => [self::class],
-        ]);
-
-        self::assertSame([self::class], $options->getAllowedClasses());
-        self::assertSame([self::class], $options->getUnserializeClassWhitelist());
-    }
 }

@@ -16,11 +16,6 @@
       <code><![CDATA[$options]]></code>
     </NonInvariantDocblockPropertyType>
   </file>
-  <file src="src/Adapter/PhpSerializeOptions.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[setUnserializeClassWhitelist]]></code>
-    </PossiblyUnusedMethod>
-  </file>
   <file src="src/AdapterPluginManagerFactory.php">
     <MixedArgument>
       <code><![CDATA[$config['serializers']]]></code>
@@ -39,10 +34,5 @@
     <UnusedParam>
       <code><![CDATA[$moduleManager]]></code>
     </UnusedParam>
-  </file>
-  <file src="test/Adapter/PhpSerializeOptionsTest.php">
-    <DeprecatedMethod>
-      <code><![CDATA[getUnserializeClassWhitelist]]></code>
-    </DeprecatedMethod>
   </file>
 </files>
