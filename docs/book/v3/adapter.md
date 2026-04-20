@@ -18,9 +18,9 @@ functions, and is a good default adapter choice.
 
 Available options include:
 
-| Option                      | Data Type         | Default Value | Description                                                                                                                                        |
-|-----------------------------|-------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| unserialize_class_whitelist | `array` or `bool` | `true`        | The allowed classes for unserialize(), see [unserialize()](https://php.net/unserialize) for more information. Only available on PHP 7.0 or higher. |
+| Option          | Data Type         | Default Value | Description                                                                                                   |
+|-----------------|-------------------|---------------|---------------------------------------------------------------------------------------------------------------|
+| allowed_classes | `array` or `bool` | `true`        | The allowed classes for unserialize(), see [unserialize()](https://php.net/unserialize) for more information. |
 
 ## The IgBinary Adapter
 

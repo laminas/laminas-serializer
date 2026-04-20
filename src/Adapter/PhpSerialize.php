@@ -110,7 +110,7 @@ final class PhpSerialize extends AbstractAdapter
 
         ErrorHandler::start($errorLevel);
         // The second parameter to unserialize() is only available on PHP 7.0 or higher
-        $ret = unserialize($serialized, ['allowed_classes' => $this->getOptions()->getUnserializeClassWhitelist()]);
+        $ret = unserialize($serialized, ['allowed_classes' => $this->getOptions()->getAllowedClasses()]);
         $err = ErrorHandler::stop();
 
         if ($ret === false) {

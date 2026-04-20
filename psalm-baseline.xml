@@ -25,20 +25,6 @@
       <code><![CDATA[setEnableJsonExprFinder]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="test/Adapter/JsonTest.php">
-    <DeprecatedMethod>
-      <code><![CDATA[getCycleCheck]]></code>
-      <code><![CDATA[getEnableJsonExprFinder]]></code>
-      <code><![CDATA[getObjectDecodeType]]></code>
-      <code><![CDATA[setObjectDecodeType]]></code>
-    </DeprecatedMethod>
-  </file>
-  <file src="test/GenericSerializerFactoryTest.php">
-    <DeprecatedMethod>
-      <code><![CDATA[getCycleCheck]]></code>
-      <code><![CDATA[getCycleCheck]]></code>
-    </DeprecatedMethod>
-  </file>
   <file src="src/Adapter/PhpSerialize.php">
     <MoreSpecificImplementedParamType>
       <code><![CDATA[$options]]></code>
@@ -53,22 +39,41 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/AdapterPluginManagerFactory.php">
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$options ?? []]]></code>
-    </MixedArgumentTypeCoercion>
     <MixedArgument>
       <code><![CDATA[$config['serializers']]]></code>
     </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$options ?? []]]></code>
+    </MixedArgumentTypeCoercion>
   </file>
   <file src="src/Module.php">
-    <UnusedParam>
-      <code><![CDATA[$moduleManager]]></code>
-    </UnusedParam>
     <UndefinedDocblockClass>
       <code><![CDATA[ModuleManager]]></code>
     </UndefinedDocblockClass>
     <UnusedClass>
       <code><![CDATA[Module]]></code>
     </UnusedClass>
+    <UnusedParam>
+      <code><![CDATA[$moduleManager]]></code>
+    </UnusedParam>
+  </file>
+  <file src="test/Adapter/JsonTest.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getCycleCheck]]></code>
+      <code><![CDATA[getEnableJsonExprFinder]]></code>
+      <code><![CDATA[getObjectDecodeType]]></code>
+      <code><![CDATA[setObjectDecodeType]]></code>
+    </DeprecatedMethod>
+  </file>
+  <file src="test/Adapter/PhpSerializeOptionsTest.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getUnserializeClassWhitelist]]></code>
+    </DeprecatedMethod>
+  </file>
+  <file src="test/GenericSerializerFactoryTest.php">
+    <DeprecatedMethod>
+      <code><![CDATA[getCycleCheck]]></code>
+      <code><![CDATA[getCycleCheck]]></code>
+    </DeprecatedMethod>
   </file>
 </files>
