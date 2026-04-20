@@ -43,11 +43,11 @@ The [JSON](https://wikipedia.org/wiki/JavaScript_Object_Notation) adapter provid
 
 Available options include:
 
-| Option                    | Data Type                   | Default Value                   |
-|---------------------------|-----------------------------|---------------------------------|
-| `cycle_check`             | `boolean`                   | `false`                         |
-| `object_decode_type`      | `Laminas\Json\Json::TYPE_*` | `Laminas\Json\Json::TYPE_ARRAY` |
-| `enable_json_expr_finder` | `boolean`                   | `false`                         |
+| Option                    | Data Type                   | Default Value                   | Notes                                                 |
+|---------------------------|-----------------------------|---------------------------------|-------------------------------------------------------|
+| `cycle_check`             | `boolean`                   | `false`                         | **Deprecated**. Will be remvoed in v4                 |
+| `object_decode_type`      | `Laminas\Json\Json::TYPE_*` | `Laminas\Json\Json::TYPE_ARRAY` | **Deprecated**. Will be replaced by assoc_array in v4 |
+| `enable_json_expr_finder` | `boolean`                   | `false`                         | **Deprecated**. Will be remvoed in v4                 |
 
 ## The PhpCode Adapter
 
