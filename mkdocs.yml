@@ -2,6 +2,14 @@ docs_dir: docs/book
 site_dir: docs/html
 nav:
     - Home: index.md
+    - v4:
+      - Introduction: v4/intro.md
+      - Installation: v4/installation.md
+      - "Basic Usage": v4/basic-usage.md
+      - Adapters: v4/adapter.md
+      - "Plugin Manager": v4/plugin-manager.md
+      - "Migration Guide":
+        - "Migration to Version 4.0": v4/migration/to-version-4.md
     - v3:
       - Introduction: v3/intro.md
       - Installation: v3/installation.md
@@ -19,8 +27,9 @@ site_description: "Serialize and deserialize PHP structures to a variety of repr
 repo_url: 'https://github.com/laminas/laminas-serializer'
 extra:
     project: Components
-    current_version: v3
+    current_version: v4
     versions:
+      - v4
       - v3
       - v2
     installation:
@@ -29,6 +38,6 @@ extra:
 plugins:
   - redirects:
         redirect_maps:
-            intro.md: v3/intro.md
-            adapter.md: v3/adapter.md
-            plugin-manager.md: v3/plugin-manager.md
+            intro.md: v4/intro.md
+            adapter.md: v4/adapter.md
+            plugin-manager.md: v4/plugin-manager.md
