@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.15.1@28dc127af1b5aecd52314f6f645bafc10d0e11f9">
+<files psalm-version="6.16.1@f1f5de594dc76faf8784e02d3dc4716c91c6f6ac">
   <file src="src/Adapter/Json.php">
     <MixedAssignment>
       <code><![CDATA[$ret]]></code>
@@ -11,42 +11,18 @@
       <code><![CDATA[$options]]></code>
     </NonInvariantDocblockPropertyType>
   </file>
-  <file src="src/Adapter/JsonOptions.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[setCycleCheck]]></code>
-      <code><![CDATA[setEnableJsonExprFinder]]></code>
-    </PossiblyUnusedMethod>
+  <file src="test/Adapter/JsonTest.php">
+    <MixedAssignment>
+      <code><![CDATA[$data]]></code>
+      <code><![CDATA[$data]]></code>
+      <code><![CDATA[$data]]></code>
+      <code><![CDATA[$data]]></code>
+    </MixedAssignment>
   </file>
-  <file src="src/Adapter/PhpSerialize.php">
-    <MoreSpecificImplementedParamType>
-      <code><![CDATA[$options]]></code>
-    </MoreSpecificImplementedParamType>
-    <NonInvariantDocblockPropertyType>
-      <code><![CDATA[$options]]></code>
-    </NonInvariantDocblockPropertyType>
-  </file>
-  <file src="src/Adapter/PhpSerializeOptions.php">
-    <PossiblyUnusedMethod>
+  <file src="test/Adapter/PhpSerializeTest.php">
+    <UndefinedMethod>
       <code><![CDATA[setUnserializeClassWhitelist]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/AdapterPluginManagerFactory.php">
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$options ?? []]]></code>
-    </MixedArgumentTypeCoercion>
-    <MixedArgument>
-      <code><![CDATA[$config['serializers']]]></code>
-    </MixedArgument>
-  </file>
-  <file src="src/Module.php">
-    <UnusedParam>
-      <code><![CDATA[$moduleManager]]></code>
-    </UnusedParam>
-    <UndefinedDocblockClass>
-      <code><![CDATA[ModuleManager]]></code>
-    </UndefinedDocblockClass>
-    <UnusedClass>
-      <code><![CDATA[Module]]></code>
-    </UnusedClass>
+      <code><![CDATA[setUnserializeClassWhitelist]]></code>
+    </UndefinedMethod>
   </file>
 </files>
