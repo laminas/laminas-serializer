@@ -22,7 +22,7 @@ final class PhpSerializeTest extends TestCase
         $expected = 's:4:"test";';
 
         $adapter = new PhpSerialize();
-        /** @var mixed $data */
+
         $data = $adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -33,7 +33,7 @@ final class PhpSerializeTest extends TestCase
         $expected = 'b:0;';
 
         $adapter = new PhpSerialize();
-        /** @var mixed $data */
+
         $data = $adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -44,7 +44,7 @@ final class PhpSerializeTest extends TestCase
         $expected = 'N;';
 
         $adapter = new PhpSerialize();
-        /** @var mixed $data */
+
         $data = $adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -55,7 +55,7 @@ final class PhpSerializeTest extends TestCase
         $expected = 'i:100;';
 
         $adapter = new PhpSerialize();
-        /** @var mixed $data */
+
         $data = $adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -66,7 +66,7 @@ final class PhpSerializeTest extends TestCase
         $expected = 'O:8:"stdClass":0:{}';
 
         $adapter = new PhpSerialize();
-        /** @var mixed $data */
+
         $data = $adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -77,7 +77,7 @@ final class PhpSerializeTest extends TestCase
         $expected = 'test';
 
         $adapter = new PhpSerialize();
-        /** @var mixed $data */
+
         $data = $adapter->unserialize($value);
         self::assertEquals($expected, $data);
     }
@@ -88,7 +88,7 @@ final class PhpSerializeTest extends TestCase
         $expected = false;
 
         $adapter = new PhpSerialize();
-        /** @var mixed $data */
+
         $data = $adapter->unserialize($value);
         self::assertEquals($expected, $data);
     }
@@ -99,7 +99,7 @@ final class PhpSerializeTest extends TestCase
         $expected = null;
 
         $adapter = new PhpSerialize();
-        /** @var mixed $data */
+
         $data = $adapter->unserialize($value);
         self::assertEquals($expected, $data);
     }
@@ -110,7 +110,7 @@ final class PhpSerializeTest extends TestCase
         $expected = 100;
 
         $adapter = new PhpSerialize();
-        /** @var mixed $data */
+
         $data = $adapter->unserialize($value);
         self::assertEquals($expected, $data);
     }
@@ -121,7 +121,7 @@ final class PhpSerializeTest extends TestCase
         $expected = new stdClass();
 
         $adapter = new PhpSerialize();
-        /** @var mixed $data */
+
         $data = $adapter->unserialize($value);
         self::assertEquals($expected, $data);
     }
@@ -146,14 +146,14 @@ final class PhpSerializeTest extends TestCase
         $adapter->unserialize($string);
     }
 
-    public function testWhileListIsFalse(): void
+    public function testAllowedClassesIsFalse(): void
     {
         $value = 'O:8:"stdClass":1:{s:7:"myProps";s:5:"hello";}';
 
         $options = new PhpSerializeOptions();
-        $options->setUnserializeClassWhitelist(false);
+        $options->setAllowedClasses(false);
         $adapter = new PhpSerialize($options);
-        /** @var mixed $data */
+
         $data = $adapter->unserialize($value);
         $this->assertInstanceOf(__PHP_Incomplete_Class::class, $data);
         $props = (array) $data;
@@ -161,7 +161,7 @@ final class PhpSerializeTest extends TestCase
         self::assertSame('hello', $props['myProps'] ?? null);
     }
 
-    public function testWhileListContainsClass(): void
+    public function testAllowedClassesContainsClass(): void
     {
         $expected          = new stdClass();
         $expected->myProps = 'hello';
@@ -169,9 +169,9 @@ final class PhpSerializeTest extends TestCase
         $value = 'O:8:"stdClass":1:{s:7:"myProps";s:5:"hello";}';
 
         $options = new PhpSerializeOptions();
-        $options->setUnserializeClassWhitelist([self::class]);
+        $options->setAllowedClasses([self::class]);
         $adapter = new PhpSerialize($options);
-        /** @var mixed $data */
+
         $data = $adapter->unserialize($value);
 
         $this->assertInstanceOf(__PHP_Incomplete_Class::class, $data);

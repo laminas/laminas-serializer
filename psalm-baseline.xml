@@ -1,28 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="6.16.1@f1f5de594dc76faf8784e02d3dc4716c91c6f6ac">
   <file src="src/Adapter/Json.php">
-    <MixedAssignment>
-      <code><![CDATA[$ret]]></code>
-    </MixedAssignment>
     <MoreSpecificImplementedParamType>
       <code><![CDATA[$options]]></code>
     </MoreSpecificImplementedParamType>
     <NonInvariantDocblockPropertyType>
       <code><![CDATA[$options]]></code>
     </NonInvariantDocblockPropertyType>
-  </file>
-  <file src="test/Adapter/JsonTest.php">
-    <MixedAssignment>
-      <code><![CDATA[$data]]></code>
-      <code><![CDATA[$data]]></code>
-      <code><![CDATA[$data]]></code>
-      <code><![CDATA[$data]]></code>
-    </MixedAssignment>
-  </file>
-  <file src="test/Adapter/PhpSerializeTest.php">
-    <UndefinedMethod>
-      <code><![CDATA[setUnserializeClassWhitelist]]></code>
-      <code><![CDATA[setUnserializeClassWhitelist]]></code>
-    </UndefinedMethod>
   </file>
 </files>

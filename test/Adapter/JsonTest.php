@@ -31,7 +31,6 @@ final class JsonTest extends TestCase
         $value    = 'test';
         $expected = '"test"';
 
-        /** @var mixed $data */
         $data = $this->adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -41,7 +40,6 @@ final class JsonTest extends TestCase
         $value    = false;
         $expected = 'false';
 
-        /** @var mixed $data */
         $data = $this->adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -51,7 +49,6 @@ final class JsonTest extends TestCase
         $value    = null;
         $expected = 'null';
 
-        /** @var mixed $data */
         $data = $this->adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -61,7 +58,6 @@ final class JsonTest extends TestCase
         $value    = 100;
         $expected = '100';
 
-        /** @var mixed $data */
         $data = $this->adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -99,7 +95,6 @@ final class JsonTest extends TestCase
         $value->test = "test";
         $expected    = '{"test":"test"}';
 
-        /** @var mixed $data */
         $data = $this->adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -216,7 +211,6 @@ final class JsonTest extends TestCase
         $json     = '"test"';
         $expected = 'test';
 
-        /** @var mixed $data */
         $data = $this->adapter->unserialize($json);
         self::assertEquals($expected, $data);
     }
@@ -226,7 +220,6 @@ final class JsonTest extends TestCase
         $json     = 'false';
         $expected = false;
 
-        /** @var mixed $data */
         $data = $this->adapter->unserialize($json);
         self::assertEquals($expected, $data);
     }
@@ -236,7 +229,6 @@ final class JsonTest extends TestCase
         $json     = 'null';
         $expected = null;
 
-        /** @var mixed $data */
         $data = $this->adapter->unserialize($json);
         self::assertEquals($expected, $data);
     }
@@ -246,7 +238,6 @@ final class JsonTest extends TestCase
         $json     = '100';
         $expected = 100;
 
-        /** @var mixed $data */
         $data = $this->adapter->unserialize($json);
         self::assertEquals($expected, $data);
     }
@@ -256,7 +247,6 @@ final class JsonTest extends TestCase
         $json     = '1.23';
         $expected = 1.23;
 
-        /** @var mixed $data */
         $data = $this->adapter->unserialize($json);
         self::assertEquals($expected, $data);
     }
@@ -308,7 +298,6 @@ final class JsonTest extends TestCase
         $json     = '{"outer":{"inner":"value"}}';
         $expected = ['outer' => ['inner' => 'value']];
 
-        /** @var mixed $data */
         $data = $this->adapter->unserialize($json);
         $this->assertIsArray($data);
         $this->assertEquals($expected, $data);

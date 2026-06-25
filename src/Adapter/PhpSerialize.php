@@ -110,7 +110,7 @@ final class PhpSerialize implements AdapterInterface
 
         ErrorHandler::start($errorLevel);
         // The second parameter to unserialize() is only available on PHP 7.0 or higher
-        /** @var mixed $ret */
+
         $ret = unserialize($serialized, ['allowed_classes' => $this->getOptions()->getAllowedClasses()]);
         $err = ErrorHandler::stop();
 

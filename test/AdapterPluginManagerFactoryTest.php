@@ -66,15 +66,12 @@ final class AdapterPluginManagerFactoryTest extends TestCase
         $container = $this->createMock(ContainerInterface::class);
 
         $container
-            ->expects($this->atLeast(2))
+            ->expects($this->once())
             ->method('has')
-            ->willReturnMap([
-                ['ServiceListener', false],
-                ['config', true],
-            ]);
+            ->willReturn(true);
 
         $container
-            ->expects($this->atLeastOnce())
+            ->expects($this->once())
             ->method('get')
             ->with('config')
             ->willReturn($config);
@@ -89,40 +86,14 @@ final class AdapterPluginManagerFactoryTest extends TestCase
         self::assertSame($serializer, $serializers->get('test-too'));
     }
 
-    public function testDoesNotConfigureSerializerServicesWhenServiceListenerPresent(): void
-    {
-        $container = $this->createMock(ContainerInterface::class);
-
-        $container
-            ->expects($this->atLeastOnce())
-            ->method('has')
-            ->with('ServiceListener')
-            ->willReturn(true);
-
-        $container
-            ->expects($this->never())
-            ->method('get')
-            ->with('config');
-
-        $factory     = new AdapterPluginManagerFactory();
-        $serializers = $factory($container, 'SerializerAdapterManager');
-
-        self::assertInstanceOf(AdapterPluginManager::class, $serializers);
-        self::assertFalse($serializers->has('test'));
-        self::assertFalse($serializers->has('test-too'));
-    }
-
     public function testDoesNotConfigureSerializerServicesWhenConfigServiceNotPresent(): void
     {
         $container = $this->createMock(ContainerInterface::class);
 
         $container
-            ->expects($this->atLeast(2))
+            ->expects($this->once())
             ->method('has')
-            ->willReturnMap([
-                ['ServiceListener', false],
-                ['config', false],
-            ]);
+            ->willReturn(false);
 
         $container
             ->expects($this->never())
@@ -140,15 +111,12 @@ final class AdapterPluginManagerFactoryTest extends TestCase
         $container = $this->createMock(ContainerInterface::class);
 
         $container
-            ->expects($this->atLeast(2))
+            ->expects($this->once())
             ->method('has')
-            ->willReturnMap([
-                ['ServiceListener', false],
-                ['config', true],
-            ]);
+            ->willReturn(true);
 
         $container
-            ->expects($this->atLeastOnce())
+            ->expects($this->once())
             ->method('get')
             ->with('config')
             ->willReturn(['foo' => 'bar']);

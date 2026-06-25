@@ -62,7 +62,7 @@ final class IgBinary implements AdapterInterface
         }
 
         ErrorHandler::start();
-        /** @var mixed $ret */
+
         $ret = igbinary_unserialize($serialized);
         $err = ErrorHandler::stop();
 

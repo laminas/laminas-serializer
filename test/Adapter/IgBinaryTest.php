@@ -22,7 +22,7 @@ final class IgBinaryTest extends TestCase
         self::assertNotFalse($expected);
 
         $adapter = new IgBinary();
-        /** @var mixed $data */
+
         $data = $adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -34,7 +34,7 @@ final class IgBinaryTest extends TestCase
         self::assertNotFalse($expected);
 
         $adapter = new IgBinary();
-        /** @var mixed $data */
+
         $data = $adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -46,7 +46,7 @@ final class IgBinaryTest extends TestCase
         self::assertNotFalse($expected);
 
         $adapter = new IgBinary();
-        /** @var mixed $data */
+
         $data = $adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -58,7 +58,7 @@ final class IgBinaryTest extends TestCase
         self::assertNotFalse($expected);
 
         $adapter = new IgBinary();
-        /** @var mixed $data */
+
         $data = $adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -70,7 +70,7 @@ final class IgBinaryTest extends TestCase
         self::assertNotFalse($expected);
 
         $adapter = new IgBinary();
-        /** @var mixed $data */
+
         $data = $adapter->serialize($value);
         self::assertEquals($expected, $data);
     }
@@ -82,7 +82,7 @@ final class IgBinaryTest extends TestCase
         self::assertNotFalse($value);
 
         $adapter = new IgBinary();
-        /** @var mixed $data */
+
         $data = $adapter->unserialize($value);
         self::assertEquals($expected, $data);
     }
@@ -94,7 +94,7 @@ final class IgBinaryTest extends TestCase
         self::assertNotFalse($value);
 
         $adapter = new IgBinary();
-        /** @var mixed $data */
+
         $data = $adapter->unserialize($value);
         self::assertEquals($expected, $data);
     }
@@ -106,7 +106,7 @@ final class IgBinaryTest extends TestCase
         self::assertNotFalse($value);
 
         $adapter = new IgBinary();
-        /** @var mixed $data */
+
         $data = $adapter->unserialize($value);
         self::assertEquals($expected, $data);
     }
@@ -118,7 +118,7 @@ final class IgBinaryTest extends TestCase
         self::assertNotFalse($value);
 
         $adapter = new IgBinary();
-        /** @var mixed $data */
+
         $data = $adapter->unserialize($value);
         self::assertEquals($expected, $data);
     }
@@ -130,7 +130,7 @@ final class IgBinaryTest extends TestCase
         self::assertNotFalse($value);
 
         $adapter = new IgBinary();
-        /** @var mixed $data */
+
         $data = $adapter->unserialize($value);
         self::assertEquals($expected, $data);
     }
