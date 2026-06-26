@@ -15,15 +15,13 @@ use const E_NOTICE;
 use const E_WARNING;
 use const PHP_VERSION_ID;
 
-final class PhpSerialize extends AbstractAdapter
+final class PhpSerialize implements AdapterInterface
 {
     /**
      * Serialized boolean false value
      */
     private static null|string $serializedFalse = null;
-
-    /** @var PhpSerializeOptions|null */
-    protected AdapterOptions|null $options = null;
+    private PhpSerializeOptions|null $options   = null;
 
     /**
      * @param iterable<string,mixed>|PhpSerializeOptions|null $options
@@ -36,7 +34,9 @@ final class PhpSerialize extends AbstractAdapter
             self::$serializedFalse = serialize(false);
         }
 
-        parent::__construct($options);
+        if ($options !== null) {
+            $this->setOptions($options);
+        }
     }
 
     /**
@@ -44,7 +44,7 @@ final class PhpSerialize extends AbstractAdapter
      *
      * @param iterable<string,mixed>|PhpSerializeOptions $options
      */
-    public function setOptions(iterable|AdapterOptions $options): void
+    public function setOptions(iterable|PhpSerializeOptions $options): void
     {
         if (! $options instanceof PhpSerializeOptions) {
             $options = new PhpSerializeOptions($options);
@@ -110,6 +110,7 @@ final class PhpSerialize extends AbstractAdapter
 
         ErrorHandler::start($errorLevel);
         // The second parameter to unserialize() is only available on PHP 7.0 or higher
+
         $ret = unserialize($serialized, ['allowed_classes' => $this->getOptions()->getAllowedClasses()]);
         $err = ErrorHandler::stop();
 

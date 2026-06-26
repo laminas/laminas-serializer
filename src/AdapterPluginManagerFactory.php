@@ -5,43 +5,35 @@ declare(strict_types=1);
 namespace Laminas\Serializer;
 
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\ServiceManager;
 use Psr\Container\ContainerInterface;
 
+use function array_replace_recursive;
+use function assert;
 use function is_array;
 
-/** @final */
-class AdapterPluginManagerFactory implements FactoryInterface
+/**
+ * @psalm-import-type ServiceManagerConfiguration from ServiceManager
+ */
+final class AdapterPluginManagerFactory implements FactoryInterface
 {
-    /**
-     * {@inheritDoc}
-     */
+    /** @inheritDoc */
     public function __invoke(
         ContainerInterface $container,
         string $requestedName,
         ?array $options = null
     ): AdapterPluginManager {
-        $pluginManager = new AdapterPluginManager($container, $options ?? []);
+        $options ??= [];
 
-        // If this is in a laminas-mvc application, the ServiceListener will inject
-        // merged configuration during bootstrap.
-        if ($container->has('ServiceListener')) {
-            return $pluginManager;
-        }
+        $config = $container->has('config') ? $container->get('config') : [];
+        assert(is_array($config));
 
-        // If we do not have a config service, nothing more to do
-        if (! $container->has('config')) {
-            return $pluginManager;
-        }
+        /** @psalm-var ServiceManagerConfiguration $serializers */
+        $serializers = isset($config['serializers']) && is_array($config['serializers']) ? $config['serializers'] : [];
 
-        $config = $container->get('config');
+        /** @psalm-var ServiceManagerConfiguration $mergedConfig */
+        $mergedConfig = array_replace_recursive($serializers, $options);
 
-        // If we do not have serializers configuration, nothing more to do
-        if (! isset($config['serializers']) || ! is_array($config['serializers'])) {
-            return $pluginManager;
-        }
-
-        $pluginManager->configure($config['serializers']);
-
-        return $pluginManager;
+        return new AdapterPluginManager($container, $mergedConfig);
     }
 }

@@ -8,31 +8,4 @@
       <code><![CDATA[$options]]></code>
     </NonInvariantDocblockPropertyType>
   </file>
-  <file src="src/Adapter/PhpSerialize.php">
-    <MoreSpecificImplementedParamType>
-      <code><![CDATA[$options]]></code>
-    </MoreSpecificImplementedParamType>
-    <NonInvariantDocblockPropertyType>
-      <code><![CDATA[$options]]></code>
-    </NonInvariantDocblockPropertyType>
-  </file>
-  <file src="src/AdapterPluginManagerFactory.php">
-    <MixedArgument>
-      <code><![CDATA[$config['serializers']]]></code>
-    </MixedArgument>
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$options ?? []]]></code>
-    </MixedArgumentTypeCoercion>
-  </file>
-  <file src="src/Module.php">
-    <UndefinedDocblockClass>
-      <code><![CDATA[ModuleManager]]></code>
-    </UndefinedDocblockClass>
-    <UnusedClass>
-      <code><![CDATA[Module]]></code>
-    </UnusedClass>
-    <UnusedParam>
-      <code><![CDATA[$moduleManager]]></code>
-    </UnusedParam>
-  </file>
 </files>

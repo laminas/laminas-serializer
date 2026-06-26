@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace LaminasTest\Serializer\Adapter;
 
-use Laminas\Serializer;
 use Laminas\Serializer\Adapter\PhpCode;
 use LaminasTest\Serializer\TestAsset\Dummy;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -16,21 +15,11 @@ use function var_export;
 #[CoversClass(PhpCode::class)]
 final class PhpCodeTest extends TestCase
 {
-    /** @var Serializer\Adapter\PhpCode */
-    private $adapter;
-
-    protected function setUp(): void
-    {
-        $this->adapter = new Serializer\Adapter\PhpCode();
-    }
-
-    /**
-     * Test when serializing a PHP object
-     */
     public function testSerializeObject(): void
     {
-        $object = new Dummy();
-        $data   = $this->adapter->serialize($object);
+        $object  = new Dummy();
+        $adapter = new PhpCode();
+        $data    = $adapter->serialize($object);
 
         self::assertEquals(var_export($object, true), $data);
     }
@@ -38,13 +27,15 @@ final class PhpCodeTest extends TestCase
     #[DataProvider('serializedValuesProvider')]
     public function testSerialize(mixed $unserialized, string $serialized): void
     {
-        self::assertEquals($serialized, $this->adapter->serialize($unserialized));
+        $adapter = new PhpCode();
+        self::assertEquals($serialized, $adapter->serialize($unserialized));
     }
 
     #[DataProvider('serializedValuesProvider')]
     public function testUnserialize(mixed $unserialized, string $serialized): void
     {
-        self::assertEquals($unserialized, $this->adapter->unserialize($serialized));
+        $adapter = new PhpCode();
+        self::assertEquals($unserialized, $adapter->unserialize($serialized));
     }
 
     /**

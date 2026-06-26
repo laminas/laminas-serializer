@@ -10,9 +10,8 @@ use Laminas\ServiceManager\ServiceManager;
 
 /**
  * @psalm-import-type ServiceManagerConfiguration from ServiceManager
- * @final
  */
-class ConfigProvider
+final class ConfigProvider
 {
     /**
      * Return configuration for this component.

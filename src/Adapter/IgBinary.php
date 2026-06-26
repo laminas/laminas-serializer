@@ -11,7 +11,7 @@ use function extension_loaded;
 use function igbinary_serialize;
 use function igbinary_unserialize;
 
-final class IgBinary extends AbstractAdapter
+final class IgBinary implements AdapterInterface
 {
     /** @var string|null Serialized null value */
     private static string|null $serializedNull = null;
@@ -30,8 +30,6 @@ final class IgBinary extends AbstractAdapter
         if (self::$serializedNull === null) {
             self::$serializedNull = igbinary_serialize(null);
         }
-
-        parent::__construct(null);
     }
 
     /**
@@ -64,6 +62,7 @@ final class IgBinary extends AbstractAdapter
         }
 
         ErrorHandler::start();
+
         $ret = igbinary_unserialize($serialized);
         $err = ErrorHandler::stop();
 

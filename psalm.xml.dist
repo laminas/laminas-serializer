@@ -19,15 +19,11 @@
         <directory name="test"/>
         <ignoreFiles>
             <directory name="vendor"/>
-            <directory name="test/TestAsset"/>
-            <directory name="test/**/TestAsset"/>
         </ignoreFiles>
     </projectFiles>
-
     <issueHandlers>
         <MixedAssignment errorLevel="suppress"/>
     </issueHandlers>
-
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
     </plugins>
