@@ -9,7 +9,7 @@ nav:
       - Adapters: v4/adapter.md
       - "Plugin Manager": v4/plugin-manager.md
       - "Migration Guide":
-        - "Migration to Version 4.0": v4/migration/to-version-4.md
+        - "Migration from Version 3 to 4": v4/migration/migration-from-version-3-to-4.md
     - v3:
       - Introduction: v3/intro.md
       - Installation: v3/installation.md
