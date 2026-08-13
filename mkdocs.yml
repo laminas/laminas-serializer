@@ -34,7 +34,6 @@ extra:
       - v2
     installation:
       config_provider_class: 'Laminas\Serializer\ConfigProvider'
-      module_class: 'Laminas\Serializer\Module'
 plugins:
   - redirects:
         redirect_maps:
