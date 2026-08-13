@@ -16,7 +16,7 @@ The `Laminas\Serializer\Adapter\PhpSerialize` adapter uses the built-in
 [serialize()](https://php.net/serialize)/[unserialize()](https://php.net/unserialize)
 functions, and is a good default adapter choice.
 
-Available options include:
+### Available Options
 
 | Option          | Data Type         | Default Value | Description                                                                                                   |
 |-----------------|-------------------|---------------|---------------------------------------------------------------------------------------------------------------|
@@ -46,11 +46,11 @@ and [json_decode()](https://www.php.net/manual/en/function.json-decode.php)
 During serialization, data is converted to a JSON string using `json_encode()`.
 During deserialization, the JSON string is converted back to PHP data structures using `json_decode()`.
 
-Available options include:
+### Available Options
 
-| Option        | Data Type | Default Value |
-|---------------|-----------|---------------|
-| `assoc_array` | `boolean` | `true`        |
+| Option        | Data Type | Default Value | Description                                       |
+|---------------|-----------|---------------|---------------------------------------------------|
+| `assoc_array` | `boolean` | `true`        | Whether to decode JSON into associative arrays.   |
 
 ## The PhpCode Adapter
 
