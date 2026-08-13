@@ -71,8 +71,8 @@ use Laminas\Serializer\Adapter\AdapterInterface;
 use Laminas\Serializer\Adapter\Json;
 use Laminas\Serializer\GenericSerializerFactory;
 
-// Adapter options can hold adapter specific options, please refer to the adapter configuration documentation section 
-$adapterOptions = ['cycle_check' => true];
+// Adapter options can hold adapter-specific options, please refer to the adapter configuration documentation section 
+$adapterOptions = ['assoc_array' => false];
 
 return [
     // mezzio projects
