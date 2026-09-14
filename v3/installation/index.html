@@ -11,7 +11,7 @@
     
         
     
-    <meta name="docsearch:version" content="3.0.0,latest">
+    <meta name="docsearch:version" content="4.0.0,latest">
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-serializer">
 
@@ -120,6 +120,14 @@
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
 
         <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                
             
 
                 
@@ -236,9 +244,17 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
+                    <a href="../../v4/intro/" class="dropdown-item">
+                        
+                            v4 (latest)
+                        
+                    </a>
+                
+            
+                
                     <a href="../intro/" class="dropdown-item active">
                         
-                            v3 (latest)
+                            v3
                         
                     </a>
                 
@@ -313,6 +329,14 @@
 
 
 
+    <div class="alert alert-danger" role="alert">
+        <h4>Caution</h4>
+        <p>
+            The documentation you are viewing is for an older version of this component.<br>
+            <a href="../..">Switch to the latest (v4) version.</a>
+        </p>
+    </div>
+
 
 
     <h1>Installation</h1>
@@ -328,8 +352,8 @@
             <a href="#installation-for-mezzio-and-laminas-mvc-application" class="toc__link nav-link">
                 Installation for a
                 Mezzio
-                or
-                laminas-mvc
+                
+                
                 Application
             </a>
         </li>
@@ -350,8 +374,8 @@
 <h2 id="installation-for-mezzio-and-laminas-mvc-application">
     Installation for a
     Mezzio
-    or
-    laminas-mvc
+    
+    
     Application
 </h2>
 
@@ -360,12 +384,12 @@
     The <a href="https://docs.laminas.dev/laminas-component-installer/">laminas-component-installer</a>
     is the recommended installation method when using in
     a Mezzio-based
-    or
-    a laminas-mvc-based application.
+    
+     application.
     It will automatically inject
     the config-provider
-    or
-    the module
+    
+    
     in the configuration during the installation process.
 </p>
 
@@ -398,8 +422,6 @@
     
     <li>For a Mezzio application, choose <code>config/config.php</code>.</li>
     
-    
-    <li>For a laminas-mvc application, choose either <code>modules.config.php</code> or <code>application.config.php</code>.</li>
     
 </ul>
 <p>
@@ -435,22 +457,6 @@ $aggregator = new Laminas\ConfigAggregator\ConfigAggregator([
 </code></pre>
 
 
-
-    <h4>Manual Configuration for a laminas-mvc-based Application</h4>
-    <p>
-        Add laminas-serializer as component at the top of the configuration file for
-        modules, e.g. <code>config/modules.config.php</code>:
-    </p>
-
-<pre data-line="2"><code class="language-php">
-return [
-    'Laminas\Serializer\Module', // Add this line
-    'Laminas\Router',
-    'Laminas\Session',
-    'Laminas\Validator',
-    'Application',
-];
-</code></pre>
 
 </details>
 
@@ -523,6 +529,14 @@ return [
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
 
         <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                
             
 
                 

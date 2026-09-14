@@ -15,10 +15,10 @@
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-serializer">
 
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-serializer/v2/intro/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-serializer/v4/migration/migration-from-version-3-to-4/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Introduction - laminas-serializer - Laminas Docs</title>
+    <title>Migration from Version 3 to 4 - laminas-serializer - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -109,7 +109,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../..">
+            <a href="../../..">
                 
                 
     laminas-serializer
@@ -124,40 +124,67 @@
 
                 
                 
-
-                    
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                
-            
-
-                
-                
                     
                         
+    <li class="subnavigation__list-item ">
+        <a href="../../intro/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../basic-usage/" class="subnavigation__link">Basic Usage</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../adapter/" class="subnavigation__link">Adapters</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../plugin-manager/" class="subnavigation__link">Plugin Manager</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration Guide</span>
+        <ul class="subnavigation__list">
+            
+                
     <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Introduction</a>
+        <a href="./" class="subnavigation__link">Migration from Version 3 to 4</a>
+    </li>
+
+            
+        </ul>
     </li>
 
                     
-                        
-    <li class="subnavigation__list-item ">
-        <a href="../adapter/" class="subnavigation__link">Adapters</a>
-    </li>
+                
+            
+
+                
+                
 
                     
-                        
-    <li class="subnavigation__list-item ">
-        <a href="../plugin-manager/" class="subnavigation__link">Plugin Manager</a>
-    </li>
+                    
+                
+            
 
+                
+                
+
+                    
                     
                 
             
@@ -211,13 +238,13 @@
     <div class="btn-group">
         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" id="version-selector-dropdown">
             
-                v2
+                v4
             
         </button>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
-                    <a href="../../v4/intro/" class="dropdown-item">
+                    <a href="../../intro/" class="dropdown-item active">
                         
                             v4 (latest)
                         
@@ -225,7 +252,7 @@
                 
             
                 
-                    <a href="../../v3/intro/" class="dropdown-item">
+                    <a href="../../../v3/intro/" class="dropdown-item">
                         
                             v3
                         
@@ -233,7 +260,7 @@
                 
             
                 
-                    <a href="./" class="dropdown-item active">
+                    <a href="../../../v2/intro/" class="dropdown-item">
                         
                             v2
                         
@@ -273,15 +300,7 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#quick-start" class="toc__link nav-link">Quick Start</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#basic-configuration-options" class="toc__link nav-link">Basic configuration Options</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#available-methods" class="toc__link nav-link">Available Methods</a>
+                        <a href="#breaking-changes" class="toc__link nav-link">Breaking Changes</a>
                     </li>
                 
             </ul>
@@ -299,7 +318,7 @@
 
             
                 <li class="breadcrumb-item">
-                    <a href="../..">
+                    <a href="../../..">
                         
     laminas-serializer
 
@@ -312,8 +331,15 @@
                         
                     
                 
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Migration Guide</li>
+                        
+                    
+                
 
-                <li class="breadcrumb-item active" aria-current="page">Introduction</li>
+                <li class="breadcrumb-item active" aria-current="page">Migration from Version 3 to 4</li>
             
         
     </ol>
@@ -321,157 +347,44 @@
 
 
 
-    <div class="alert alert-danger" role="alert">
-        <h4>Caution</h4>
-        <p>
-            The documentation you are viewing is for an older version of this component.<br>
-            <a href="../..">Switch to the latest (v4) version.</a>
-        </p>
-    </div>
-
 
 
 
     
     
+        <h2 class="chapter__headline">Migration Guide</h2>
+    
 
-    <h1 id="introduction">Introduction</h1>
-<p>laminas-serialzier provides an adapter-based interface for serializing and
-deserializing PHP types to and from different representations.</p>
-<p>For more information what a serializer is read the wikipedia page of
-<a href="http://en.wikipedia.org/wiki/Serialization">Serialization</a>.</p>
-<h2 id="quick-start">Quick Start</h2>
-<p>Serializing adapters can either be created from the provided
-<code>Laminas\Serializer\Serializer::factory</code> method, or by instantiating one of the
-<code>Laminas\Serializer\Adapter\*</code> classes.</p>
-<pre class="highlight"><code class="language-php">use Laminas\Serializer\Adapter;
-use Laminas\Serializer\Exception;
-use Laminas\Serializer\Serializer;
-
-// Via factory:
-$serializer = Serializer::factory(Adapter\PhpSerialize::class);
-
-// Alternately:
-$serializer = new Adapter\PhpSerialize();
-
-// Now $serializer is an instance of Laminas\Serializer\Adapter\AdapterInterface,
-// specifically Laminas\Serializer\Adapter\PhpSerialize
-
-try {
-    $serialized = $serializer-&gt;serialize($data);
-    // now $serialized is a string
-
-    $unserialized = $serializer-&gt;unserialize($serialized);
-    // now $data == $unserialized
-} catch (Exception\ExceptionInterface $e) {
-    echo $e;
-}</code></pre>
-<p>The method <code>serialize()</code> generates a storable string. To regenerate this
-serialized data, call the method <code>unserialize()</code>.</p>
-<p>Any time an error is encountered serializing or unserializing, the adapter will
-throw a <code>Laminas\Serializer\Exception\ExceptionInterface</code>.</p>
-<p>Because an application often uses only one serializer internally, it is possible
-to define and use a default serializer. That serializer will be used by default
-by other components like <code>Laminas\Cache\Storage\Plugin\Serializer</code>.</p>
-<p>To define and use the default serializer, use the static serialization methods
-of the basic <code>Laminas\Serializer\Serializer</code>:</p>
-<pre class="highlight"><code class="language-php">use Laminas\Serializer\Adapter;
-use Laminas\Serializer\Exception;
-use Laminas\Serializer\Serializer;
-
-Serializer::setDefaultAdapter(Adapter\PhpSerialize::class);
-
-try {
-    $serialized = Serializer::serialize($data);
-    // now $serialized is a string
-
-    $unserialized = Serializer::unserialize($serialized);
-    // now $data == $unserialized
-} catch (Exception\ExceptionInterface $e) {
-    echo $e;
-}</code></pre>
-<h2 id="basic-configuration-options">Basic configuration Options</h2>
-<p>To configure a serializer adapter, you can optionally use an instance of
-<code>Laminas\Serializer\Adapter\AdapterOptions</code>, an instance of one of the adapter
-specific options class, an <code>array</code>, or a <code>Traversable</code> object. The adapter
-will convert it into the adapter specific options class instance (if present) or
-into the basic <code>Laminas\Serializer\Adapter\AdapterOptions</code> class instance.</p>
-<p>Options can be passed as the second argument to the provided
-<code>Laminas\Serializer\Serializer::factory</code> and <code>::setDefaultAdapter</code> methods, via the
-adapter's <code>setOptions</code> method, or as constructor arguments when directly
-instantiating an adapter.</p>
-<h2 id="available-methods">Available Methods</h2>
-<p>Each serializer implements the interface <code>Laminas\Serializer\Adapter\AdapterInterface</code>.</p>
-<p>This interface defines the following methods:</p>
-<div class="table-responsive"><table>
-<thead>
-<tr>
-<th>Method signature</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>serialize(mixed $value) : string</code></td>
-<td>Generates a storable representation of a value.</td>
-</tr>
-<tr>
-<td><code>unserialize(string $value) : mixed</code></td>
-<td>Creates a PHP value from a stored representation.</td>
-</tr>
-</tbody>
-</table></div>
-<p>The base class <code>Laminas\Serializer\Serializer</code> is used to instantiate the
-adapters, to configure the factory, and as a proxy for serialization operations.</p>
-<p>It defines the following static methods, where the following references map to
-classes/interfaces as follows:</p>
+    <h1 id="migration-from-version-3-to-4">Migration from Version 3 to 4</h1>
+<p>Upgrading <code>laminas-serializer</code> will require some code changes, depending on how the serializers were used.</p>
+<h2 id="breaking-changes">Breaking Changes</h2>
+<h3 id="removed-laminas-json-dependency">Removed laminas-json Dependency</h3>
+<p>The dependency on <code>laminas/laminas-json</code> has been removed.
+The <code>Json</code> adapter now uses native PHP functions (<a href="https://www.php.net/manual/function.json-encode.php"><code>json_encode</code></a> and <a href="https://www.php.net/manual/function.json-decode.php"><code>json_decode</code></a>).</p>
+<h4 id="json-adapter-and-jsonexception">JSON Adapter and JsonException</h4>
+<p>Since <code>laminas/laminas-json</code> is no longer used, the <code>Json</code> adapter now throws <code>JsonException</code> wrapped in <code>Laminas\Serializer\Exception\RuntimeException</code> when an error occurs during serialization or unserialization.</p>
+<h3 id="removed-options-and-methods">Removed Options and Methods</h3>
+<h4 id="jsonoptions">JsonOptions</h4>
+<p>The following deprecated options and their corresponding getters and setters have been removed from <code>Laminas\Serializer\Adapter\JsonOptions</code>:</p>
 <ul>
-<li><code>AdapterPluginManager</code>: <code>Laminas\Serializer\AdapterPluginManager</code></li>
-<li><code>AdapterInterface</code>: <code>Laminas\Serializer\Adapter\AdapterInterface</code></li>
-<li><code>AdapterOptions</code>: <code>Laminas\Serializer\Adapter\AdapterOptions</code></li>
+<li><code>cycleCheck</code> (<code>setCycleCheck()</code> / <code>getCycleCheck()</code>)</li>
+<li><code>enableJsonExprFinder</code> (<code>setEnableJsonExprFinder()</code> / <code>getEnableJsonExprFinder()</code>)</li>
+<li><code>objectDecodeType</code> (<code>setObjectDecodeType()</code> / <code>getObjectDecodeType()</code>)</li>
 </ul>
-<div class="table-responsive"><table>
-<thead>
-<tr>
-<th>Method signature</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>factory(/* ... */) : AdapterInterface</code></td>
-<td>Create a serializer adapter instance. Arguments are: <code>string|AdapterInterface $adapterName, AdapterOptions|array|Traversable $adapterOptions = null</code>.</td>
-</tr>
-<tr>
-<td><code>setAdapterPluginManager(AdapterPluginManager $adapters) : void</code></td>
-<td>Change the adapter plugin manager.</td>
-</tr>
-<tr>
-<td><code>getAdapterPluginManager() : AdapterPluginManager</code></td>
-<td>Get the adapter plugin manager.</td>
-</tr>
-<tr>
-<td><code>resetAdapterPluginManager() : void</code></td>
-<td>Resets the internal adapter plugin manager.</td>
-</tr>
-<tr>
-<td><code>setDefaultAdapter(string|AdapterInterface $adapter /* ... */): void</code></td>
-<td>Change the default adapter. Full argument list: <code>string|AdapterInterface $adapter, AdapterOptions|array|Traversable $adapterOptions = null</code>.</td>
-</tr>
-<tr>
-<td><code>getDefaultAdapter() : AdapterInterface</code></td>
-<td>Get the default adapter.</td>
-</tr>
-<tr>
-<td><code>serialize(mixed $data /* ... */) : string</code></td>
-<td>Generates a storable representation of a value using the default adapter. Optionally, provide a  different adapter via the second argument. Full argument list: <code>mixed $value, string|AdapterInterface $adapter = null, AdapterOptions|array|Traversable $adapterOptions = null</code>.</td>
-</tr>
-<tr>
-<td><code>unserialize(string $value /* ... */) : mixed</code></td>
-<td>Creates a PHP value from a stored representation using the default adapter. Optionally, provide a different adapter via the second argument. Full argument list: <code>string $value, string|AdapterInterface|null $adapter = null, AdapterOptions|array|Traversable $adapterOptions = null</code></td>
-</tr>
-</tbody>
-</table></div>
+<p>Use <code>setAssocArray()</code> and <code>isAssocArray()</code> instead of <code>objectDecodeType</code>.</p>
+<h4 id="phpserializeoptions">PhpSerializeOptions</h4>
+<p>The deprecated option <code>unserialize_class_whitelist</code> has been renamed to <code>allowed_classes</code> and the setter and getter for the previous option name has been removed: <code>setUnserializeClassWhitelist()</code> and <code>getUnserializeClassWhitelist()</code> respectively.
+Replacement methods are named <code>setAllowedClasses()</code> and <code>getAllowedClasses()</code>.</p>
+<h3 id="removed-module-class">Removed Module Class</h3>
+<p>The <code>Laminas\Serializer\Module</code> class has been removed.
+This means that formal integration with <code>laminas-mvc</code> via the <code>ServiceListener</code> is no longer provided.
+The <code>SerializerAdapterManager</code> is still available via <code>ConfigProvider</code>.</p>
+<h3 id="final-classes">Final Classes</h3>
+<p>The following classes are now marked as <code>final</code> because they are no longer intended to be subclassed:</p>
+<ul>
+<li><code>Laminas\Serializer\AdapterPluginManagerFactory</code></li>
+<li><code>Laminas\Serializer\ConfigProvider</code></li>
+</ul>
 
 
 
@@ -482,10 +395,10 @@ classes/interfaces as follows:</p>
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../v3/migration/to-version-3/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../plugin-manager/">
                     <small class="page-nav__label">Previous</small>
                     <i class="bi bi-arrow-left"></i>
-                    Migration to Version 3.0
+                    Plugin Manager
                 </a>
             
         </li>
@@ -493,9 +406,9 @@ classes/interfaces as follows:</p>
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../adapter/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../../../v3/intro/">
                     <small class="page-nav__label">Next</small>
-                    Adapters
+                    Introduction
                     <i class="bi bi-arrow-right"></i>
                 </a>
             
@@ -528,7 +441,7 @@ classes/interfaces as follows:</p>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../..">
+            <a href="../../..">
                 
                 
     laminas-serializer
@@ -543,40 +456,67 @@ classes/interfaces as follows:</p>
 
                 
                 
-
-                    
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                
-            
-
-                
-                
                     
                         
+    <li class="subnavigation__list-item ">
+        <a href="../../intro/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../basic-usage/" class="subnavigation__link">Basic Usage</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../adapter/" class="subnavigation__link">Adapters</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../plugin-manager/" class="subnavigation__link">Plugin Manager</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration Guide</span>
+        <ul class="subnavigation__list">
+            
+                
     <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Introduction</a>
+        <a href="./" class="subnavigation__link">Migration from Version 3 to 4</a>
+    </li>
+
+            
+        </ul>
     </li>
 
                     
-                        
-    <li class="subnavigation__list-item ">
-        <a href="../adapter/" class="subnavigation__link">Adapters</a>
-    </li>
+                
+            
+
+                
+                
 
                     
-                        
-    <li class="subnavigation__list-item ">
-        <a href="../plugin-manager/" class="subnavigation__link">Plugin Manager</a>
-    </li>
+                    
+                
+            
 
+                
+                
+
+                    
                     
                 
             
@@ -673,13 +613,13 @@ classes/interfaces as follows:</p>
 </footer>
 
     <script>
-        let base_url = '../..',
+        let base_url = '../../..',
             project  = "components",
             siteName = 'laminas-serializer';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="../../search/main.js"></script>
+        <script src="../../../search/main.js"></script>
     
 
     

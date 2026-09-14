@@ -2,42 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/</loc>
-         <lastmod>2026-04-20</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v2/adapter/</loc>
-         <lastmod>2026-04-20</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v2/intro/</loc>
-         <lastmod>2026-04-20</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v2/plugin-manager/</loc>
-         <lastmod>2026-04-20</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v3/adapter/</loc>
-         <lastmod>2026-04-20</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v3/basic-usage/</loc>
-         <lastmod>2026-04-20</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v3/installation/</loc>
-         <lastmod>2026-04-20</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v3/intro/</loc>
-         <lastmod>2026-04-20</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v3/plugin-manager/</loc>
-         <lastmod>2026-04-20</lastmod>
+         <lastmod>2026-09-14</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-serializer/v3/migration/to-version-3/</loc>
-         <lastmod>2026-04-20</lastmod>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-serializer/v4/adapter/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-serializer/v4/basic-usage/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-serializer/v4/installation/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-serializer/v4/intro/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-serializer/v4/plugin-manager/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.laminas.dev/laminas-serializer/v4/migration/migration-from-version-3-to-4/</loc>
+         <lastmod>2026-09-14</lastmod>
     </url>
 </urlset>
