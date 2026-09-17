@@ -58,7 +58,7 @@ final class AdapterPluginManagerFactoryTest extends TestCase
                     'test' => 'test-too',
                 ],
                 'factories' => [
-                    'test-too' => fn(): AdapterInterface => $serializer,
+                    'test-too' => static fn(): AdapterInterface => $serializer,
                 ],
             ],
         ];
