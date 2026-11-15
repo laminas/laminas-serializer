@@ -39,7 +39,7 @@
         "boundwize/structarmed": "^0.17.9",
         "laminas/laminas-coding-standard": "~3.1.0",
         "phpunit/phpunit": "^11.5.55",
-        "psalm/plugin-phpunit": "^0.19.5",
+        "psalm/plugin-phpunit": "^1.0.0",
         "vimeo/psalm": "^6.15.1"
     },
     "autoload": {
